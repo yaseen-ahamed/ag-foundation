@@ -26,11 +26,11 @@ export const FlagshipShowcaseSection: React.FC = () => {
   const flagshipPillars = [
     {
       id: 'rehab-village',
-      category: 'Neuro & Physical Rehab',
-      title: 'Project Rehab Village',
+      category: 'Ortho-Neuro & Community Rehab',
+      title: 'Ayurgreen Rehab Village',
       description:
-        'Our comprehensive neuro-rehabilitation and physical therapy environment helps patients regain mobility, functional independence, and confidence after stroke or spinal injury.',
-      to: '/programmes/project-rehab-village',
+        'A transformative initiative by Ayurgreen Hospitals set amidst a serene village environment, offering specialized ortho-neuro rehabilitation programs and extended accommodation facilities.',
+      to: '/programmes/rehab-village',
       ctaLabel: 'Learn More',
       crop: { x: 256, y: 690, w: 225, h: 112 },
       overlayBg: 'bg-[#087F83]/92',

@@ -25,6 +25,43 @@ export interface ProgrammeItem {
     isPlaceholder: boolean;
   };
   relatedSlugs: string[];
+  logoUrl?: string;
+  welcomeHeading?: string;
+  aboutHeading?: string;
+  vision?: string;
+  mission?: string;
+  activitiesHeading?: string;
+  activitiesIntro?: string[];
+  stakeholdersHeading?: string;
+  stakeholdersIntro?: string;
+  stakeholders?: {
+    role: string;
+    description: string;
+  }[];
+  whyHeading?: string;
+  whyIntro?: string;
+  whyItems?: {
+    label: string;
+    description: string;
+  }[];
+  collaborateHeading?: string;
+  collaborateIntro?: string;
+  collaboratePartners?: {
+    title: string;
+    description: string;
+  }[];
+  volunteerOpportunities?: {
+    intro: string;
+    bullets: string[];
+    closing: string;
+  };
+  patientsConsultationNote?: string;
+  directContact?: {
+    prompt: string;
+    name: string;
+    phone: string;
+    email: string;
+  };
 }
 
 export interface AssociatedInstitution {
@@ -405,58 +442,183 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
     },
     {
       slug: 'rehab-village',
-      title: 'Project Rehab Village',
-      shortTitle: 'Project Rehab Village',
+      title: 'Ayurgreen Rehab Village',
+      shortTitle: 'Rehab Village',
       category: 'Rehabilitation',
       featuredOnHome: true,
       iconName: 'Home',
-      accentColor: '#1E88E5',
+      accentColor: '#087F83',
       cropRegion: { x: 185, y: 706, w: 150, h: 74 },
       illustrationType: 'rehab-village',
+      logoUrl: '/assets/aistudio/rehab_village_logo.webp',
+      welcomeHeading: 'WELCOME TO AYURGREEN REHAB VILLAGE',
+      aboutHeading: 'About Rehab Village',
       summary:
-        'A community-based rehabilitation initiative supporting physical recovery, assisted mobility, and dignified reintegration.',
+        'A transformative initiative by Ayurgreen Hospitals set amidst a serene village environment, offering specialized ortho-neuro rehabilitation programs and extended accommodation facilities.',
       heroSubtitle:
-        'A structured, restorative environment dedicated to physical rehabilitation, functional independence, and family-centred recovery.',
+        'Rehab Village is a transformative initiative by Ayurgreen Hospitals, designed to redefine rehabilitation and patient care amidst a serene and nurturing village environment.',
       introduction: [
-        'Project Rehab Village is Ayurgreen Foundation’s flagship rehabilitation initiative created to support individuals recovering from stroke, neurological injuries, trauma, and debilitating physical conditions.',
-        'Recognising that recovery requires time, consistent therapy, and an encouraging environment, Project Rehab Village combines multidisciplinary rehabilitative care with community-oriented support to help patients regain mobility and confidence.',
+        'Rehab Village is a transformative initiative by Ayurgreen Hospitals, designed to redefine rehabilitation and patient care. Set amidst a serene village environment, Rehab Village offers a unique and nurturing space for patients to recover and regain independence. By integrating traditional healing techniques with modern medical advancements, Rehab Village ensures holistic, patient-centered care tailored to individual needs.',
+        'Patients benefit from specialized ortho-neuro rehabilitation programs, extended accommodation facilities like service villas and apartments, and a supportive community atmosphere that enhances their recovery journey.',
       ],
+      vision:
+        'To be a globally recognized leader in community-integrated rehabilitation, blending advanced therapeutic care with a supportive village atmosphere. Rehab Village strives to empower patients to regain independence while contributing to local economic development through sustainable partnerships with the community, enhancing both healthcare and livelihoods.',
+      mission:
+        'To provide accessible, affordable and holistic rehabilitation services through state-of-the-art facilities, expert care, and partnerships with local communities. Ayurgreen Rehab village is committed to enhancing patient well-being by combining traditional and modern therapies, prioritizing personalized care, and promoting responsible tourism that contributes to economic and social growth.',
       purpose:
-        'To provide comprehensive, compassionate rehabilitation support that transitions patients from hospital care back into active family and community life.',
+        'To provide accessible, affordable and holistic rehabilitation services through state-of-the-art facilities, expert care, and partnerships with local communities.',
       objectives: [
-        'Deliver structured physical and functional rehabilitation for post-stroke and neuro-rehabilitation patients.',
-        'Promote assisted mobility, daily living skills, and long-term functional independence.',
-        'Equip family caregivers with practical guidance for safe home-based recovery.',
-        'Foster a supportive, stigma-free community environment for long-term healing.',
+        'Integrate traditional healing techniques with modern medical advancements for holistic, patient-centered care.',
+        'Provide specialized ortho-neuro rehabilitation programs and extended accommodation in home stays, service villas, and apartments.',
+        'Empower patients to regain independence while contributing to local economic development through sustainable community partnerships.',
+        'Promote medical and responsible tourism that contributes to economic and social growth.',
+      ],
+      activitiesHeading: 'Activities at Rehab Village',
+      activitiesIntro: [
+        'Rehab Village focuses on providing patient accommodation in home stays, service villas, and apartments across different ranges. These accommodations are furnished and equipped with necessary facilities to ensure comfort and convenience.',
+        'Patients receive visits from doctors once a day at their accommodation, as per their health status. Additional services include housekeeping, laundry, food support, and door-to-door delivery from the restaurant. Treatments are provided exclusively at Ayurgreen Hospitals, where patients can access a variety of therapeutic and medical services.',
       ],
       activities: [
         {
-          title: 'Multidisciplinary Rehabilitation Support',
+          title: 'Extended Patient Accommodation',
           description:
-            'Guided mobility training, physiotherapy support, and functional exercises tailored to individual recovery milestones.',
+            'Furnished and equipped home stays, service villas, and apartments across different ranges within a 5 km radius of Edappal to ensure comfort and convenience.',
         },
         {
-          title: 'Caregiver Orientation & Family Support',
+          title: 'Daily Doctor Visits & Support Services',
           description:
-            'Hands-on education for family members on safe patient handling, fall prevention, and sustained home care.',
+            'Patients receive visits from doctors once a day at their accommodation as per their health status, along with housekeeping, laundry, food support, and door-to-door delivery from the restaurant.',
         },
         {
-          title: 'Functional Reintegration Pathways',
+          title: 'Treatments at Ayurgreen Hospitals',
           description:
-            'Connecting physical rehabilitation with psychosocial encouragement in coordination with the Social Rehabilitation Programme.',
+            'Treatments are provided exclusively at Ayurgreen Hospitals, where patients can access specialized ortho-neuro rehabilitation and a variety of therapeutic and medical services.',
         },
       ],
+      stakeholdersHeading: 'Stakeholders at Rehab Village',
+      stakeholdersIntro:
+        'Rehab Village thrives through collaboration with its diverse stakeholders, including government and local bodies, tourism departments, and others who contribute to its success:',
+      stakeholders: [
+        {
+          role: 'Patients',
+          description:
+            'The primary beneficiaries who receive top-quality care and rehabilitation services.',
+        },
+        {
+          role: 'Families and Caregivers',
+          description:
+            'Guided on providing continued support during and after rehabilitation.',
+        },
+        {
+          role: 'Healthcare Professionals',
+          description:
+            'Doctors, therapists, and staff contributing their expertise in a specialized setting.',
+        },
+        {
+          role: 'Accommodation Partners',
+          description:
+            'Homestay providers, service villas, and apartments offering extended accommodation within a 5 km radius of Edappal.',
+        },
+        {
+          role: 'Local Community',
+          description:
+            'Benefiting from job creation and economic development opportunities.',
+        },
+        {
+          role: 'Volunteers',
+          description:
+            'Actively involved in enhancing the patient experience and community support.',
+        },
+      ],
+      whyHeading: 'Why Rehab Village',
+      whyIntro:
+        'Rehab Village stands out as a unique and holistic rehabilitation initiative that integrates modern medical approaches with a supportive village-style environment. Here are key reasons to choose Rehab Village:',
+      whyItems: [
+        {
+          label: 'For Patients',
+          description:
+            'Affordable and personalized care in a supportive environment, complemented by extended accommodation facilities such as service villas and apartments. Additional services include volunteer support, doctor visits, 24/7 support, travel assistance, housekeeping, laundry services, and door-to-door delivery from the restaurant, ensuring a seamless and comfortable experience.',
+        },
+        {
+          label: 'For Caregivers',
+          description:
+            'Peace of mind knowing loved ones are in expert hands and receiving holistic care.',
+        },
+        {
+          label: 'For Local Businesses',
+          description:
+            'Increased economic activity through partnerships with accommodation providers and local services.',
+        },
+        {
+          label: 'For Healthcare Professionals',
+          description:
+            'Opportunities for skill development and contributions to innovative rehabilitation practices.',
+        },
+        {
+          label: 'For Volunteers',
+          description:
+            'Meaningful engagement and the chance to make a positive impact.',
+        },
+        {
+          label: 'Collaboration with Government and Local Bodies',
+          description:
+            'Partnerships with government and local authorities ensure seamless operations, infrastructure support, and enhanced accessibility for patients.',
+        },
+        {
+          label: 'Integration with Tourism Departments',
+          description:
+            'Promoting medical and responsible tourism to boost economic and cultural engagement while fostering community development.',
+        },
+      ],
+      collaborateHeading: 'How to Collaborate with Rehab Village',
+      collaborateIntro:
+        'Rehab Village welcomes collaborations with a variety of stakeholders to enhance its operations and expand its impact. Opportunities include:',
+      collaboratePartners: [
+        {
+          title: 'Extended Accommodation Partners',
+          description:
+            'Homestay providers, service villas, and apartments within a 5 km radius can join us in providing a comfortable and supportive environment for patients.',
+        },
+        {
+          title: 'Transportation Providers',
+          description:
+            'To ensure our patients have easy and safe access to the Rehab Village, we are partnering with trusted transportation providers. We aim for a reliable, comfortable transportation services for individual or group transfers, including accessible vehicles for those with mobility needs.',
+        },
+      ],
+      volunteerOpportunities: {
+        intro:
+          'Rehab Village invites volunteers to join its mission of transforming patient care. Opportunities include:',
+        bullets: [
+          'Assisting patients with daily activities and therapeutic sessions.',
+          'Organizing and participating in recreational and community events.',
+          'Providing administrative support or contributing to research initiatives.',
+        ],
+        closing:
+          "Volunteering at Ayurgreen Hospital & Rehab Village is a mutually beneficial experience. The organization gains valuable support in patient care and daily operations, while volunteers receive practical experience, skill development, and opportunities for personal and career growth. It's a chance to make a real impact while gaining insights into the field of healthcare and rehabilitation.",
+      },
+      patientsConsultationNote:
+        'Patients seeking rehabilitation services can directly visit Ayurgreen Hospitals for consultation. Based on the patient’s needs, the hospital team will guide them to the appropriate Rehab Village accommodation facilities.',
+      directContact: {
+        prompt:
+          'Are you interested in learning more about Rehab Village or joining our community as a partner, or volunteer? Get in touch with us today:',
+        name: 'Ayurgreen Rehab Village',
+        phone: '+91 89 430 555 18',
+        email: 'rehabvillage@ayurgreenhospitals.com',
+      },
       intendedAudience: [
-        'Individuals recovering from stroke, spinal, or neurological conditions.',
-        'Patients requiring long-term physical therapy and assisted mobility support.',
-        'Family caregivers seeking structured guidance for post-discharge rehabilitation.',
+        'Patients: The primary beneficiaries who receive top-quality care and rehabilitation services.',
+        'Families and Caregivers: Guided on providing continued support during and after rehabilitation.',
+        'Healthcare Professionals: Doctors, therapists, and staff contributing their expertise in a specialized setting.',
+        'Accommodation Partners: Homestay providers, service villas, and apartments within a 5 km radius of Edappal.',
+        'Local Community: Benefiting from job creation and economic development opportunities.',
+        'Volunteers: Actively involved in enhancing the patient experience and community support.',
       ],
       impactStatus: {
         qualitativeSummary:
-          'Dedicated community rehabilitation support helping patients rebuild mobility, confidence, and daily independence.',
-        isPlaceholder: true,
+          'Empowering patients to regain independence through specialized ortho-neuro rehabilitation, extended village accommodation, and sustainable local community partnerships.',
+        isPlaceholder: false,
       },
-      relatedSlugs: ['social-rehabilitation', 'charity-care', 'stroke-force'],
+      relatedSlugs: ['social-rehabilitation', 'charity-care', 'volunteer-activities'],
     },
     {
       slug: 'social-rehabilitation',
@@ -880,7 +1042,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       dateLabel: 'Editorial Framework · Rehabilitation Support',
       relatedProgrammeSlug: 'rehab-village',
       isPlaceholder: true,
-      cropRegion: { x: 430, y: 68, w: 560, h: 350 },
+      cropRegion: { x: 185, y: 706, w: 150, h: 74 },
     },
     {
       id: 'story-template-stroke-force',

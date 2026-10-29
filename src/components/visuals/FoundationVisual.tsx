@@ -24,6 +24,7 @@ interface ReferencePhotoCropProps {
 const REFERENCE_ASSET = '/assets/aistudio/WhatsApp_Image_2026-10-27_at_12.20.49_PM_35a2c012.jpeg';
 export const STROKE_FORCE_PHOTO = '/assets/aistudio/stroke_force_fc11680c.webp';
 export const CHARITY_CARE_PHOTO = '/assets/aistudio/charity_care_6e336a13.webp';
+export const REHAB_VILLAGE_PHOTO = '/assets/aistudio/rehab_village_vehicle_4fb8d250.webp';
 
 export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
   crop,
@@ -36,6 +37,8 @@ export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
   const isStrokeForceCrop = crop.x === 0 && crop.y === 1280;
   const isCharityCareCrop =
     (crop.x === 32 && crop.y === 690) || (crop.x === 76 && crop.y === 706);
+  const isRehabVillageCrop =
+    (crop.x === 256 && crop.y === 690) || (crop.x === 185 && crop.y === 706);
 
   const resolvedDirectImage =
     imageSrc ||
@@ -43,6 +46,8 @@ export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
       ? STROKE_FORCE_PHOTO
       : isCharityCareCrop
       ? CHARITY_CARE_PHOTO
+      : isRehabVillageCrop
+      ? REHAB_VILLAGE_PHOTO
       : undefined);
 
   if (hasError) {

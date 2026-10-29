@@ -6,6 +6,7 @@ import {
   Users,
   Sparkles,
   PhoneCall,
+  Mail,
   HeartHandshake,
 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
@@ -39,7 +40,7 @@ export const ProgrammesOverviewPage: React.FC = () => {
     <>
       <SeoHead
         title="Our Programmes — Healthcare, Rehabilitation & Education | Ayurgreen Foundation"
-        description="Explore all 8 core programmes of Ayurgreen Foundation: Charity Care, Project Rehab Village, Social Rehabilitation, Community Outreach, Medical Camps, College of Life Sciences, Radiology, and Volunteer Activities."
+        description="Explore all 8 core programmes of Ayurgreen Foundation: Charity Care, Ayurgreen Rehab Village, Social Rehabilitation, Community Outreach, Medical Camps, College of Life Sciences, Radiology, and Volunteer Activities."
         canonicalPath="/programmes"
       />
 
@@ -115,7 +116,8 @@ export const ProgrammeDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { config } = useSite();
 
-  const programme = config.programmes.find((p) => p.slug === slug);
+  const normalizedSlug = slug === 'project-rehab-village' ? 'rehab-village' : slug;
+  const programme = config.programmes.find((p) => p.slug === normalizedSlug);
 
   if (!programme) {
     return <Navigate to="/programmes" replace />;
@@ -145,15 +147,32 @@ export const ProgrammeDetailPage: React.FC = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-4">
             <div className="lg:col-span-7">
-              <div className="flex items-center gap-3 mb-4">
-                <ProgrammeIconBadge
-                  iconName={programme.iconName}
-                  accentColor={programme.accentColor}
-                  size="sm"
-                />
-                <span className="text-xs font-semibold uppercase tracking-widest text-[#087F83]">
-                  {programme.category}
-                </span>
+              <div className="flex items-center gap-3.5 mb-4">
+                {programme.logoUrl ? (
+                  <div className="w-14 h-14 rounded-xl bg-white border border-[#DFE6EB] p-1.5 flex items-center justify-center shadow-2xs shrink-0">
+                    <img
+                      src={programme.logoUrl}
+                      alt={programme.title}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                ) : (
+                  <ProgrammeIconBadge
+                    iconName={programme.iconName}
+                    accentColor={programme.accentColor}
+                    size="sm"
+                  />
+                )}
+                <div>
+                  <span className="block text-xs font-semibold uppercase tracking-widest text-[#087F83]">
+                    {programme.welcomeHeading || programme.category}
+                  </span>
+                  {programme.welcomeHeading && (
+                    <span className="text-[11px] font-medium text-[#536477]">
+                      {programme.category} · Ayurgreen Hospitals Initiative
+                    </span>
+                  )}
+                </div>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-editorial text-[#102C4B] mb-4">
@@ -182,7 +201,7 @@ export const ProgrammeDetailPage: React.FC = () => {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="h-64 sm:h-72 rounded-2xl overflow-hidden border border-[#DFE6EB] shadow-sm bg-white">
+              <div className="h-64 sm:h-80 rounded-2xl overflow-hidden border border-[#DFE6EB] shadow-sm bg-white">
                 {programme.cropRegion ? (
                   <ReferencePhotoCrop
                     crop={programme.cropRegion}
@@ -202,16 +221,16 @@ export const ProgrammeDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Programme Introduction, 3. Purpose & Objectives, 4. Activities & Approach */}
+      {/* 2. Main Narrative & Structured Sections */}
       <section className="py-14 sm:py-18 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Main Column */}
             <div className="lg:col-span-8 space-y-12">
-              {/* Introduction */}
+              {/* About / Programme Introduction */}
               <div>
                 <h2 className="text-2xl sm:text-3xl font-editorial text-[#102C4B] mb-3">
-                  Programme Overview
+                  {programme.aboutHeading || 'Programme Overview'}
                 </h2>
                 <div className="w-16 h-0.5 bg-[#087F83] mb-5" aria-hidden="true" />
                 <div className="space-y-4 text-sm sm:text-base text-[#536477] leading-relaxed">
@@ -221,38 +240,67 @@ export const ProgrammeDetailPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Purpose & Objectives */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-[#F7F9FA] border border-[#DFE6EB] space-y-6">
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-widest text-[#087F83] mb-1">
-                    Core Purpose
+              {/* Vision & Mission (when provided, e.g. Rehab Village) OR Purpose & Objectives */}
+              {programme.vision && programme.mission ? (
+                <div className="p-6 sm:p-8 rounded-2xl bg-[#F7F9FA] border border-[#DFE6EB] space-y-6">
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-widest text-[#087F83] mb-2">
+                      Vision
+                    </div>
+                    <p className="text-sm sm:text-base text-[#102C4B] leading-relaxed">
+                      {programme.vision}
+                    </p>
                   </div>
-                  <p className="text-base sm:text-lg font-editorial text-[#102C4B] leading-snug">
-                    {programme.purpose}
-                  </p>
-                </div>
 
-                <div className="pt-4 border-t border-[#DFE6EB]">
-                  <h3 className="text-base font-bold text-[#102C4B] mb-4">
-                    Key Programme Objectives
-                  </h3>
-                  <ul className="space-y-3">
-                    {programme.objectives.map((obj, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-sm text-[#536477]">
-                        <CheckCircle2 className="w-4 h-4 text-[#087F83] shrink-0 mt-0.5" />
-                        <span>{obj}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="pt-6 border-t border-[#DFE6EB]">
+                    <div className="text-xs font-semibold uppercase tracking-widest text-[#087F83] mb-2">
+                      Mission
+                    </div>
+                    <p className="text-sm sm:text-base text-[#102C4B] leading-relaxed">
+                      {programme.mission}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="p-6 sm:p-8 rounded-2xl bg-[#F7F9FA] border border-[#DFE6EB] space-y-6">
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-widest text-[#087F83] mb-1">
+                      Core Purpose
+                    </div>
+                    <p className="text-base sm:text-lg font-editorial text-[#102C4B] leading-snug">
+                      {programme.purpose}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-[#DFE6EB]">
+                    <h3 className="text-base font-bold text-[#102C4B] mb-4">
+                      Key Programme Objectives
+                    </h3>
+                    <ul className="space-y-3">
+                      {programme.objectives.map((obj, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-sm text-[#536477]">
+                          <CheckCircle2 className="w-4 h-4 text-[#087F83] shrink-0 mt-0.5" />
+                          <span>{obj}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
 
               {/* Activities & Approach */}
               <div>
                 <h2 className="text-2xl sm:text-3xl font-editorial text-[#102C4B] mb-3">
-                  Activities &amp; Implementation Approach
+                  {programme.activitiesHeading || 'Activities & Implementation Approach'}
                 </h2>
-                <div className="w-16 h-0.5 bg-[#087F83] mb-6" aria-hidden="true" />
+                <div className="w-16 h-0.5 bg-[#087F83] mb-5" aria-hidden="true" />
+                {programme.activitiesIntro && programme.activitiesIntro.length > 0 && (
+                  <div className="space-y-4 text-sm sm:text-base text-[#536477] leading-relaxed mb-6">
+                    {programme.activitiesIntro.map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))}
+                  </div>
+                )}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                   {programme.activities.map((act, index) => (
                     <div
@@ -260,7 +308,7 @@ export const ProgrammeDetailPage: React.FC = () => {
                       className="p-5 rounded-2xl border border-[#DFE6EB] bg-white flex flex-col"
                     >
                       <div className="text-xs font-bold text-[#087F83] tabular-nums mb-1.5">
-                        0{index + 1}. Approach
+                        0{index + 1}. Key Pillar
                       </div>
                       <h3 className="text-sm sm:text-base font-bold text-[#102C4B] mb-2">
                         {act.title}
@@ -272,24 +320,147 @@ export const ProgrammeDetailPage: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Why Rehab Village (when provided) */}
+              {programme.whyItems && programme.whyItems.length > 0 && (
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-editorial text-[#102C4B] mb-3">
+                    {programme.whyHeading || 'Why Choose This Programme'}
+                  </h2>
+                  <div className="w-16 h-0.5 bg-[#087F83] mb-5" aria-hidden="true" />
+                  {programme.whyIntro && (
+                    <p className="text-sm sm:text-base text-[#536477] leading-relaxed mb-6">
+                      {programme.whyIntro}
+                    </p>
+                  )}
+                  <div className="space-y-3.5">
+                    {programme.whyItems.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="p-5 rounded-2xl border border-[#DFE6EB] bg-[#F7F9FA]/70 flex items-start gap-3.5"
+                      >
+                        <CheckCircle2 className="w-5 h-5 text-[#087F83] shrink-0 mt-0.5" />
+                        <div className="text-sm sm:text-base text-[#536477] leading-relaxed">
+                          <strong className="text-[#102C4B] font-semibold">
+                            {item.label}:
+                          </strong>{' '}
+                          {item.description}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* How to Collaborate (when provided) */}
+              {programme.collaboratePartners && programme.collaboratePartners.length > 0 && (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-2xl sm:text-3xl font-editorial text-[#102C4B] mb-3">
+                      {programme.collaborateHeading || 'How to Collaborate'}
+                    </h2>
+                    <div className="w-16 h-0.5 bg-[#087F83] mb-5" aria-hidden="true" />
+                    {programme.collaborateIntro && (
+                      <p className="text-sm sm:text-base text-[#536477] leading-relaxed">
+                        {programme.collaborateIntro}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {programme.collaboratePartners.map((partner, idx) => (
+                      <div
+                        key={idx}
+                        className="p-6 rounded-2xl border border-[#DFE6EB] bg-white space-y-2"
+                      >
+                        <h3 className="text-base font-bold text-[#102C4B]">
+                          {partner.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-[#536477] leading-relaxed">
+                          {partner.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {programme.volunteerOpportunities && (
+                    <div className="p-6 sm:p-8 rounded-2xl bg-[#EFF7FA] border border-[#DFE6EB] space-y-4">
+                      <h3 className="text-lg font-bold text-[#102C4B]">
+                        Volunteer Opportunities
+                      </h3>
+                      <p className="text-sm sm:text-base text-[#102C4B] leading-relaxed">
+                        {programme.volunteerOpportunities.intro}
+                      </p>
+                      <ul className="space-y-2.5">
+                        {programme.volunteerOpportunities.bullets.map((bullet, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 text-sm text-[#102C4B]"
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-[#087F83] shrink-0 mt-0.5" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="text-xs sm:text-sm text-[#536477] leading-relaxed pt-2 border-t border-[#DFE6EB]">
+                        {programme.volunteerOpportunities.closing}
+                      </p>
+                    </div>
+                  )}
+
+                  {programme.patientsConsultationNote && (
+                    <div className="p-6 rounded-2xl bg-[#F7F9FA] border border-[#DFE6EB]">
+                      <h3 className="text-base font-bold text-[#102C4B] mb-1.5">
+                        Patients
+                      </h3>
+                      <p className="text-sm text-[#536477] leading-relaxed">
+                        {programme.patientsConsultationNote}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
-            {/* Sidebar: 5. Intended Beneficiaries, 6. Impact & Outcomes, 9/10. Get Involved & Contact CTA */}
+            {/* Sidebar: Stakeholders / Beneficiaries, Impact Status, & Direct Contact CTA */}
             <aside className="lg:col-span-4 space-y-6">
-              {/* Intended Audience / Beneficiaries */}
+              {/* Stakeholders / Intended Audience */}
               <div className="p-6 rounded-2xl border border-[#DFE6EB] bg-white space-y-4">
                 <div className="flex items-center gap-2.5 text-[#102C4B]">
-                  <Users className="w-5 h-5 text-[#087F83]" />
-                  <h3 className="text-base font-bold">Intended Beneficiaries</h3>
+                  <Users className="w-5 h-5 text-[#087F83] shrink-0" />
+                  <h3 className="text-base font-bold">
+                    {programme.stakeholdersHeading || 'Intended Beneficiaries'}
+                  </h3>
                 </div>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-[#536477]">
-                  {programme.intendedAudience.map((aud, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-[#087F83] font-bold">·</span>
-                      <span>{aud}</span>
-                    </li>
-                  ))}
-                </ul>
+                {programme.stakeholdersIntro && (
+                  <p className="text-xs sm:text-sm text-[#536477] leading-relaxed">
+                    {programme.stakeholdersIntro}
+                  </p>
+                )}
+                {programme.stakeholders && programme.stakeholders.length > 0 ? (
+                  <ul className="space-y-3 text-xs sm:text-sm text-[#536477]">
+                    {programme.stakeholders.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#087F83] font-bold mt-0.5">·</span>
+                        <span>
+                          <strong className="text-[#102C4B] font-semibold">
+                            {item.role}:
+                          </strong>{' '}
+                          {item.description}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#536477]">
+                    {programme.intendedAudience.map((aud, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#087F83] font-bold">·</span>
+                        <span>{aud}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               {/* Impact & Outcomes Status */}
@@ -310,6 +481,37 @@ export const ProgrammeDetailPage: React.FC = () => {
                 )}
               </div>
 
+              {/* Direct Contact Card (when provided, e.g. Ayurgreen Rehab Village) */}
+              {programme.directContact && (
+                <div className="p-6 rounded-2xl border border-[#087F83]/30 bg-[#F7F9FA] space-y-4">
+                  <h3 className="text-base font-bold text-[#102C4B]">
+                    Contact Us
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#536477] leading-relaxed">
+                    {programme.directContact.prompt}
+                  </p>
+                  <div className="pt-2 border-t border-[#DFE6EB] space-y-2.5">
+                    <div className="text-sm font-bold text-[#102C4B]">
+                      {programme.directContact.name}
+                    </div>
+                    <a
+                      href={`tel:${programme.directContact.phone.replace(/\s+/g, '')}`}
+                      className="flex items-center gap-2 text-xs sm:text-sm text-[#087F83] hover:underline font-medium tabular-nums"
+                    >
+                      <PhoneCall className="w-4 h-4 shrink-0" />
+                      <span>Phone: {programme.directContact.phone}</span>
+                    </a>
+                    <a
+                      href={`mailto:${programme.directContact.email}`}
+                      className="flex items-center gap-2 text-xs sm:text-sm text-[#087F83] hover:underline font-medium break-all"
+                    >
+                      <Mail className="w-4 h-4 shrink-0" />
+                      <span>Email: {programme.directContact.email}</span>
+                    </a>
+                  </div>
+                </div>
+              )}
+
               {/* Get Involved & Partnership Sidebar Box */}
               <div className="p-6 rounded-2xl bg-[#102C4B] text-white space-y-4">
                 <HeartHandshake className="w-7 h-7 text-[#4DD0E1]" />
@@ -317,7 +519,7 @@ export const ProgrammeDetailPage: React.FC = () => {
                   Collaborate on {programme.shortTitle}
                 </h3>
                 <p className="text-xs text-white/80 leading-relaxed">
-                  Whether you are a donor, healthcare volunteer, or CSR partner, your support strengthens our capacity to reach more communities.
+                  Whether you are a donor, healthcare volunteer, accommodation or transport partner, your support strengthens our capacity to reach more patients and communities.
                 </p>
                 <div className="space-y-2.5 pt-2">
                   <Link
