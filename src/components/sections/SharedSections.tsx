@@ -188,21 +188,21 @@ export const FeaturedProjectStrokeForceCard: React.FC = () => {
   const { config } = useSite();
 
   return (
-    <div className="mt-10 rounded-3xl bg-gradient-to-r from-[#102C4B] via-[#0B4358] to-[#087F83] text-white overflow-hidden border border-[#07565B] shadow-sm">
+    <div className="mt-10 rounded-3xl bg-gradient-to-r from-[#EAF6F7] via-[#EFF8F9] to-[#E2F2F4] text-[#102C4B] overflow-hidden border border-[#C4E2E6] shadow-sm">
       <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
         <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-5">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2.5">
-              <span className="px-3 py-1 rounded-md bg-[#2CE5C3]/20 border border-[#2CE5C3]/40 text-[#7CE8D8] font-nav text-xs font-semibold uppercase tracking-[0.08em]">
+              <span className="px-3 py-1 rounded-md bg-[#087F83] text-white font-nav text-xs font-semibold uppercase tracking-[0.08em]">
                 Featured Project
               </span>
-              <span className="text-xs font-medium text-white/80">
+              <span className="text-xs font-semibold text-[#536477]">
                 An initiative of Ayurgreen Foundation
               </span>
             </div>
 
             <div className="flex items-center gap-4 pt-1">
-              <div className="bg-white/95 px-3 py-1.5 rounded-xl shrink-0">
+              <div className="bg-white px-3.5 py-2 rounded-xl border border-[#D5E9EC] shadow-2xs shrink-0">
                 <img
                   src={config.organization.logos.strokeForce}
                   alt="Stroke Force Logo"
@@ -210,20 +210,20 @@ export const FeaturedProjectStrokeForceCard: React.FC = () => {
                 />
               </div>
               <div>
-                <h3 className="text-2xl sm:text-3xl font-editorial text-white leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-editorial text-[#102C4B] leading-tight">
                   STROKE FORCE
                 </h3>
-                <p className="text-xs sm:text-sm font-semibold text-[#5EEAD4]">
+                <p className="text-xs sm:text-sm font-semibold text-[#087F83]">
                   Community Stroke Awareness
                 </p>
               </div>
             </div>
 
-            <p className="text-sm sm:text-base text-white/90 leading-relaxed pt-1">
+            <p className="text-sm sm:text-base text-[#334E68] leading-relaxed pt-1">
               A flagship community awareness initiative that equips people with the knowledge to recognise stroke warning signs, understand the urgency of treatment and spread life-saving awareness within their communities.
             </p>
 
-            <p className="text-sm sm:text-base font-semibold text-[#7CE8D8] tracking-wide">
+            <p className="text-sm sm:text-base font-semibold text-[#07565B] tracking-wide">
               Recognising Stroke Signs. Acting Fast. Saving Lives.
             </p>
           </div>
@@ -231,15 +231,15 @@ export const FeaturedProjectStrokeForceCard: React.FC = () => {
           <div className="pt-2 flex flex-wrap items-center gap-3.5">
             <Link
               to="/stroke-force"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-white text-[#102C4B] hover:bg-[#EFF7FA] text-xs sm:text-sm font-semibold transition-colors shadow-2xs"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#102C4B] text-white hover:bg-[#087F83] text-xs sm:text-sm font-semibold transition-colors shadow-2xs"
             >
-              <HeartPulse className="w-4 h-4 text-[#087F83]" />
+              <HeartPulse className="w-4 h-4 text-[#5EEAD4]" />
               <span>Explore Stroke Force</span>
-              <ArrowRight className="w-4 h-4 text-[#087F83]" />
+              <ArrowRight className="w-4 h-4 text-[#5EEAD4]" />
             </Link>
             <Link
               to="/programmes/medical-camps"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white/10 hover:bg-white/20 text-white border border-white/40 text-xs sm:text-sm font-semibold transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white hover:bg-[#F7F9FA] text-[#102C4B] border border-[#B8DCE0] text-xs sm:text-sm font-semibold transition-colors"
             >
               <span>Stroke Awareness Medical Camps</span>
             </Link>
@@ -253,7 +253,7 @@ export const FeaturedProjectStrokeForceCard: React.FC = () => {
             className="w-full h-full"
           />
           <div
-            className="hidden lg:block absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0B4358] to-transparent pointer-events-none"
+            className="hidden lg:block absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#E6F4F6] to-transparent pointer-events-none"
             aria-hidden="true"
           />
         </div>
