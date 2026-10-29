@@ -28,7 +28,7 @@ interface SiteContextValue {
   importSiteJson: (rawJson: string) => { success: boolean; error?: string };
 }
 
-const CONFIG_STORAGE_KEY = 'ayurgreen_foundation_site_config_v8';
+const CONFIG_STORAGE_KEY = 'ayurgreen_foundation_site_config_v9';
 const INQUIRIES_STORAGE_KEY = 'ayurgreen_foundation_inquiries_v1';
 
 const SiteContext = createContext<SiteContextValue | undefined>(undefined);

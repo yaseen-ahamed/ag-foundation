@@ -1736,6 +1736,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       iconName: 'Landmark',
       logoUrl: '/assets/aistudio/ayurgreen_college_logo.webp',
       internalRoute: '/programmes/college-of-life-sciences',
+      externalUrl: 'https://ayurgreencollege.com/',
       buttonLabel: 'Visit Website',
     },
     {
@@ -1747,6 +1748,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       iconName: 'Microscope',
       logoUrl: '/assets/aistudio/ayurgreen_scientifica_logo.webp',
       internalRoute: '/about#institutions',
+      externalUrl: 'https://ayurgreenscientifica.org/',
       buttonLabel: 'Visit Website',
     },
     {
@@ -1758,6 +1760,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       iconName: 'ScanLine',
       logoUrl: '/assets/aistudio/getwell_hospital_logo.webp',
       internalRoute: '/programmes/radiology',
+      externalUrl: 'https://getwell-hospital-naduvattom.vercel.app/',
       buttonLabel: 'Visit Website',
     },
   ],
