@@ -13,7 +13,6 @@ import { ReferencePhotoCrop } from '../components/visuals/FoundationVisual';
 import {
   FlagshipShowcaseSection,
   FeaturedProjectStrokeForceCard,
-  ProgressivePathwaySection,
   ProgrammeCard,
   AssociatedInstitutionsSection,
   ImpactMetricsStrip,
@@ -25,7 +24,6 @@ export const HomePage: React.FC = () => {
   const { config } = useSite();
 
   const featuredProgrammes = config.programmes.filter((p) => p.featuredOnHome);
-  const additionalProgrammes = config.programmes.filter((p) => !p.featuredOnHome);
   const leadStory = config.impactStories[0];
   const secondaryStories = config.impactStories.slice(1, 3);
 
@@ -215,42 +213,13 @@ export const HomePage: React.FC = () => {
               <ProgrammeCard key={prog.slug} programme={prog} />
             ))}
           </div>
-
-          {/* Secondary Strip for Remaining Core & Institutional Programmes */}
-          {additionalProgrammes.length > 0 && (
-            <div className="mt-8 pt-6 border-t border-[#DFE6EB] flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#F7F9FA] rounded-2xl p-5">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#087F83]">
-                  Additional Core &amp; Connected Programmes
-                </span>
-                <p className="text-xs sm:text-sm text-[#536477] mt-0.5">
-                  Explore our volunteer network, allied health college, and diagnostic services:
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                {additionalProgrammes.map((prog) => (
-                  <Link
-                    key={prog.slug}
-                    to={`/programmes/${prog.slug}`}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-[#DFE6EB] hover:border-[#087F83] text-xs font-semibold text-[#102C4B] hover:text-[#087F83] transition-colors"
-                  >
-                    <span>{prog.title}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#087F83]" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </section>
 
       {/* SECTION 5: OUR ASSOCIATED INSTITUTIONS */}
       <AssociatedInstitutionsSection />
 
-      {/* SECTION 6: HOW OUR MODEL WORKS */}
-      <ProgressivePathwaySection />
-
-      {/* SECTION 7: OUR IMPACT */}
+      {/* SECTION 6: OUR IMPACT */}
       <ImpactMetricsStrip showHeader={true} />
 
       {/* SECTION 8: ACTIVITIES & EVENTS */}

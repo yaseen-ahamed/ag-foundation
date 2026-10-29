@@ -74,6 +74,7 @@ export interface ProgrammeItem {
     | 'ScanLine'
     | 'HandHeart';
   accentColor: string;
+  imageUrl?: string;
   cropRegion?: { x: number; y: number; w: number; h: number };
   illustrationType:
     | 'charity'
@@ -670,6 +671,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       featuredOnHome: true,
       iconName: 'Accessibility',
       accentColor: '#26A69A',
+      imageUrl: '/assets/aistudio/social_rehab_program_3edebc6f.png',
       cropRegion: { x: 395, y: 706, w: 112, h: 74 },
       illustrationType: 'social-rehab',
       aboutHeading: 'About the Programme',
@@ -1178,6 +1180,8 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       featuredOnHome: true,
       iconName: 'GraduationCap',
       accentColor: '#102C4B',
+      imageUrl: '/assets/aistudio/ewp_program.JPG_dbea8171.jpeg',
+      cropRegion: { x: 850, y: 706, w: 115, h: 74 },
       illustrationType: 'college',
       logoUrl: '/assets/aistudio/ayurgreen_college_logo.webp',
       welcomeHeading: 'Supporting Dreams, Creating Purpose.',

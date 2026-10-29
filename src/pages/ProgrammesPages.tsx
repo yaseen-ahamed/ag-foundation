@@ -224,9 +224,10 @@ export const ProgrammeDetailPage: React.FC = () => {
 
             <div className="lg:col-span-5">
               <div className="h-64 sm:h-80 rounded-2xl overflow-hidden border border-[#DFE6EB] shadow-sm bg-white">
-                {programme.cropRegion ? (
+                {programme.imageUrl || programme.cropRegion ? (
                   <ReferencePhotoCrop
-                    crop={programme.cropRegion}
+                    crop={programme.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                    imageSrc={programme.imageUrl}
                     alt={displayTitle}
                     className="w-full h-full"
                   />

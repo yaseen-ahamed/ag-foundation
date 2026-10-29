@@ -27,6 +27,8 @@ export const CHARITY_CARE_PHOTO = '/assets/aistudio/charity_care_6e336a13.webp';
 export const REHAB_VILLAGE_PHOTO = '/assets/aistudio/rehab_village_vehicle_4fb8d250.webp';
 export const MEDICAL_CAMP_PHOTO = '/assets/aistudio/medical_camp_3776972f.webp';
 export const VOLUNTEER_ACTIVITY_PHOTO = '/assets/aistudio/volunteer_activit_801ee57d.webp';
+export const SOCIAL_REHAB_PHOTO = '/assets/aistudio/social_rehab_program_3edebc6f.png';
+export const EWP_SCHOLARSHIP_PHOTO = '/assets/aistudio/ewp_program.JPG_dbea8171.jpeg';
 
 export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
   crop,
@@ -41,8 +43,10 @@ export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
     (crop.x === 32 && crop.y === 690) || (crop.x === 76 && crop.y === 706);
   const isRehabVillageCrop =
     (crop.x === 256 && crop.y === 690) || (crop.x === 185 && crop.y === 706);
+  const isSocialRehabCrop = crop.x === 395 && crop.y === 706;
   const isMedicalCampCrop = crop.x === 563 && crop.y === 706;
   const isVolunteerActivityCrop = crop.x === 725 && crop.y === 706;
+  const isEwpScholarshipCrop = crop.x === 850 && crop.y === 706;
 
   const resolvedDirectImage =
     imageSrc ||
@@ -52,10 +56,14 @@ export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
       ? CHARITY_CARE_PHOTO
       : isRehabVillageCrop
       ? REHAB_VILLAGE_PHOTO
+      : isSocialRehabCrop
+      ? SOCIAL_REHAB_PHOTO
       : isMedicalCampCrop
       ? MEDICAL_CAMP_PHOTO
       : isVolunteerActivityCrop
       ? VOLUNTEER_ACTIVITY_PHOTO
+      : isEwpScholarshipCrop
+      ? EWP_SCHOLARSHIP_PHOTO
       : undefined);
 
   if (hasError) {

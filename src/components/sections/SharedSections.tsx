@@ -511,9 +511,10 @@ export const ProgrammeCard: React.FC<{ programme: ProgrammeItem }> = ({ programm
     <article className="group bg-white rounded-2xl border border-[#DFE6EB] hover:border-[#087F83]/60 transition-all duration-200 flex flex-col overflow-hidden">
       {/* Top Visual Slot */}
       <div className="relative h-44 w-full bg-[#EFF7FA] overflow-hidden">
-        {programme.cropRegion ? (
+        {programme.imageUrl || programme.cropRegion ? (
           <ReferencePhotoCrop
-            crop={programme.cropRegion}
+            crop={programme.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+            imageSrc={programme.imageUrl}
             alt={programme.title}
             className="w-full h-full group-hover:scale-[1.03] transition-transform duration-200"
           />
