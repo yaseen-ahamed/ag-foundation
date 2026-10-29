@@ -249,7 +249,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
     emailVerified: false, // Marked configurable until verified by administrator
     phone: '[Pending Official Telephone Configuration]',
     phoneVerified: false,
-    mapQueryUrl: 'https://www.google.com/maps/search/?api=1&query=Edappal+Kavilpadi+Malappuram+Kerala',
+    mapQueryUrl: 'https://share.google/TVSFkrnpwUfVc9iQN',
     socials: {
       instagram: '',
       linkedin: '',

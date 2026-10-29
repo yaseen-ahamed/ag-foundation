@@ -508,6 +508,14 @@ export const ProgrammeDetailPage: React.FC = () => {
                       <Mail className="w-4 h-4 shrink-0" />
                       <span>Email: {programme.directContact.email}</span>
                     </a>
+                    <a
+                      href={config.contact.mapQueryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#102C4B] hover:text-[#087F83] pt-1 transition-colors"
+                    >
+                      <span>View Location on Google Maps →</span>
+                    </a>
                   </div>
                 </div>
               )}

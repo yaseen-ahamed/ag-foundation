@@ -324,7 +324,7 @@ export const ContactPage: React.FC = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#087F83] hover:underline mt-3"
                     >
-                      <span>Open Edappal, Kavilpadi in Google Maps</span>
+                      <span>Open Ayurgreen Campus in Google Maps</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </div>
@@ -385,14 +385,36 @@ export const ContactPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Location Visual Card */}
-              <div className="p-6 rounded-2xl bg-[#102C4B] text-white space-y-3">
-                <h3 className="text-lg font-editorial">
-                  Visiting the Ayurgreen Campus
-                </h3>
-                <p className="text-xs sm:text-sm text-white/85 leading-relaxed">
-                  Our Administrative Office is located at Ayurgreen Campus in Edappal, Kavilpadi, Malappuram District, Kerala. Please schedule an appointment using the contact form prior to visiting for partnership or programme discussions.
-                </p>
+              {/* Interactive Google Maps Card & Campus Directions */}
+              <div className="rounded-2xl border border-[#DFE6EB] bg-white overflow-hidden shadow-2xs">
+                <div className="h-60 w-full bg-[#EFF7FA] relative">
+                  <iframe
+                    title="Ayurgreen Campus — Edappal, Kavilpadi, Malappuram, Kerala"
+                    src="https://maps.google.com/maps?q=Ayurgreen+Hospitals,+Kavilpadi,+Edappal,+Malappuram,+Kerala+679582&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    className="w-full h-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+                <div className="p-5 sm:p-6 bg-[#102C4B] text-white space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="text-lg font-editorial">
+                      Visiting the Ayurgreen Campus
+                    </h3>
+                    <a
+                      href={config.contact.mapQueryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs font-semibold transition-colors shrink-0"
+                    >
+                      <span>Get Directions</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                  <p className="text-xs sm:text-sm text-white/85 leading-relaxed">
+                    Our Administrative Office is located at Ayurgreen Campus in Edappal, Kavilpadi, Malappuram District, Kerala. Please schedule an appointment using the contact form prior to visiting for partnership or programme discussions.
+                  </p>
+                </div>
               </div>
             </div>
 
