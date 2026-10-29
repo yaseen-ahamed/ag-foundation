@@ -1,0 +1,6 @@
+{
+  "name": "Ayurgreen Foundation — Healthcare & Education for Social Impact",
+  "description": "Official digital platform of Ayurgreen Foundation, a Section 8 non-profit advancing healthcare access, rehabilitation, Stroke Force awareness, education, and community welfare.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
