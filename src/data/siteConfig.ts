@@ -1504,7 +1504,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
             {
               badge: '02 · Collaborative Camp',
               title: '2. Koode Medical Camp',
-              imageUrl: '/assets/aistudio/medical_camp_3776972f.jpeg',
+              imageUrl: '/assets/aistudio/medical_camp_3776972f.webp',
               meta: [
                 { label: 'Date', value: '1 November 2025' },
                 { label: 'Venue', value: 'Ayurgreen Hospital, Edappal' },
@@ -1873,7 +1873,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       relatedRoute: '/programmes/medical-camps',
       isPlaceholder: false,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
-      imageUrl: '/assets/aistudio/medical_camp_3776972f.jpeg',
+      imageUrl: '/assets/aistudio/medical_camp_3776972f.webp',
     },
     {
       id: 'news-calicut-stroke-camp',
@@ -2027,10 +2027,11 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       title: 'Koode Medical Camp & Community Outreach',
       category: 'Medical Camps',
       caption:
-        'Taking healthcare beyond hospital walls through stroke awareness and community medical camps.',
-      altText: 'Ayurgreen Foundation medical camp consultation and community health checkup.',
+        'Taking healthcare beyond hospital walls through the Koode Medical Camp in collaboration with ILA Foundation at Ayurgreen Campus, Edappal.',
+      altText: 'Koode Medical Camp gathering of patients, families, and healthcare team at Ayurgreen Campus.',
       isVerifiedAsset: true,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
+      customImageUrl: '/assets/aistudio/medical_camp_3776972f.webp',
     },
     {
       id: 'gal-vol-1',
