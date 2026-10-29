@@ -19,6 +19,7 @@ export interface ProgrammeCustomSection {
   cards?: {
     badge?: string;
     title: string;
+    imageUrl?: string;
     meta?: { label: string; value: string }[];
     paragraphs: string[];
     impactTitle?: string;
@@ -198,6 +199,7 @@ export interface NewsEventItem {
   relatedRoute: string;
   isPlaceholder: boolean;
   cropRegion?: { x: number; y: number; w: number; h: number };
+  imageUrl?: string;
 }
 
 export interface GalleryItem {
@@ -1486,6 +1488,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
             {
               badge: '01 · District-Level Camp',
               title: '1. District-Level Stroke Awareness & Rehabilitation Medical Camp',
+              imageUrl: '/assets/aistudio/stroke_camp_-_calicut_3972d47b.png',
               meta: [
                 { label: 'Location', value: 'Thondayad, Kozhikode' },
                 { label: 'Organised by', value: 'Ayurgreen Foundation' },
@@ -1501,6 +1504,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
             {
               badge: '02 · Collaborative Camp',
               title: '2. Koode Medical Camp',
+              imageUrl: '/assets/aistudio/medical_camp_3776972f.jpeg',
               meta: [
                 { label: 'Date', value: '1 November 2025' },
                 { label: 'Venue', value: 'Ayurgreen Hospital, Edappal' },
@@ -1869,6 +1873,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       relatedRoute: '/programmes/medical-camps',
       isPlaceholder: false,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
+      imageUrl: '/assets/aistudio/medical_camp_3776972f.jpeg',
     },
     {
       id: 'news-calicut-stroke-camp',
@@ -1886,6 +1891,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       relatedRoute: '/programmes/medical-camps',
       isPlaceholder: false,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
+      imageUrl: '/assets/aistudio/stroke_camp_-_calicut_3972d47b.png',
     },
     {
       id: 'news-nilambur-stroke-camp',
@@ -1908,8 +1914,8 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       id: 'news-run-fast-marathon',
       title: 'RUN FAST Mini Marathon — Stroke Force Public Awareness Initiative',
       category: 'Awareness Campaigns',
-      dateLabel: 'Flagship Event',
-      locationLabel: 'Community Outreach, Kerala',
+      dateLabel: '29 October 2025',
+      locationLabel: 'Edappal, Malappuram',
       summary:
         'Public mini marathon organised to promote active living and spread the life-saving message of recognising stroke warning signs and acting fast.',
       content: [
@@ -1919,12 +1925,13 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       relatedRoute: '/stroke-force',
       isPlaceholder: false,
       cropRegion: { x: 0, y: 1280, w: 400, h: 145 },
+      imageUrl: '/assets/aistudio/runfast_-__minimarathon_9f7439db.png',
     },
     {
       id: 'news-national-reading-day',
       title: 'National Reading Day — Educational & Community Engagement',
       category: 'Foundation Events',
-      dateLabel: 'Annual Observance',
+      dateLabel: '19 June · Annual Observance',
       locationLabel: 'Ayurgreen Campus, Edappal',
       summary:
         'Promoting knowledge sharing, literacy, and reflective learning among students, volunteers, and the healthcare community.',
@@ -1935,12 +1942,13 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       relatedRoute: '/programmes/ewp-scholarship',
       isPlaceholder: false,
       cropRegion: { x: 725, y: 706, w: 115, h: 74 },
+      imageUrl: '/assets/aistudio/national_reding_day_dc3855d2.png',
     },
     {
       id: 'news-world-environment-day',
       title: 'World Environment Day — Green Campus & Community Wellbeing Drive',
       category: 'Foundation Events',
-      dateLabel: 'Annual Observance',
+      dateLabel: '5 June · Annual Observance',
       locationLabel: 'Ayurgreen Campus & Rehab Village, Edappal',
       summary:
         'Celebrating environmental stewardship and sustainable community living in alignment with Ayurgreen’s healing village ethos.',
@@ -1951,9 +1959,58 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       relatedRoute: '/programmes/rehab-village',
       isPlaceholder: false,
       cropRegion: { x: 185, y: 706, w: 150, h: 74 },
+      imageUrl: '/assets/aistudio/world_environment_day_fa6ae0f5.png',
     },
   ],
   galleryItems: [
+    {
+      id: 'gal-runfast-marathon',
+      title: 'RUN FAST Stroke Awareness Mini Marathon',
+      category: 'Community Outreach Programmes',
+      caption:
+        'Citizens, students, and officials uniting in Edappal, Malappuram for the RUN FAST Stroke Awareness Marathon.',
+      altText:
+        'Participants holding the Run FAST Stroke Awareness Marathon 2025 banner at Ayurgreen Campus, Edappal.',
+      isVerifiedAsset: true,
+      cropRegion: { x: 0, y: 1280, w: 400, h: 145 },
+      customImageUrl: '/assets/aistudio/runfast_-__minimarathon_9f7439db.png',
+    },
+    {
+      id: 'gal-calicut-camp',
+      title: 'Calicut District-Level Stroke Awareness & Rehabilitation Camp',
+      category: 'Medical Camps',
+      caption:
+        'Free district-level stroke awareness and rehabilitation camp in Thondayad, Kozhikode in association with Rotary Club Calicut Cyber City.',
+      altText:
+        'Speakers and participants at the Calicut Stroke Awareness and Rehabilitation Medical Camp.',
+      isVerifiedAsset: true,
+      cropRegion: { x: 563, y: 706, w: 112, h: 74 },
+      customImageUrl: '/assets/aistudio/stroke_camp_-_calicut_3972d47b.png',
+    },
+    {
+      id: 'gal-reading-day',
+      title: 'National Reading Day Observance',
+      category: 'Foundation Events',
+      caption:
+        'Interactive session with students and faculty observing National Reading Day at Ayurgreen Foundation.',
+      altText:
+        'Speaker addressing students in front of the National Reading Day June 19 screen.',
+      isVerifiedAsset: true,
+      cropRegion: { x: 725, y: 706, w: 115, h: 74 },
+      customImageUrl: '/assets/aistudio/national_reding_day_dc3855d2.png',
+    },
+    {
+      id: 'gal-environment-day',
+      title: 'World Environment Day — Pledge & Green Campus Drive',
+      category: 'Foundation Events',
+      caption:
+        'Students and healthcare volunteers participating in the World Environment Day handprint pledge banner at Ayurgreen Campus.',
+      altText:
+        'Students and staff gathered around the World Environment Day handprint banner at Ayurgreen Foundation.',
+      isVerifiedAsset: true,
+      cropRegion: { x: 185, y: 706, w: 150, h: 74 },
+      customImageUrl: '/assets/aistudio/world_environment_day_fa6ae0f5.png',
+    },
     {
       id: 'gal-rehab-1',
       title: 'Ayurgreen Rehab Village Accessible Transport & Campus',
@@ -1966,18 +2023,8 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       cropRegion: { x: 185, y: 706, w: 150, h: 74 },
     },
     {
-      id: 'gal-outreach-1',
-      title: 'Stroke Force — Community Stroke Awareness',
-      category: 'Community Outreach Programmes',
-      caption:
-        'Equipping communities with the knowledge to recognise stroke warning signs and act fast.',
-      altText: 'Caregiver assisting a patient outdoors during Stroke Force rehabilitation awareness.',
-      isVerifiedAsset: true,
-      cropRegion: { x: 0, y: 1280, w: 400, h: 145 },
-    },
-    {
       id: 'gal-camps-1',
-      title: 'Medical Camps & Community Outreach',
+      title: 'Koode Medical Camp & Community Outreach',
       category: 'Medical Camps',
       caption:
         'Taking healthcare beyond hospital walls through stroke awareness and community medical camps.',
@@ -2004,16 +2051,6 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       altText: 'Clinical care and blood donation support under Charity Care.',
       isVerifiedAsset: true,
       cropRegion: { x: 76, y: 706, w: 96, h: 74 },
-    },
-    {
-      id: 'gal-rehab-3',
-      title: 'Social Rehabilitation & Guided Therapy',
-      category: 'Rehabilitation Activities',
-      caption:
-        'Supporting individuals beyond medical recovery towards independence and social reintegration.',
-      altText: 'Therapist assisting a beneficiary with hand and arm coordination.',
-      isVerifiedAsset: true,
-      cropRegion: { x: 395, y: 706, w: 112, h: 74 },
     },
   ],
   governanceDocs: [

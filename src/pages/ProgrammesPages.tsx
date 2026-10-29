@@ -474,6 +474,15 @@ export const ProgrammeDetailPage: React.FC = () => {
                             key={cIdx}
                             className="p-6 sm:p-7 rounded-2xl border border-[#DFE6EB] bg-white space-y-4 shadow-2xs"
                           >
+                            {card.imageUrl && (
+                              <div className="h-56 sm:h-64 w-full rounded-xl overflow-hidden bg-[#EFF7FA] mb-2">
+                                <img
+                                  src={card.imageUrl}
+                                  alt={card.title}
+                                  className="w-full h-full object-cover object-center block"
+                                />
+                              </div>
+                            )}
                             {card.badge && (
                               <span className="inline-block px-3 py-1 rounded-md bg-[#EFF7FA] text-[#087F83] text-xs font-semibold uppercase tracking-wider">
                                 {card.badge}

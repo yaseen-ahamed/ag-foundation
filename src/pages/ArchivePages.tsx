@@ -388,9 +388,10 @@ export const GalleryPage: React.FC = () => {
                     aria-label={`View larger image: ${item.title}`}
                     className="relative h-56 w-full bg-[#EFF7FA] overflow-hidden text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-[#087F83]"
                   >
-                    {item.cropRegion && (
+                    {(item.customImageUrl || item.cropRegion) && (
                       <ReferencePhotoCrop
-                        crop={item.cropRegion}
+                        crop={item.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                        imageSrc={item.customImageUrl}
                         alt={item.altText}
                         className="w-full h-full group-hover:scale-[1.03] transition-transform duration-200"
                       />
@@ -440,9 +441,10 @@ export const GalleryPage: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative h-[320px] sm:h-[460px] bg-[#102C4B]">
-              {activeItem.cropRegion && (
+              {(activeItem.customImageUrl || activeItem.cropRegion) && (
                 <ReferencePhotoCrop
-                  crop={activeItem.cropRegion}
+                  crop={activeItem.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                  imageSrc={activeItem.customImageUrl}
                   alt={activeItem.altText}
                   className="w-full h-full"
                 />
@@ -617,10 +619,11 @@ export const NewsEventsPage: React.FC = () => {
                   className="bg-white rounded-2xl border border-[#DFE6EB] overflow-hidden flex flex-col justify-between shadow-2xs"
                 >
                   <div>
-                    {item.cropRegion && (
-                      <div className="h-44 w-full bg-[#EFF7FA]">
+                    {(item.imageUrl || item.cropRegion) && (
+                      <div className="h-48 w-full bg-[#EFF7FA]">
                         <ReferencePhotoCrop
-                          crop={item.cropRegion}
+                          crop={item.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                          imageSrc={item.imageUrl}
                           alt={item.title}
                           className="w-full h-full"
                         />
@@ -701,6 +704,17 @@ export const NewsEventsPage: React.FC = () => {
                 <X className="w-5 h-5" />
               </button>
             </div>
+
+            {(activeArticle.imageUrl || activeArticle.cropRegion) && (
+              <div className="h-60 w-full rounded-xl overflow-hidden bg-[#EFF7FA]">
+                <ReferencePhotoCrop
+                  crop={activeArticle.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                  imageSrc={activeArticle.imageUrl}
+                  alt={activeArticle.title}
+                  className="w-full h-full"
+                />
+              </div>
+            )}
 
             <div className="space-y-4 text-sm sm:text-base text-[#536477] leading-relaxed">
               {activeArticle.content.map((p, i) => (

@@ -390,10 +390,11 @@ export const HomePage: React.FC = () => {
                 key={item.id}
                 className="bg-white rounded-2xl border border-[#DFE6EB] overflow-hidden flex flex-col shadow-2xs"
               >
-                {item.cropRegion && (
-                  <div className="h-40 w-full bg-[#EFF7FA]">
+                {(item.imageUrl || item.cropRegion) && (
+                  <div className="h-48 w-full bg-[#EFF7FA]">
                     <ReferencePhotoCrop
-                      crop={item.cropRegion}
+                      crop={item.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                      imageSrc={item.imageUrl}
                       alt={item.title}
                       className="w-full h-full"
                     />
