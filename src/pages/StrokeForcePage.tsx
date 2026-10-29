@@ -105,6 +105,15 @@ export const StrokeForcePage: React.FC = () => {
                 />
               </div>
 
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 rounded-md bg-[#087F83] text-white font-nav text-xs font-semibold uppercase tracking-[0.08em]">
+                  Featured Project
+                </span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#087F83]">
+                  An initiative of Ayurgreen Foundation
+                </span>
+              </div>
+
               <h1 className="text-[clamp(2.25rem,4vw,3.5rem)] font-editorial font-light text-[#102C4B] leading-[1.08]">
                 Stroke Force — Community Stroke Awareness.
               </h1>
@@ -114,7 +123,7 @@ export const StrokeForcePage: React.FC = () => {
               </p>
 
               <p className="text-base text-[#102C4B]/85 leading-relaxed max-w-2xl">
-                Stroke Force is a community-based stroke awareness initiative of Ayurgreen Foundation designed to improve public awareness of stroke warning signs and the critical importance of seeking immediate medical attention.
+                A flagship community awareness initiative that equips people with the knowledge to recognise stroke warning signs, understand the urgency of treatment and spread life-saving awareness within their communities.
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5 pt-2">

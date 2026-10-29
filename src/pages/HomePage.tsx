@@ -12,6 +12,7 @@ import { SeoHead, SectionHeading } from '../components/common/UIElements';
 import { ReferencePhotoCrop } from '../components/visuals/FoundationVisual';
 import {
   FlagshipShowcaseSection,
+  FeaturedProjectStrokeForceCard,
   ProgressivePathwaySection,
   ProgrammeCard,
   AssociatedInstitutionsSection,
@@ -23,8 +24,8 @@ import {
 export const HomePage: React.FC = () => {
   const { config } = useSite();
 
-  const featuredProgrammes = config.programmes.slice(0, 6);
-  const additionalProgrammes = config.programmes.slice(6);
+  const featuredProgrammes = config.programmes.filter((p) => p.featuredOnHome);
+  const additionalProgrammes = config.programmes.filter((p) => !p.featuredOnHome);
   const leadStory = config.impactStories[0];
   const secondaryStories = config.impactStories.slice(1, 3);
 
@@ -189,15 +190,16 @@ export const HomePage: React.FC = () => {
       <section aria-labelledby="our-programmes-heading" className="py-14 sm:py-18 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
+            kicker="Healthcare, Education & Community Development"
             title="Our Programmes"
-            subtitle="We work across multiple areas to create healthier communities and better opportunities for individuals and families."
+            subtitle="Ayurgreen Foundation works to create meaningful social impact through healthcare support, rehabilitation, education, research and community engagement."
             align="split"
             action={
               <Link
                 to="/programmes"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-[#087F83] text-xs font-semibold text-[#102C4B] hover:bg-[#EFF7FA] transition-colors whitespace-nowrap"
               >
-                <span>View All 8 Programmes</span>
+                <span>View All Programmes</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#087F83]" />
               </Link>
             }
@@ -210,15 +212,18 @@ export const HomePage: React.FC = () => {
             ))}
           </div>
 
-          {/* Secondary Strip for Remaining Core Programmes so Zero Programmes are Omitted */}
+          {/* Featured Project: STROKE FORCE */}
+          <FeaturedProjectStrokeForceCard />
+
+          {/* Secondary Strip for Remaining Core & Institutional Programmes */}
           {additionalProgrammes.length > 0 && (
             <div className="mt-8 pt-6 border-t border-[#DFE6EB] flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#F7F9FA] rounded-2xl p-5">
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#087F83]">
-                  Institutional &amp; Clinical Programmes
+                  Additional Core &amp; Connected Programmes
                 </span>
                 <p className="text-xs sm:text-sm text-[#536477] mt-0.5">
-                  Explore our dedicated educational and diagnostic healthcare initiatives:
+                  Explore our volunteer network, allied health college, and diagnostic services:
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -360,26 +365,27 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 9: LATEST NEWS AND EVENTS */}
+      {/* SECTION 9: ACTIVITIES & EVENTS */}
       <section aria-labelledby="latest-news-heading" className="py-14 sm:py-16 bg-white border-t border-[#DFE6EB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            title="Latest News &amp; Events"
-            subtitle="Updates from our awareness campaigns, medical camps, rehabilitation initiatives, and official Foundation announcements."
+            kicker="Community Outreach & Observances"
+            title="Activities &amp; Events"
+            subtitle="Updates from our RUN FAST Mini Marathon, Koode Medical Camp, Calicut &amp; Nilambur Stroke Awareness Camps, National Reading Day, and World Environment Day."
             align="split"
             action={
               <Link
                 to="/news-events"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-[#087F83] text-xs font-semibold text-[#102C4B] hover:bg-[#EFF7FA] transition-colors whitespace-nowrap"
               >
-                <span>View All Updates</span>
+                <span>View All Activities &amp; Events</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#087F83]" />
               </Link>
             }
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {config.newsEvents.slice(0, 3).map((item) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {config.newsEvents.slice(0, 6).map((item) => (
               <article
                 key={item.id}
                 className="bg-white rounded-2xl border border-[#DFE6EB] overflow-hidden flex flex-col shadow-2xs"

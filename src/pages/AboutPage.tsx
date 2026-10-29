@@ -240,9 +240,9 @@ export const AboutPage: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            kicker="Institutional Collaboration"
-            title="Associated Institutions"
-            subtitle="Ayurgreen Foundation collaborates closely with associated educational, scientific research, and clinical diagnostic institutions to expand our social impact."
+            kicker="Working Towards a Shared Vision"
+            title="Our Associated Institutions"
+            subtitle="Ayurgreen Foundation is connected with institutions and services across healthcare, education and research that contribute to the broader Ayurgreen ecosystem."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -257,7 +257,7 @@ export const AboutPage: React.FC = () => {
               return (
                 <div
                   key={inst.id}
-                  className="bg-white rounded-2xl border border-[#DFE6EB] p-6 flex flex-col justify-between"
+                  className="bg-white rounded-2xl border border-[#DFE6EB] p-6 flex flex-col justify-between shadow-2xs"
                 >
                   <div>
                     <div className="w-16 h-16 rounded-xl overflow-hidden border border-[#DFE6EB]/70 bg-[#102C4B] mb-4">
@@ -274,19 +274,31 @@ export const AboutPage: React.FC = () => {
                     <h3 className="text-lg font-bold text-[#102C4B] mb-2">
                       {inst.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#536477] leading-relaxed mb-4">
+                    <p className="text-xs sm:text-sm text-[#536477] leading-relaxed mb-5">
                       {inst.description}
                     </p>
                   </div>
-                  {inst.internalRoute && !inst.internalRoute.startsWith('/about') && (
-                    <Link
-                      to={inst.internalRoute}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#087F83] hover:underline pt-3 border-t border-[#DFE6EB]"
-                    >
-                      <span>Explore Programme Details</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  )}
+                  <div className="pt-4 border-t border-[#DFE6EB]">
+                    {inst.externalUrl ? (
+                      <a
+                        href={inst.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs font-semibold transition-colors"
+                      >
+                        <span>{inst.buttonLabel || 'Visit Website'}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    ) : (
+                      <Link
+                        to={inst.internalRoute || '/programmes'}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs font-semibold transition-colors"
+                      >
+                        <span>{inst.buttonLabel || 'Visit Website'}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
+                  </div>
                 </div>
               );
             })}

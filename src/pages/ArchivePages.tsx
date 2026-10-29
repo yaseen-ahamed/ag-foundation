@@ -16,12 +16,18 @@ import { useSite } from '../context/SiteContext';
 import { ImpactStoryItem, NewsEventItem } from '../data/siteConfig';
 import { SeoHead, Breadcrumbs, SectionHeading } from '../components/common/UIElements';
 import { ReferencePhotoCrop } from '../components/visuals/FoundationVisual';
-import { ImpactMetricsStrip, ParticipationBanner } from '../components/sections/SharedSections';
+import {
+  ImpactMetricsStrip,
+  CharityCareImpactSection,
+  ParticipationBanner,
+} from '../components/sections/SharedSections';
 
 export const ImpactPage: React.FC = () => {
   const { config, setIsCmsOpen } = useSite();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeStory, setActiveStory] = useState<ImpactStoryItem | null>(null);
+
+  const charityProgramme = config.programmes.find((p) => p.slug === 'charity-care');
 
   const categories = [
     'All',
@@ -41,7 +47,7 @@ export const ImpactPage: React.FC = () => {
     <>
       <SeoHead
         title="Our Impact & Recovery Stories | Ayurgreen Foundation"
-        description="Explore the social impact of Ayurgreen Foundation across healthcare support, Project Rehab Village, Stroke Force awareness, education, and volunteerism."
+        description="Explore the social impact of Ayurgreen Foundation across Charity Care (90 patients supported), Rehab Village, Stroke Force awareness, medical camps, education, and volunteerism."
         canonicalPath="/impact"
       />
 
@@ -66,6 +72,15 @@ export const ImpactPage: React.FC = () => {
 
       {/* Five Impact Pillars */}
       <ImpactMetricsStrip showHeader={true} />
+
+      {/* Charity Care Impact Indicators & Annual Beneficiary Chart (2023–2026) */}
+      {charityProgramme?.charityStats && (
+        <section className="py-12 sm:py-16 bg-white border-t border-[#DFE6EB]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <CharityCareImpactSection stats={charityProgramme.charityStats} />
+          </div>
+        </section>
+      )}
 
       {/* Impact Stories Directory */}
       <section className="py-12 sm:py-16 bg-[#F7F9FA] border-t border-[#DFE6EB]">
@@ -520,25 +535,25 @@ export const NewsEventsPage: React.FC = () => {
   return (
     <>
       <SeoHead
-        title="News & Events Archive | Ayurgreen Foundation"
-        description="Official programme reports, medical camp updates, Stroke Force awareness campaigns, and event announcements from Ayurgreen Foundation."
+        title="Activities & Events | Ayurgreen Foundation"
+        description="Explore RUN FAST Mini Marathon, Koode Medical Camp, Calicut & Nilambur Stroke Awareness Camps, National Reading Day, and World Environment Day activities."
         canonicalPath="/news-events"
       />
 
       {/* Page Hero */}
       <section className="bg-[#EFF7FA] border-b border-[#DFE6EB] py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs items={[{ label: 'News & Events' }]} />
+          <Breadcrumbs items={[{ label: 'Activities & Events' }]} />
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="max-w-3xl">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#087F83] mb-2">
-                Official Communications &amp; Activity Archive
+                Community Outreach, Medical Camps &amp; Observances
               </p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-editorial text-[#102C4B] mb-4">
-                News &amp; Events
+                Activities &amp; Events
               </h1>
               <p className="text-base sm:text-lg text-[#536477] leading-relaxed">
-                Follow our ongoing community awareness drives, medical camps, rehabilitation updates, and official announcements.
+                Follow our ongoing community awareness drives, medical camps, rehabilitation initiatives, and special observances.
               </p>
             </div>
             <button

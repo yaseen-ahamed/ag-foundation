@@ -2,16 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  Landmark,
-  Microscope,
-  ScanLine,
+  ArrowUpRight,
   Users,
   Accessibility,
   HeartHandshake,
   GraduationCap,
   HandHeart,
+  BarChart3,
+  HeartPulse,
 } from 'lucide-react';
-import { ProgrammeItem } from '../../data/siteConfig';
+import { ProgrammeItem, CharityCareStats } from '../../data/siteConfig';
 import { useSite } from '../../context/SiteContext';
 import {
   ReferencePhotoCrop,
@@ -26,10 +26,10 @@ export const FlagshipShowcaseSection: React.FC = () => {
   const flagshipPillars = [
     {
       id: 'rehab-village',
-      category: 'Ortho-Neuro & Community Rehab',
-      title: 'Ayurgreen Rehab Village',
+      category: 'Community-Based Rehabilitation',
+      title: 'Rehab Village Project',
       description:
-        'A transformative initiative by Ayurgreen Hospitals set amidst a serene village environment, offering specialized ortho-neuro rehabilitation programs and extended accommodation facilities.',
+        'A community-based rehabilitation initiative focused on recovery, functional independence, social participation and reintegration.',
       to: '/programmes/rehab-village',
       ctaLabel: 'Learn More',
       crop: { x: 256, y: 690, w: 225, h: 112 },
@@ -39,10 +39,10 @@ export const FlagshipShowcaseSection: React.FC = () => {
     },
     {
       id: 'stroke-force',
-      category: 'Fast Action Awareness',
+      category: 'Featured Project · Fast Action',
       title: 'Stroke Force',
       description:
-        'Our community-wide stroke education initiative trains families, schools, and local responders to recognise early warning signs and seek emergency care within the golden hour.',
+        'A flagship community awareness initiative that equips people with the knowledge to recognise stroke warning signs, understand the urgency of treatment and spread life-saving awareness within their communities.',
       to: '/stroke-force',
       ctaLabel: 'Learn More',
       crop: { x: 0, y: 1280, w: 400, h: 145 },
@@ -52,10 +52,10 @@ export const FlagshipShowcaseSection: React.FC = () => {
     },
     {
       id: 'charity-care',
-      category: 'Clinical & Diagnostic Access',
-      title: 'Charity Care',
+      category: 'Healthcare Access',
+      title: 'Charity Care Programme',
       description:
-        'Bridging critical healthcare gaps for underserved families through subsidised hospital care, specialist medical camps, and advanced diagnostic imaging support.',
+        'Providing financial assistance to eligible patients facing economic difficulties, helping them access essential healthcare and treatment.',
       to: '/programmes/charity-care',
       ctaLabel: 'Learn More',
       crop: { x: 32, y: 690, w: 220, h: 112 },
@@ -82,7 +82,7 @@ export const FlagshipShowcaseSection: React.FC = () => {
           </h2>
         </div>
 
-        {/* 3-Column Tall Portrait Cards: Default resting state with bottom bar, full colour-wash reveal on hover */}
+        {/* 3-Column Tall Portrait Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {flagshipPillars.map((item, idx) => {
             const isHovered = hoveredIndex === idx;
@@ -112,14 +112,14 @@ export const FlagshipShowcaseSection: React.FC = () => {
                     alt={item.title}
                     className="w-full h-full transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                   />
-                  {/* Default (Resting) State: Subtle Bottom Dark Luminance Scrim for Title Contrast */}
+                  {/* Default (Resting) State Scrim */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent transition-opacity duration-200 ${
                       isHovered ? 'opacity-0' : 'opacity-100'
                     }`}
                     aria-hidden="true"
                   />
-                  {/* Hover State: Full-Card Translucent Colour-Wash Scrim covering entire card */}
+                  {/* Hover State Scrim */}
                   <div
                     className={`absolute inset-0 ${item.overlayBg} transition-opacity duration-200 ${
                       isHovered ? 'opacity-100' : 'opacity-0'
@@ -128,7 +128,7 @@ export const FlagshipShowcaseSection: React.FC = () => {
                   />
                 </div>
 
-                {/* Top-Right Category Badge: Coloured in Default State -> Flips to Solid White with Dark Text on Hover */}
+                {/* Top-Right Category Badge */}
                 <div className="relative z-10 p-6 sm:p-7 flex items-center justify-end">
                   <span
                     className={`px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-medium tracking-[-0.01em] transition-colors duration-200 shadow-2xs ${
@@ -141,7 +141,7 @@ export const FlagshipShowcaseSection: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Bottom / Mid Content Area: Title anchored at bottom in default state, rises smoothly above description + CTA on hover */}
+                {/* Bottom / Mid Content Area */}
                 <div className="relative z-10 px-7 sm:px-8 pb-6 sm:pb-7 mt-auto flex flex-col justify-end">
                   <h3 className="text-[1.75rem] sm:text-[2.1rem] font-editorial font-normal text-white leading-[1.12] tracking-[-0.02em] transition-transform duration-200">
                     {item.title}
@@ -169,7 +169,7 @@ export const FlagshipShowcaseSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bottom Signature Solid Accent Bar (Visible in default resting state, merges into full colour-wash on hover) */}
+                {/* Bottom Signature Solid Accent Bar */}
                 <div
                   className={`relative z-20 h-3.5 w-full ${item.bottomBarColor} shrink-0 transition-opacity duration-200 ${
                     isHovered ? 'opacity-0' : 'opacity-100'
@@ -184,41 +184,266 @@ export const FlagshipShowcaseSection: React.FC = () => {
   );
 };
 
+export const FeaturedProjectStrokeForceCard: React.FC = () => {
+  const { config } = useSite();
+
+  return (
+    <div className="mt-10 rounded-3xl bg-gradient-to-r from-[#102C4B] via-[#0B4358] to-[#087F83] text-white overflow-hidden border border-[#07565B] shadow-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+        <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-5">
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="px-3 py-1 rounded-md bg-[#2CE5C3]/20 border border-[#2CE5C3]/40 text-[#7CE8D8] font-nav text-xs font-semibold uppercase tracking-[0.08em]">
+                Featured Project
+              </span>
+              <span className="text-xs font-medium text-white/80">
+                An initiative of Ayurgreen Foundation
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4 pt-1">
+              <div className="bg-white/95 px-3 py-1.5 rounded-xl shrink-0">
+                <img
+                  src={config.organization.logos.strokeForce}
+                  alt="Stroke Force Logo"
+                  className="h-10 sm:h-12 w-auto object-contain"
+                />
+              </div>
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-editorial text-white leading-tight">
+                  STROKE FORCE
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-[#5EEAD4]">
+                  Community Stroke Awareness
+                </p>
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base text-white/90 leading-relaxed pt-1">
+              A flagship community awareness initiative that equips people with the knowledge to recognise stroke warning signs, understand the urgency of treatment and spread life-saving awareness within their communities.
+            </p>
+
+            <p className="text-sm sm:text-base font-semibold text-[#7CE8D8] tracking-wide">
+              Recognising Stroke Signs. Acting Fast. Saving Lives.
+            </p>
+          </div>
+
+          <div className="pt-2 flex flex-wrap items-center gap-3.5">
+            <Link
+              to="/stroke-force"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-white text-[#102C4B] hover:bg-[#EFF7FA] text-xs sm:text-sm font-semibold transition-colors shadow-2xs"
+            >
+              <HeartPulse className="w-4 h-4 text-[#087F83]" />
+              <span>Explore Stroke Force</span>
+              <ArrowRight className="w-4 h-4 text-[#087F83]" />
+            </Link>
+            <Link
+              to="/programmes/medical-camps"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white/10 hover:bg-white/20 text-white border border-white/40 text-xs sm:text-sm font-semibold transition-colors"
+            >
+              <span>Stroke Awareness Medical Camps</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="lg:col-span-5 relative min-h-[240px] sm:min-h-[280px]">
+          <ReferencePhotoCrop
+            crop={{ x: 0, y: 1280, w: 400, h: 145 }}
+            alt="Stroke Force — Community Stroke Awareness"
+            className="w-full h-full"
+          />
+          <div
+            className="hidden lg:block absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0B4358] to-transparent pointer-events-none"
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const CharityCareImpactSection: React.FC<{ stats: CharityCareStats }> = ({
+  stats,
+}) => {
+  const maxCases = Math.max(...stats.annualData.map((d) => d.totalCases), 40);
+
+  return (
+    <div className="space-y-8">
+      {/* 4 Key Impact Indicators */}
+      <div>
+        <div className="flex items-center gap-2.5 mb-4">
+          <BarChart3 className="w-5 h-5 text-[#087F83]" />
+          <h2 className="text-2xl sm:text-3xl font-editorial text-[#102C4B]">
+            Charity Care Impact &amp; Beneficiary Overview
+          </h2>
+        </div>
+        <div className="w-16 h-0.5 bg-[#087F83] mb-6" aria-hidden="true" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {stats.indicators.map((ind, idx) => (
+            <div
+              key={idx}
+              className="p-5 rounded-2xl border border-[#DFE6EB] bg-[#F7F9FA] flex flex-col justify-between"
+            >
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-[#087F83] mb-1">
+                  {ind.label}
+                </div>
+                <div className="text-3xl sm:text-4xl font-editorial text-[#102C4B] tabular-nums mb-2">
+                  {ind.value}
+                </div>
+              </div>
+              <p className="text-xs text-[#536477] leading-relaxed">
+                {ind.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Annual Beneficiary Chart & Table (2023–2026) */}
+      <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE6EB] bg-white space-y-6 shadow-2xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DFE6EB] pb-4">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#087F83]">
+              Annual Beneficiary Reporting (2023–2026)
+            </span>
+            <h3 className="text-xl font-editorial text-[#102C4B] mt-0.5">
+              Patients Supported &amp; 100% Assistance Breakdown
+            </h3>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 text-xs">
+            <span className="inline-flex items-center gap-1.5 text-[#102C4B] font-medium">
+              <span className="w-3 h-3 rounded-xs bg-[#102C4B] inline-block" />
+              Total Patients/Cases
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-[#087F83] font-medium">
+              <span className="w-3 h-3 rounded-xs bg-[#087F83] inline-block" />
+              Received 100% Assistance
+            </span>
+          </div>
+        </div>
+
+        {/* Visual Horizontal Bar Comparison per Year */}
+        <div className="space-y-4">
+          {stats.annualData.map((row) => {
+            const totalPct = Math.round((row.totalCases / maxCases) * 100);
+            const fullPct = Math.round((row.fullAssistance / maxCases) * 100);
+            return (
+              <div key={row.year} className="space-y-1.5">
+                <div className="flex items-center justify-between text-xs sm:text-sm">
+                  <span className="font-bold text-[#102C4B] tabular-nums w-14">
+                    {row.year}
+                  </span>
+                  <div className="flex items-center gap-4 tabular-nums text-xs">
+                    <span className="text-[#102C4B] font-semibold">
+                      {row.totalCases} Patients/Cases
+                    </span>
+                    <span className="text-[#087F83] font-semibold">
+                      {row.fullAssistance} Received 100% Assistance
+                    </span>
+                  </div>
+                </div>
+                <div className="w-full h-3.5 rounded-full bg-[#EFF7FA] overflow-hidden relative">
+                  <div
+                    className="h-full bg-[#102C4B]/25 rounded-full transition-all duration-300"
+                    style={{ width: `${totalPct}%` }}
+                    title={`${row.year}: ${row.totalCases} Total Patients/Cases`}
+                  />
+                  <div
+                    className="h-full bg-[#087F83] rounded-full absolute left-0 top-0 transition-all duration-300"
+                    style={{ width: `${fullPct}%` }}
+                    title={`${row.year}: ${row.fullAssistance} Received 100% Assistance`}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Structured Reporting Table */}
+        <div className="overflow-x-auto pt-2">
+          <table className="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr className="border-b border-[#DFE6EB] text-[#536477] font-semibold">
+                <th className="py-3 pr-4">Year</th>
+                <th className="py-3 px-4 text-right">Patients/Cases</th>
+                <th className="py-3 px-4 text-right">Received 100% Assistance</th>
+                <th className="py-3 pl-4 text-right">Partial Assistance</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#DFE6EB] tabular-nums">
+              {stats.annualData.map((row) => (
+                <tr key={row.year} className="hover:bg-[#F7F9FA]">
+                  <td className="py-3 pr-4 font-medium text-[#102C4B]">{row.year}</td>
+                  <td className="py-3 px-4 text-right text-[#102C4B]">{row.totalCases}</td>
+                  <td className="py-3 px-4 text-right text-[#087F83] font-semibold">
+                    {row.fullAssistance}
+                  </td>
+                  <td className="py-3 pl-4 text-right text-[#536477]">
+                    {row.partialAssistance}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr className="border-t-2 border-[#102C4B] font-bold text-[#102C4B] tabular-nums bg-[#EFF7FA]/60">
+                <td className="py-3.5 pr-4 pl-2">Total</td>
+                <td className="py-3.5 px-4 text-right">{stats.totals.totalCases}</td>
+                <td className="py-3.5 px-4 text-right text-[#087F83]">
+                  {stats.totals.fullAssistance}
+                </td>
+                <td className="py-3.5 pl-4 pr-2 text-right">
+                  {stats.totals.partialAssistance}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        {stats.footnote && (
+          <p className="text-xs text-[#536477] pt-1">{stats.footnote}</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export const ProgressivePathwaySection: React.FC = () => {
   const steps = [
     {
       step: '01.',
-      stage: 'Introduce & Identify',
-      title: 'Community Screening & Stroke Awareness',
+      stage: 'Early Detection & Outreach',
+      title: 'Stroke Force & Medical Camps',
       description:
-        'Grassroots outreach and Stroke Force workshops equip families and local volunteers to recognise early neurological and health warning signs.',
+        'Community outreach and Stroke Force workshops equip citizens to recognise stroke warning signs and understand the urgency of timely medical attention.',
       linkText: 'Stroke Force Initiative',
       to: '/stroke-force',
     },
     {
       step: '02.',
-      stage: 'Clinical & Diagnostic Support',
-      title: 'Accessible Diagnostics & Charity Care',
+      stage: 'Clinical & Diagnostic Access',
+      title: 'Charity Care Programme',
       description:
-        'Eligible patients receive timely radiology imaging, medical camp evaluations, and financial treatment support through partner care networks.',
-      linkText: 'Charity Care & Radiology',
+        'Need-based financial assistance in association with Ayurgreen Hospital helps vulnerable patients access essential treatment, diagnostics, medicines, and therapy.',
+      linkText: 'Charity Care Programme',
       to: '/programmes/charity-care',
     },
     {
       step: '03.',
-      stage: 'Structured Recovery',
-      title: 'Multidisciplinary Rehabilitation',
+      stage: 'Multidisciplinary Rehabilitation',
+      title: 'Rehab Village Project',
       description:
-        'Dedicated physiotherapy, occupational therapy, and assistive care at Project Rehab Village guide patients toward physical independence.',
-      linkText: 'Project Rehab Village',
-      to: '/programmes/project-rehab-village',
+        'Specialized ortho-neuro rehabilitation and extended village-style accommodation nurture functional recovery and independence.',
+      linkText: 'Rehab Village Project',
+      to: '/programmes/rehab-village',
     },
     {
       step: '04.',
-      stage: 'Sustained Dignity',
-      title: 'Social Reintegration & Skill Education',
+      stage: 'Social Reintegration & Education',
+      title: 'Social Rehab & EWP Scholarships',
       description:
-        'Long-term social rehabilitation and paramedical training empower individuals and youth to participate fully in community life.',
+        'Vocational guidance, family-centred counselling, student internships, and EWP scholarships empower individuals and youth for the future.',
       linkText: 'Social Rehabilitation',
       to: '/programmes/social-rehabilitation',
     },
@@ -233,7 +458,7 @@ export const ProgressivePathwaySection: React.FC = () => {
         <SectionHeading
           kicker="How Our Model Works"
           title="A Progressive Pathway from Early Awareness to Dignified Recovery"
-          subtitle="Complex healthcare challenges require more than a single intervention. Our model connects prevention, clinical access, physical therapy, and community reintegration."
+          subtitle="Complex healthcare and social challenges require more than a single intervention. Our model connects prevention, clinical access, physical therapy, education, and community reintegration."
           align="split"
           action={
             <Link
@@ -361,65 +586,89 @@ export const AssociatedInstitutionsSection: React.FC = () => {
   return (
     <section
       aria-labelledby="associated-institutions-heading"
-      className="py-6 sm:py-8"
+      className="py-10 sm:py-14"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#EFF7FA] rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#DFE6EB]/80">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
-            <div className="flex flex-col md:flex-row md:items-center gap-4 lg:gap-10">
-              <div>
-                <h2
-                  id="associated-institutions-heading"
-                  className="text-2xl sm:text-3xl font-editorial text-[#102C4B]"
-                >
-                  Associated Institutions
-                </h2>
-                <div className="w-16 h-0.5 bg-[#087F83] mt-2" aria-hidden="true" />
-              </div>
-              <p className="text-sm text-[#536477] max-w-xl leading-relaxed">
-                The following institutions are associated with Ayurgreen Foundation and work closely with our mission in healthcare, education and research.
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+            <div className="max-w-3xl space-y-2">
+              <div className="w-16 h-0.5 bg-[#087F83] mb-3" aria-hidden="true" />
+              <p className="font-nav text-xs font-semibold uppercase tracking-[0.08em] text-[#087F83]">
+                Working Towards a Shared Vision
+              </p>
+              <h2
+                id="associated-institutions-heading"
+                className="text-2xl sm:text-3xl lg:text-4xl font-editorial text-[#102C4B]"
+              >
+                Our Associated Institutions
+              </h2>
+              <p className="text-sm sm:text-base text-[#536477] leading-relaxed pt-1">
+                Ayurgreen Foundation is connected with institutions and services across healthcare, education and research that contribute to the broader Ayurgreen ecosystem.
               </p>
             </div>
             <Link
               to="/about#institutions"
-              className="self-start lg:self-center inline-flex items-center gap-2 px-5 py-2 rounded-md border border-[#087F83] text-xs font-semibold text-[#102C4B] hover:bg-white transition-colors whitespace-nowrap shrink-0"
+              className="self-start lg:self-end inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-[#087F83] text-xs font-semibold text-[#102C4B] hover:bg-white transition-colors whitespace-nowrap shrink-0"
             >
               <span>Know More</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#087F83]" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {config.associatedInstitutions.map((inst) => {
               const logoUrl = getInstLogoUrl(inst.id, inst.logoUrl);
               return (
-                <Link
+                <div
                   key={inst.id}
-                  to={inst.internalRoute || '/about#institutions'}
-                  className="group bg-white rounded-2xl p-5 border border-[#DFE6EB] hover:border-[#087F83] transition-all flex items-center justify-between gap-4 shadow-2xs"
+                  className="bg-white rounded-2xl p-6 border border-[#DFE6EB] hover:border-[#087F83] transition-all flex flex-col justify-between gap-5 shadow-2xs"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 sm:w-[68px] sm:h-[68px] rounded-xl overflow-hidden border border-[#DFE6EB]/70 shrink-0 bg-[#102C4B]">
-                      <img
-                        src={logoUrl}
-                        alt={`${inst.name} official logo`}
-                        loading="lazy"
-                        className="w-full h-full object-cover block"
-                      />
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 sm:w-[68px] sm:h-[68px] rounded-xl overflow-hidden border border-[#DFE6EB]/70 shrink-0 bg-[#102C4B]">
+                        <img
+                          src={logoUrl}
+                          alt={`${inst.name} official logo`}
+                          loading="lazy"
+                          className="w-full h-full object-cover block"
+                        />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#087F83] block mb-0.5">
+                          {inst.category}
+                        </span>
+                        <h3 className="text-base font-bold text-[#102C4B] leading-snug">
+                          {inst.name}
+                        </h3>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-sm sm:text-base font-bold text-[#102C4B] group-hover:text-[#087F83] transition-colors leading-snug">
-                        {inst.name}
-                      </h3>
-                      <p className="text-xs text-[#536477] mt-1 leading-relaxed">
-                        {inst.description}
-                      </p>
-                    </div>
+                    <p className="text-xs sm:text-sm text-[#536477] leading-relaxed">
+                      {inst.description}
+                    </p>
                   </div>
-                  <div className="w-8 h-8 rounded-full border border-[#DFE6EB] group-hover:border-[#087F83] flex items-center justify-center shrink-0 text-[#536477] group-hover:text-[#087F83] transition-colors">
-                    <ArrowRight className="w-4 h-4" />
+
+                  <div className="pt-4 border-t border-[#DFE6EB]/80">
+                    {inst.externalUrl ? (
+                      <a
+                        href={inst.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs font-semibold transition-colors"
+                      >
+                        <span>{inst.buttonLabel || 'Visit Website'}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    ) : (
+                      <Link
+                        to={inst.internalRoute || '/about#institutions'}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs font-semibold transition-colors"
+                      >
+                        <span>{inst.buttonLabel || 'Visit Website'}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
                   </div>
-                </Link>
+                </div>
               );
             })}
           </div>
@@ -458,7 +707,7 @@ export const ImpactMetricsStrip: React.FC<{ showHeader?: boolean }> = ({
         {showHeader && (
           <SectionHeading
             title="Our Impact"
-            subtitle="Structured across five core pillars of community wellbeing. Numerical figures are displayed only when officially audited and configured."
+            subtitle="Structured across five core pillars of community wellbeing, documenting verified beneficiary assistance, medical camps, rehabilitation, and student volunteering."
             align="split"
             action={
               <Link
@@ -525,11 +774,13 @@ export const DonationAppealSection: React.FC = () => {
               Your contribution can help support healthcare access, rehabilitation, education and community initiatives through Ayurgreen Foundation. Every contribution is managed with Section 8 non-profit accountability.
             </p>
             <div className="flex flex-wrap items-center gap-3 text-xs text-[#536477] mt-4">
-              <span>Charity Care Treatment Support</span>
+              <span>Charity Care Programme</span>
               <span aria-hidden="true">·</span>
-              <span>Project Rehab Village</span>
+              <span>Rehab Village Project</span>
               <span aria-hidden="true">·</span>
-              <span>Stroke Force Community Education</span>
+              <span>EWP Scholarship Programme</span>
+              <span aria-hidden="true">·</span>
+              <span>Stroke Force</span>
             </div>
           </div>
 
@@ -562,7 +813,7 @@ export const ParticipationBanner: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-          {/* Left Photographic Area matching reference */}
+          {/* Left Photographic Area */}
           <div className="lg:col-span-5 relative min-h-[220px] sm:min-h-[260px]">
             <ReferencePhotoCrop
               crop={{ x: 0, y: 1280, w: 400, h: 145 }}

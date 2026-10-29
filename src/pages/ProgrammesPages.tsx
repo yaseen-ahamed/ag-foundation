@@ -8,11 +8,14 @@ import {
   PhoneCall,
   Mail,
   HeartHandshake,
+  AlertCircle,
 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { SeoHead, Breadcrumbs, SectionHeading } from '../components/common/UIElements';
 import {
   ProgrammeCard,
+  FeaturedProjectStrokeForceCard,
+  CharityCareImpactSection,
   AssociatedInstitutionsSection,
   ParticipationBanner,
 } from '../components/sections/SharedSections';
@@ -39,8 +42,8 @@ export const ProgrammesOverviewPage: React.FC = () => {
   return (
     <>
       <SeoHead
-        title="Our Programmes — Healthcare, Rehabilitation & Education | Ayurgreen Foundation"
-        description="Explore all 8 core programmes of Ayurgreen Foundation: Charity Care, Ayurgreen Rehab Village, Social Rehabilitation, Community Outreach, Medical Camps, College of Life Sciences, Radiology, and Volunteer Activities."
+        title="Our Programmes — Healthcare, Education & Community Development | Ayurgreen Foundation"
+        description="Ayurgreen Foundation works to create meaningful social impact through healthcare support, rehabilitation, education, research and community engagement."
         canonicalPath="/programmes"
       />
 
@@ -51,19 +54,19 @@ export const ProgrammesOverviewPage: React.FC = () => {
           <div className="max-w-3xl">
             <div className="w-20 h-[2px] bg-[#087F83] mb-5" aria-hidden="true" />
             <p className="font-nav text-xs font-semibold uppercase tracking-[0.08em] text-[#087F83] mb-2">
-              8 Core Initiatives · Healthcare, Rehabilitation &amp; Education
+              Healthcare, Education &amp; Community Development
             </p>
             <h1 className="text-[clamp(2.25rem,4vw,3.5rem)] font-editorial font-light text-[#102C4B] leading-[1.08] mb-4">
               Our Programmes.
             </h1>
             <p className="text-base sm:text-lg text-[#536477] leading-relaxed">
-              We work across healthcare assistance, physical and social rehabilitation, paramedical education, diagnostic access, and grassroots outreach to create healthier communities and dignified futures.
+              Ayurgreen Foundation works to create meaningful social impact through healthcare support, rehabilitation, education, research and community engagement.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Filter Bar & Programme Grid */}
+      {/* Filter Bar, Programme Grid & Featured Project Stroke Force */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Interactive Category Filter Buttons */}
@@ -93,7 +96,7 @@ export const ProgrammesOverviewPage: React.FC = () => {
               to="/stroke-force"
               className="inline-flex items-center gap-2 text-xs font-semibold text-[#087F83] hover:underline"
             >
-              <span>Featured Campaign: Stroke Force Community Awareness</span>
+              <span>Featured Project: Stroke Force Community Stroke Awareness</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -103,6 +106,9 @@ export const ProgrammesOverviewPage: React.FC = () => {
               <ProgrammeCard key={prog.slug} programme={prog} />
             ))}
           </div>
+
+          {/* Featured Project: STROKE FORCE */}
+          <FeaturedProjectStrokeForceCard />
         </div>
       </section>
 
@@ -116,13 +122,21 @@ export const ProgrammeDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { config } = useSite();
 
-  const normalizedSlug = slug === 'project-rehab-village' ? 'rehab-village' : slug;
+  const slugAliases: Record<string, string> = {
+    'project-rehab-village': 'rehab-village',
+    'community-outreach': 'medical-camps',
+    'education-with-purpose': 'ewp-scholarship',
+    'ayurgreen-volunteers': 'volunteer-activities',
+  };
+
+  const normalizedSlug = slug ? slugAliases[slug] || slug : '';
   const programme = config.programmes.find((p) => p.slug === normalizedSlug);
 
   if (!programme) {
     return <Navigate to="/programmes" replace />;
   }
 
+  const displayTitle = programme.detailTitle || programme.title;
   const relatedProgrammes = config.programmes.filter((p) =>
     programme.relatedSlugs.includes(p.slug)
   );
@@ -130,7 +144,7 @@ export const ProgrammeDetailPage: React.FC = () => {
   return (
     <>
       <SeoHead
-        title={`${programme.title} — Our Programmes | Ayurgreen Foundation`}
+        title={`${displayTitle} — Our Programmes | Ayurgreen Foundation`}
         description={programme.summary}
         canonicalPath={`/programmes/${programme.slug}`}
       />
@@ -141,7 +155,7 @@ export const ProgrammeDetailPage: React.FC = () => {
           <Breadcrumbs
             items={[
               { label: 'Our Programmes', to: '/programmes' },
-              { label: programme.title },
+              { label: displayTitle },
             ]}
           />
 
@@ -152,7 +166,7 @@ export const ProgrammeDetailPage: React.FC = () => {
                   <div className="w-14 h-14 rounded-xl bg-white border border-[#DFE6EB] p-1.5 flex items-center justify-center shadow-2xs shrink-0">
                     <img
                       src={programme.logoUrl}
-                      alt={programme.title}
+                      alt={displayTitle}
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -169,21 +183,29 @@ export const ProgrammeDetailPage: React.FC = () => {
                   </span>
                   {programme.welcomeHeading && (
                     <span className="text-[11px] font-medium text-[#536477]">
-                      {programme.category} · Ayurgreen Hospitals Initiative
+                      {programme.category} · Ayurgreen Foundation Initiative
                     </span>
                   )}
                 </div>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-editorial text-[#102C4B] mb-4">
-                {programme.title}
+                {displayTitle}
               </h1>
 
-              <p className="text-base sm:text-lg text-[#536477] leading-relaxed mb-6">
+              <p className="text-base sm:text-lg font-medium text-[#087F83] leading-relaxed mb-4">
                 {programme.heroSubtitle}
               </p>
 
-              <div className="flex flex-wrap items-center gap-3">
+              {programme.heroLeadParagraphs && programme.heroLeadParagraphs.length > 0 && (
+                <div className="space-y-3 text-sm sm:text-base text-[#536477] leading-relaxed mb-6">
+                  {programme.heroLeadParagraphs.map((leadPara, i) => (
+                    <p key={i}>{leadPara}</p>
+                  ))}
+                </div>
+              )}
+
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <Link
                   to="/donate"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs sm:text-sm font-semibold transition-colors"
@@ -195,7 +217,7 @@ export const ProgrammeDetailPage: React.FC = () => {
                   to="/contact"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-white border border-[#DFE6EB] hover:border-[#087F83] text-[#102C4B] text-xs sm:text-sm font-semibold transition-colors"
                 >
-                  <span>Enquire / Refer a Beneficiary</span>
+                  <span>Enquire / Contact Us</span>
                 </Link>
               </div>
             </div>
@@ -205,13 +227,13 @@ export const ProgrammeDetailPage: React.FC = () => {
                 {programme.cropRegion ? (
                   <ReferencePhotoCrop
                     crop={programme.cropRegion}
-                    alt={programme.title}
+                    alt={displayTitle}
                     className="w-full h-full"
                   />
                 ) : (
                   <BespokeInstitutionalArt
                     type={programme.illustrationType}
-                    alt={programme.title}
+                    alt={displayTitle}
                     className="w-full h-full"
                   />
                 )}
@@ -230,7 +252,7 @@ export const ProgrammeDetailPage: React.FC = () => {
               {/* About / Programme Introduction */}
               <div>
                 <h2 className="text-2xl sm:text-3xl font-editorial text-[#102C4B] mb-3">
-                  {programme.aboutHeading || 'Programme Overview'}
+                  {programme.aboutHeading || 'About the Programme'}
                 </h2>
                 <div className="w-16 h-0.5 bg-[#087F83] mb-5" aria-hidden="true" />
                 <div className="space-y-4 text-sm sm:text-base text-[#536477] leading-relaxed">
@@ -239,6 +261,11 @@ export const ProgrammeDetailPage: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Charity Care Impact Indicators & Annual Beneficiary Chart (when present) */}
+              {programme.charityStats && (
+                <CharityCareImpactSection stats={programme.charityStats} />
+              )}
 
               {/* Vision & Mission (when provided, e.g. Rehab Village) OR Purpose & Objectives */}
               {programme.vision && programme.mission ? (
@@ -265,7 +292,7 @@ export const ProgrammeDetailPage: React.FC = () => {
                 <div className="p-6 sm:p-8 rounded-2xl bg-[#F7F9FA] border border-[#DFE6EB] space-y-6">
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-widest text-[#087F83] mb-1">
-                      Core Purpose
+                      Core Purpose &amp; Belief
                     </div>
                     <p className="text-base sm:text-lg font-editorial text-[#102C4B] leading-snug">
                       {programme.purpose}
@@ -274,7 +301,7 @@ export const ProgrammeDetailPage: React.FC = () => {
 
                   <div className="pt-4 border-t border-[#DFE6EB]">
                     <h3 className="text-base font-bold text-[#102C4B] mb-4">
-                      Key Programme Objectives
+                      Programme Objectives &amp; Scope
                     </h3>
                     <ul className="space-y-3">
                       {programme.objectives.map((obj, idx) => (
@@ -301,14 +328,14 @@ export const ProgrammeDetailPage: React.FC = () => {
                     ))}
                   </div>
                 )}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {programme.activities.map((act, index) => (
                     <div
                       key={index}
-                      className="p-5 rounded-2xl border border-[#DFE6EB] bg-white flex flex-col"
+                      className="p-5 rounded-2xl border border-[#DFE6EB] bg-white flex flex-col shadow-2xs"
                     >
                       <div className="text-xs font-bold text-[#087F83] tabular-nums mb-1.5">
-                        0{index + 1}. Key Pillar
+                        0{index + 1}.
                       </div>
                       <h3 className="text-sm sm:text-base font-bold text-[#102C4B] mb-2">
                         {act.title}
@@ -320,6 +347,209 @@ export const ProgrammeDetailPage: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Custom Verbatim Sections (Charity Care, Social Rehab, Volunteer Internship, EWP, Medical Camps) */}
+              {programme.customSections &&
+                programme.customSections.map((sec) => (
+                  <div key={sec.id} className="space-y-5 pt-2">
+                    <div>
+                      {sec.kicker && (
+                        <div className="text-xs font-semibold uppercase tracking-widest text-[#087F83] mb-1">
+                          {sec.kicker}
+                        </div>
+                      )}
+                      <h2 className="text-2xl sm:text-3xl font-editorial text-[#102C4B] mb-3">
+                        {sec.heading}
+                      </h2>
+                      <div className="w-16 h-0.5 bg-[#087F83]" aria-hidden="true" />
+                    </div>
+
+                    {/* Pathway Chain (e.g., Identification -> Assessment -> ...) */}
+                    {sec.pathwayChain && sec.pathwayChain.length > 0 && (
+                      <div className="p-5 rounded-2xl bg-[#EFF7FA] border border-[#DFE6EB] flex flex-wrap items-center gap-2 sm:gap-3">
+                        {sec.pathwayChain.map((stage, sIdx) => (
+                          <React.Fragment key={sIdx}>
+                            <span className="px-3.5 py-2 rounded-xl bg-white border border-[#DFE6EB] text-xs sm:text-sm font-bold text-[#102C4B] shadow-2xs">
+                              {stage}
+                            </span>
+                            {sIdx < sec.pathwayChain!.length - 1 && (
+                              <ArrowRight className="w-4 h-4 text-[#087F83] shrink-0" />
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Paragraphs */}
+                    {sec.paragraphs && sec.paragraphs.length > 0 && (
+                      <div className="space-y-4 text-sm sm:text-base text-[#536477] leading-relaxed">
+                        {sec.paragraphs.map((p, pIdx) => (
+                          <p key={pIdx}>{p}</p>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Bullets Intro + Bullets + Bullets Footer */}
+                    {sec.bullets && sec.bullets.length > 0 && (
+                      <div className="p-6 rounded-2xl bg-[#F7F9FA] border border-[#DFE6EB] space-y-4">
+                        {sec.bulletsIntro && (
+                          <p className="text-sm sm:text-base font-semibold text-[#102C4B]">
+                            {sec.bulletsIntro}
+                          </p>
+                        )}
+                        <ul className="space-y-3">
+                          {sec.bullets.map((b, bIdx) => (
+                            <li
+                              key={bIdx}
+                              className="flex items-start gap-3 text-sm sm:text-base text-[#536477]"
+                            >
+                              <CheckCircle2 className="w-4 h-4 text-[#087F83] shrink-0 mt-1" />
+                              <div>
+                                {b.label ? (
+                                  <>
+                                    <strong className="text-[#102C4B] font-semibold">
+                                      {b.label}:
+                                    </strong>{' '}
+                                    <span>{b.text}</span>
+                                  </>
+                                ) : (
+                                  <span>{b.text}</span>
+                                )}
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                        {sec.bulletsFooter && (
+                          <p className="text-xs sm:text-sm text-[#536477] pt-3 border-t border-[#DFE6EB] leading-relaxed">
+                            {sec.bulletsFooter}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Numbered Steps */}
+                    {sec.steps && sec.steps.length > 0 && (
+                      <div className="space-y-3.5">
+                        {sec.steps.map((st, stIdx) => (
+                          <div
+                            key={stIdx}
+                            className="p-5 rounded-2xl border border-[#DFE6EB] bg-white flex items-start gap-4 shadow-2xs"
+                          >
+                            <span className="w-9 h-9 rounded-xl bg-[#EFF7FA] text-[#087F83] font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 tabular-nums">
+                              {st.stepLabel}
+                            </span>
+                            <div>
+                              <h3 className="text-sm sm:text-base font-bold text-[#102C4B] mb-1">
+                                {st.title}
+                              </h3>
+                              <p className="text-xs sm:text-sm text-[#536477] leading-relaxed">
+                                {st.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                        {sec.bulletsFooter && !sec.bullets && (
+                          <p className="text-xs sm:text-sm text-[#536477] pt-2 leading-relaxed">
+                            {sec.bulletsFooter}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Highlight Note (e.g. Scholarship Disclaimer) */}
+                    {sec.highlightNote && (
+                      <div className="p-5 rounded-2xl bg-[#EFF7FA] border border-[#087F83]/30 flex items-start gap-3">
+                        <AlertCircle className="w-5 h-5 text-[#087F83] shrink-0 mt-0.5" />
+                        <p className="text-xs sm:text-sm font-medium text-[#102C4B] leading-relaxed">
+                          {sec.highlightNote}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Detailed Outreach Camp Cards (e.g. Medical Camps) */}
+                    {sec.cards && sec.cards.length > 0 && (
+                      <div className="space-y-6">
+                        {sec.cards.map((card, cIdx) => (
+                          <div
+                            key={cIdx}
+                            className="p-6 sm:p-7 rounded-2xl border border-[#DFE6EB] bg-white space-y-4 shadow-2xs"
+                          >
+                            {card.badge && (
+                              <span className="inline-block px-3 py-1 rounded-md bg-[#EFF7FA] text-[#087F83] text-xs font-semibold uppercase tracking-wider">
+                                {card.badge}
+                              </span>
+                            )}
+                            <h3 className="text-xl font-editorial text-[#102C4B]">
+                              {card.title}
+                            </h3>
+
+                            {card.meta && card.meta.length > 0 && (
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-4 rounded-xl bg-[#F7F9FA] border border-[#DFE6EB] text-xs sm:text-sm">
+                                {card.meta.map((m, mIdx) => (
+                                  <div key={mIdx}>
+                                    <span className="text-[#536477]">{m.label}: </span>
+                                    <strong className="text-[#102C4B] font-semibold">
+                                      {m.value}
+                                    </strong>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            <div className="space-y-3 text-sm sm:text-base text-[#536477] leading-relaxed">
+                              {card.paragraphs.map((cp, cpIdx) => (
+                                <p key={cpIdx}>{cp}</p>
+                              ))}
+                            </div>
+
+                            {card.impactBullets && card.impactBullets.length > 0 && (
+                              <div className="p-4 sm:p-5 rounded-xl bg-[#EFF7FA] border border-[#087F83]/30 space-y-2">
+                                <div className="text-xs font-bold uppercase tracking-wider text-[#087F83]">
+                                  {card.impactTitle || 'Impact at a glance'}
+                                </div>
+                                <ul className="space-y-1.5">
+                                  {card.impactBullets.map((ib, ibIdx) => (
+                                    <li
+                                      key={ibIdx}
+                                      className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-[#102C4B]"
+                                    >
+                                      <CheckCircle2 className="w-4 h-4 text-[#087F83] shrink-0 mt-0.5" />
+                                      <span>{ib}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Contextual CTA Buttons */}
+                    {sec.ctaButtons && sec.ctaButtons.length > 0 && (
+                      <div className="pt-2 flex flex-wrap items-center gap-3">
+                        {sec.ctaButtons.map((btn, btnIdx) => {
+                          const btnClass =
+                            btn.variant === 'primary'
+                              ? 'bg-[#087F83] hover:bg-[#07565B] text-white'
+                              : btn.variant === 'secondary'
+                              ? 'bg-[#102C4B] hover:bg-[#087F83] text-white'
+                              : 'bg-white border border-[#087F83] text-[#102C4B] hover:bg-[#EFF7FA]';
+                          return (
+                            <Link
+                              key={btnIdx}
+                              to={btn.to}
+                              className={`inline-flex items-center gap-2 px-5 py-3 rounded-md text-xs sm:text-sm font-semibold transition-colors ${btnClass}`}
+                            >
+                              <span>{btn.label}</span>
+                              <ArrowRight className="w-4 h-4" />
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ))}
 
               {/* Why Rehab Village (when provided) */}
               {programme.whyItems && programme.whyItems.length > 0 && (
@@ -471,14 +701,21 @@ export const ProgrammeDetailPage: React.FC = () => {
                     Impact &amp; Outcomes
                   </h3>
                 </div>
+                {programme.impactStatus.verifiedMetricValue && (
+                  <div className="pt-1">
+                    <div className="text-3xl font-editorial text-[#102C4B] tabular-nums">
+                      {programme.impactStatus.verifiedMetricValue}
+                    </div>
+                    {programme.impactStatus.verifiedMetricLabel && (
+                      <div className="text-xs font-semibold text-[#087F83]">
+                        {programme.impactStatus.verifiedMetricLabel}
+                      </div>
+                    )}
+                  </div>
+                )}
                 <p className="text-xs sm:text-sm text-[#102C4B] leading-relaxed">
                   {programme.impactStatus.qualitativeSummary}
                 </p>
-                {programme.impactStatus.isPlaceholder && (
-                  <p className="text-[11px] text-[#536477] pt-2 border-t border-[#DFE6EB]">
-                    Audited beneficiary statistics for {programme.shortTitle} can be updated by administrators in the Content Studio.
-                  </p>
-                )}
               </div>
 
               {/* Direct Contact Card (when provided, e.g. Ayurgreen Rehab Village) */}
@@ -527,28 +764,28 @@ export const ProgrammeDetailPage: React.FC = () => {
                   Collaborate on {programme.shortTitle}
                 </h3>
                 <p className="text-xs text-white/80 leading-relaxed">
-                  Whether you are a donor, healthcare volunteer, accommodation or transport partner, your support strengthens our capacity to reach more patients and communities.
+                  Whether you are a donor, healthcare volunteer, educational institution, or community partner, your support strengthens our capacity to reach more beneficiaries.
                 </p>
                 <div className="space-y-2.5 pt-2">
                   <Link
                     to="/volunteer"
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs font-semibold transition-colors"
                   >
-                    <span>Volunteer With Us</span>
+                    <span>Become a Volunteer</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                   <Link
                     to="/partner-with-us"
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md border border-white/30 hover:bg-white/10 text-white text-xs font-semibold transition-colors"
                   >
-                    <span>Partner With Us</span>
+                    <span>Explore Partnership Opportunities</span>
                   </Link>
                   <Link
                     to="/contact"
                     className="w-full inline-flex items-center justify-center gap-1.5 pt-1 text-xs text-white/80 hover:text-white"
                   >
                     <PhoneCall className="w-3.5 h-3.5" />
-                    <span>Contact Programme Coordinator</span>
+                    <span>Contact Us</span>
                   </Link>
                 </div>
               </div>
@@ -557,7 +794,7 @@ export const ProgrammeDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 8. Related Programmes */}
+      {/* Related Programmes */}
       {relatedProgrammes.length > 0 && (
         <section className="py-14 bg-[#F7F9FA] border-t border-[#DFE6EB]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
