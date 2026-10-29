@@ -738,7 +738,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       featuredOnHome: true,
       iconName: 'Stethoscope',
       accentColor: '#087F83',
-      cropRegion: { x: 562, y: 706, w: 112, h: 74 },
+      cropRegion: { x: 563, y: 706, w: 112, h: 74 },
       illustrationType: 'medical-camps',
       summary:
         'Organising accessible community health screening camps, medical consultations, and early-detection guidance in underserved areas.',
@@ -1107,7 +1107,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       ],
       relatedRoute: '/programmes/medical-camps',
       isPlaceholder: true,
-      cropRegion: { x: 562, y: 706, w: 112, h: 74 },
+      cropRegion: { x: 563, y: 706, w: 112, h: 74 },
     },
     {
       id: 'news-placeholder-programme-report',
@@ -1168,9 +1168,9 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       title: 'Community Medical Consultation & Outreach',
       category: 'Medical Camps',
       caption: 'Healthcare consultation and community health interaction during outreach activities.',
-      altText: 'Healthcare professional speaking with community members around a consultation table.',
+      altText: 'Community medical camp and gathering hosted under a canopy.',
       isVerifiedAsset: true,
-      cropRegion: { x: 562, y: 706, w: 112, h: 74 },
+      cropRegion: { x: 563, y: 706, w: 112, h: 74 },
     },
     {
       id: 'gal-vol-1',

@@ -25,6 +25,7 @@ const REFERENCE_ASSET = '/assets/aistudio/WhatsApp_Image_2026-10-27_at_12.20.49_
 export const STROKE_FORCE_PHOTO = '/assets/aistudio/stroke_force_fc11680c.webp';
 export const CHARITY_CARE_PHOTO = '/assets/aistudio/charity_care_6e336a13.webp';
 export const REHAB_VILLAGE_PHOTO = '/assets/aistudio/rehab_village_vehicle_4fb8d250.webp';
+export const MEDICAL_CAMP_PHOTO = '/assets/aistudio/medical_camp_3776972f.webp';
 
 export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
   crop,
@@ -39,6 +40,7 @@ export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
     (crop.x === 32 && crop.y === 690) || (crop.x === 76 && crop.y === 706);
   const isRehabVillageCrop =
     (crop.x === 256 && crop.y === 690) || (crop.x === 185 && crop.y === 706);
+  const isMedicalCampCrop = crop.x === 563 && crop.y === 706;
 
   const resolvedDirectImage =
     imageSrc ||
@@ -48,6 +50,8 @@ export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
       ? CHARITY_CARE_PHOTO
       : isRehabVillageCrop
       ? REHAB_VILLAGE_PHOTO
+      : isMedicalCampCrop
+      ? MEDICAL_CAMP_PHOTO
       : undefined);
 
   if (hasError) {
