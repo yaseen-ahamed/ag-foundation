@@ -11,6 +11,7 @@ import {
   HeartPulse,
   Handshake,
   PhoneCall,
+  Download,
 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { SeoHead, Breadcrumbs, SectionHeading } from '../components/common/UIElements';
@@ -127,16 +128,26 @@ export const StrokeForcePage: React.FC = () => {
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <a
+                  href="https://github.com/yaseen-ahamed/ag-foundation/releases/download/strokeforce/strokeforce.apk"
+                  download="strokeforce.apk"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-[#102C4B] hover:bg-[#07565B] text-white text-sm font-semibold transition-colors shadow-2xs whitespace-nowrap"
+                  title="Download Stroke Force Android App (APK)"
+                  aria-label="Download Stroke Force APK for Android"
+                >
+                  <Download className="w-4 h-4 text-[#5EEAD4]" />
+                  <span>Download App (APK)</span>
+                </a>
                 <Link
                   to="/volunteer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-sm font-semibold transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-sm font-semibold transition-colors whitespace-nowrap"
                 >
                   <span>Become a Community Educator</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   to="/partner-with-us"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-white hover:bg-[#F7F9FA] text-[#102C4B] border border-[#087F83] text-sm font-semibold transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-white hover:bg-[#F7F9FA] text-[#102C4B] border border-[#087F83] text-sm font-semibold transition-colors whitespace-nowrap"
                 >
                   <span>Host a Session at Your Institution</span>
                 </Link>

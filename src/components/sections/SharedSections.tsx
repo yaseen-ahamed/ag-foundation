@@ -10,6 +10,7 @@ import {
   HandHeart,
   BarChart3,
   HeartPulse,
+  Download,
 } from 'lucide-react';
 import { ProgrammeItem, CharityCareStats } from '../../data/siteConfig';
 import { useSite } from '../../context/SiteContext';
@@ -228,18 +229,30 @@ export const FeaturedProjectStrokeForceCard: React.FC = () => {
             </p>
           </div>
 
-          <div className="pt-2 flex flex-wrap items-center gap-3.5">
+          <div className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3.5">
             <Link
               to="/stroke-force"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#102C4B] text-white hover:bg-[#087F83] text-xs sm:text-sm font-semibold transition-colors shadow-2xs"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-md bg-[#102C4B] text-white hover:bg-[#087F83] text-xs sm:text-sm font-semibold transition-colors shadow-2xs whitespace-nowrap"
             >
               <HeartPulse className="w-4 h-4 text-[#5EEAD4]" />
               <span>Explore Stroke Force</span>
               <ArrowRight className="w-4 h-4 text-[#5EEAD4]" />
             </Link>
+
+            <a
+              href="https://github.com/yaseen-ahamed/ag-foundation/releases/download/strokeforce/strokeforce.apk"
+              download="strokeforce.apk"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-xs sm:text-sm font-semibold transition-all shadow-2xs hover:shadow-xs whitespace-nowrap"
+              title="Download Stroke Force Android App (APK)"
+              aria-label="Download Stroke Force APK for Android"
+            >
+              <Download className="w-4 h-4 text-[#7CE8D8]" />
+              <span>Download App (APK)</span>
+            </a>
+
             <Link
               to="/programmes/medical-camps"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white hover:bg-[#F7F9FA] text-[#102C4B] border border-[#B8DCE0] text-xs sm:text-sm font-semibold transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-white hover:bg-[#F7F9FA] text-[#102C4B] border border-[#B8DCE0] text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap"
             >
               <span>Stroke Awareness Medical Camps</span>
             </Link>
