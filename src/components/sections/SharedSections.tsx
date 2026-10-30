@@ -34,9 +34,9 @@ export const FlagshipShowcaseSection: React.FC = () => {
       to: '/programmes/rehab-village',
       ctaLabel: 'Learn More',
       crop: { x: 256, y: 690, w: 225, h: 112 },
-      overlayBg: 'bg-[#087F83]/92',
-      bottomBarColor: 'bg-[#087F83]',
-      restingPillClass: 'bg-[#087F83] text-white',
+      overlayBg: 'bg-[#F39200]/92',
+      bottomBarColor: 'bg-[#F39200]',
+      restingPillClass: 'bg-[#F39200] text-white',
     },
     {
       id: 'stroke-force',
@@ -47,9 +47,9 @@ export const FlagshipShowcaseSection: React.FC = () => {
       to: '/stroke-force',
       ctaLabel: 'Learn More',
       crop: { x: 0, y: 1280, w: 400, h: 145 },
-      overlayBg: 'bg-[#102C4B]/92',
-      bottomBarColor: 'bg-[#102C4B]',
-      restingPillClass: 'bg-[#102C4B] text-white',
+      overlayBg: 'bg-[#2B84EA]/92',
+      bottomBarColor: 'bg-[#2B84EA]',
+      restingPillClass: 'bg-[#2B84EA] text-white',
     },
     {
       id: 'charity-care',
@@ -60,9 +60,9 @@ export const FlagshipShowcaseSection: React.FC = () => {
       to: '/programmes/charity-care',
       ctaLabel: 'Learn More',
       crop: { x: 32, y: 690, w: 220, h: 112 },
-      overlayBg: 'bg-[#0D9488]/92',
-      bottomBarColor: 'bg-[#0D9488]',
-      restingPillClass: 'bg-[#0D9488] text-white',
+      overlayBg: 'bg-[#58B947]/92',
+      bottomBarColor: 'bg-[#58B947]',
+      restingPillClass: 'bg-[#58B947] text-white',
     },
   ];
 
