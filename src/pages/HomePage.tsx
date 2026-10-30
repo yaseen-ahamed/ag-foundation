@@ -17,7 +17,6 @@ import {
   AssociatedInstitutionsSection,
   ImpactMetricsStrip,
   DonationAppealSection,
-  ParticipationBanner,
 } from '../components/sections/SharedSections';
 
 export const HomePage: React.FC = () => {
@@ -412,9 +411,6 @@ export const HomePage: React.FC = () => {
 
       {/* SECTION 11: DONATION APPEAL */}
       <DonationAppealSection />
-
-      {/* SECTION 12: VOLUNTEER AND PARTNERSHIP BANNER */}
-      <ParticipationBanner />
     </>
   );
 };
