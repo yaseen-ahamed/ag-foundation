@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ayurgreenfoundation.org/sitemap.xml
+Sitemap: https://www.ayurgreenfoundation.org/sitemap.xml

@@ -30,7 +30,7 @@ export const HomePage: React.FC = () => {
     <>
       <SeoHead
         title="Ayurgreen Foundation — Healthcare & Education for Social Impact"
-        description="Ayurgreen Foundation works to improve lives through healthcare support, rehabilitation, education and community development, helping individuals and communities move towards healthier, more dignified futures."
+        description="Ayurgreen Foundation is a Section 8 non-profit in Edappal, Malappuram, Kerala advancing Charity Care, Rehabilitation, Stroke Force awareness, and EWP scholarships."
         canonicalPath="/"
       />
 
@@ -83,6 +83,8 @@ export const HomePage: React.FC = () => {
           <img
             src={config.organization.logos.heroBanner || '/assets/aistudio/ayurgreen_care_492328da.png'}
             alt="Ayurgreen doctor examining and assisting patients in wheelchairs outdoors during rehabilitation care"
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover object-right block"
           />
           <div

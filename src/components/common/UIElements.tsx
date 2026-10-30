@@ -6,12 +6,16 @@ interface SeoHeadProps {
   title: string;
   description: string;
   canonicalPath?: string;
+  noIndex?: boolean;
+  schemaType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage';
 }
 
 export const SeoHead: React.FC<SeoHeadProps> = ({
   title,
   description,
   canonicalPath,
+  noIndex = false,
+  schemaType,
 }) => {
   const location = useLocation();
 
@@ -21,25 +25,76 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       : `${title} | Ayurgreen Foundation`;
     document.title = fullTitle;
 
-    const setMeta = (selector: string, content: string) => {
-      const el = document.querySelector(selector);
-      if (el) {
-        el.setAttribute('content', content);
+    const path = canonicalPath ?? location.pathname;
+    const canonicalUrl = `https://www.ayurgreenfoundation.org${path === '/' ? '/' : path.replace(/\/+$/, '')}`;
+
+    const setMeta = (selector: string, attr: string, content: string) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement('meta');
+        if (selector.includes('property=')) {
+          const propMatch = selector.match(/property="([^"]+)"/);
+          if (propMatch) el.setAttribute('property', propMatch[1]);
+        } else if (selector.includes('name=')) {
+          const nameMatch = selector.match(/name="([^"]+)"/);
+          if (nameMatch) el.setAttribute('name', nameMatch[1]);
+        }
+        document.head.appendChild(el);
       }
+      el.setAttribute(attr, content);
     };
 
-    setMeta('meta[name="description"]', description);
-    setMeta('meta[property="og:title"]', fullTitle);
-    setMeta('meta[property="og:description"]', description);
-    setMeta('meta[name="twitter:title"]', fullTitle);
-    setMeta('meta[name="twitter:description"]', description);
+    setMeta('meta[name="description"]', 'content', description);
+    setMeta('meta[name="robots"]', 'content', noIndex ? 'noindex, follow' : 'index, follow');
+    setMeta('meta[property="og:title"]', 'content', fullTitle);
+    setMeta('meta[property="og:description"]', 'content', description);
+    setMeta('meta[property="og:url"]', 'content', canonicalUrl);
+    setMeta('meta[name="twitter:title"]', 'content', fullTitle);
+    setMeta('meta[name="twitter:description"]', 'content', description);
 
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) {
-      const path = canonicalPath ?? location.pathname;
-      canonical.setAttribute('href', `https://ayurgreenfoundation.org${path}`);
+      canonical.setAttribute('href', canonicalUrl);
     }
-  }, [title, description, canonicalPath, location.pathname]);
+
+    // Dynamic Page Schema JSON-LD
+    const resolvedSchemaType =
+      schemaType ||
+      (path === '/about'
+        ? 'AboutPage'
+        : path === '/contact'
+        ? 'ContactPage'
+        : path === '/programmes' || path === '/news-events' || path === '/gallery'
+        ? 'CollectionPage'
+        : 'WebPage');
+
+    let scriptEl = document.getElementById('dynamic-page-schema') as HTMLScriptElement | null;
+    if (noIndex) {
+      if (scriptEl) scriptEl.remove();
+    } else {
+      if (!scriptEl) {
+        scriptEl = document.createElement('script');
+        scriptEl.id = 'dynamic-page-schema';
+        scriptEl.type = 'application/ld+json';
+        document.head.appendChild(scriptEl);
+      }
+      scriptEl.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': resolvedSchemaType,
+        '@id': `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: fullTitle,
+        description,
+        isPartOf: {
+          '@id': 'https://www.ayurgreenfoundation.org/#website',
+        },
+        about: {
+          '@id': 'https://www.ayurgreenfoundation.org/#organization',
+        },
+        inLanguage: 'en-IN',
+      });
+    }
+  }, [title, description, canonicalPath, noIndex, schemaType, location.pathname]);
 
   useEffect(() => {
     if (location.hash) {
@@ -67,8 +122,32 @@ export const Breadcrumbs: React.FC<{ items: BreadcrumbItem[]; light?: boolean }>
   items,
   light = false,
 }) => {
+  const location = useLocation();
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.ayurgreenfoundation.org/',
+      },
+      ...items.map((item, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 2,
+        name: item.label,
+        item: `https://www.ayurgreenfoundation.org${item.to || location.pathname}`,
+      })),
+    ],
+  };
+
   return (
     <nav aria-label="Breadcrumb" className="mb-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <ol
         className={`flex flex-wrap items-center gap-1.5 text-xs font-medium ${
           light ? 'text-white/80' : 'text-[#536477]'

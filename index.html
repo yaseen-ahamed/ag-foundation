@@ -6,29 +6,32 @@
     <title>Ayurgreen Foundation — Healthcare &amp; Education for Social Impact</title>
     <meta
       name="description"
-      content="Ayurgreen Foundation is a Section 8 non-profit advancing equitable healthcare access, rehabilitation, Stroke Force awareness, education, and community development in Kerala."
+      content="Ayurgreen Foundation is a Section 8 non-profit in Edappal, Malappuram, Kerala advancing Charity Care, Rehabilitation, Stroke Force awareness, and EWP scholarships."
     />
+    <meta name="robots" content="index, follow" />
     <link rel="icon" type="image/png" href="/assets/aistudio/founation_icon_06d4307b.png" />
     <link rel="apple-touch-icon" href="/assets/aistudio/founation_icon_06d4307b.png" />
-    <link rel="canonical" href="https://ayurgreenfoundation.org/" />
+    <link rel="canonical" href="https://www.ayurgreenfoundation.org/" />
 
     <!-- OpenGraph Social Cards -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Ayurgreen Foundation" />
+    <meta property="og:url" content="https://www.ayurgreenfoundation.org/" />
     <meta property="og:title" content="Ayurgreen Foundation — Healthcare &amp; Education for Social Impact" />
     <meta
       property="og:description"
-      content="Supporting individuals and communities through Charity Care, Project Rehab Village, Social Rehabilitation, Stroke Force, and healthcare education."
+      content="Supporting individuals and communities in Kerala through Charity Care, Project Rehab Village, Social Rehabilitation, Stroke Force, and healthcare education."
     />
-    <meta property="og:image" content="/assets/aistudio/ayurgreen_foundation_logo__35041206.png" />
+    <meta property="og:image" content="https://www.ayurgreenfoundation.org/assets/aistudio/ayurgreen_foundation_logo__35041206.png" />
 
     <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ayurgreen Foundation — Healthcare &amp; Education for Social Impact" />
     <meta
       name="twitter:description"
-      content="Supporting individuals and communities through Charity Care, Project Rehab Village, Social Rehabilitation, Stroke Force, and healthcare education."
+      content="Supporting individuals and communities in Kerala through Charity Care, Project Rehab Village, Social Rehabilitation, Stroke Force, and healthcare education."
     />
+    <meta name="twitter:image" content="https://www.ayurgreenfoundation.org/assets/aistudio/ayurgreen_foundation_logo__35041206.png" />
 
     <!-- Google Fonts: Barlow Semi Condensed (Site-Wide Font Across Header, Headings & Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,29 +41,55 @@
       rel="stylesheet"
     />
 
-    <!-- Schema.org NGO Structured Data -->
+    <!-- Schema.org NGO & WebSite Structured Data (@graph) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "NGO",
-        "name": "Ayurgreen Foundation",
-        "alternateName": "AG Foundation",
-        "foundingDate": "2022-05-24",
-        "slogan": "Healthcare & Education for Social Impact",
-        "url": "https://ayurgreenfoundation.org",
-        "logo": "/assets/aistudio/ayurgreen_foundation_logo__35041206.png",
-        "description": "Ayurgreen Foundation is the social impact arm of Ayurgreen Group, established on 24 May 2022 as a Section 8 non-profit company advancing healthcare, rehabilitation, education, and community development.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Admin Office, Ayurgreen Campus, Kavilpadi",
-          "addressLocality": "Edappal, Malappuram",
-          "addressRegion": "Kerala",
-          "addressCountry": "IN"
-        },
-        "parentOrganization": {
-          "@type": "Organization",
-          "name": "Ayurgreen Group"
-        }
+        "@graph": [
+          {
+            "@type": ["NGO", "Organization"],
+            "@id": "https://www.ayurgreenfoundation.org/#organization",
+            "name": "Ayurgreen Foundation",
+            "alternateName": "AG Foundation",
+            "foundingDate": "2022-05-24",
+            "slogan": "Healthcare & Education for Social Impact",
+            "url": "https://www.ayurgreenfoundation.org/",
+            "logo": "https://www.ayurgreenfoundation.org/assets/aistudio/ayurgreen_foundation_logo__35041206.png",
+            "email": "foundationayurgreen@gmail.com",
+            "telephone": "+91-89430-55518",
+            "description": "Ayurgreen Foundation is the social impact arm of Ayurgreen Group, established on 24 May 2022 as a Section 8 non-profit company in Edappal, Malappuram, Kerala advancing healthcare assistance, rehabilitation, education, and community development.",
+            "areaServed": {
+              "@type": "State",
+              "name": "Kerala",
+              "containedInPlace": {
+                "@type": "Country",
+                "name": "India"
+              }
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Admin Office, Ayurgreen Campus, Kavilpadi, Edappal",
+              "addressLocality": "Malappuram",
+              "addressRegion": "Kerala",
+              "postalCode": "679582",
+              "addressCountry": "IN"
+            },
+            "parentOrganization": {
+              "@type": "Organization",
+              "name": "Ayurgreen Group"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.ayurgreenfoundation.org/#website",
+            "url": "https://www.ayurgreenfoundation.org/",
+            "name": "Ayurgreen Foundation",
+            "publisher": {
+              "@id": "https://www.ayurgreenfoundation.org/#organization"
+            },
+            "inLanguage": "en-IN"
+          }
+        ]
       }
     </script>
   </head>

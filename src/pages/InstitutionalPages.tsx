@@ -698,6 +698,7 @@ export const NotFoundPage: React.FC = () => {
       <SeoHead
         title="Page Not Found | Ayurgreen Foundation"
         description="The requested page could not be found on the Ayurgreen Foundation website."
+        noIndex={true}
       />
       <section className="py-20 sm:py-28 bg-[#F7F9FA] text-center px-4">
         <div className="max-w-lg mx-auto bg-white rounded-3xl border border-[#DFE6EB] p-8 sm:p-10 space-y-5 shadow-2xs">
