@@ -19,7 +19,7 @@ import { ReferencePhotoCrop } from '../components/visuals/FoundationVisual';
 import {
   ImpactMetricsStrip,
   CharityCareImpactSection,
-  ParticipationBanner,
+  DonationAppealSection,
 } from '../components/sections/SharedSections';
 
 export const ImpactPage: React.FC = () => {
@@ -263,7 +263,7 @@ export const ImpactPage: React.FC = () => {
         </div>
       )}
 
-      <ParticipationBanner />
+      <DonationAppealSection />
     </>
   );
 };
@@ -509,7 +509,7 @@ export const GalleryPage: React.FC = () => {
         </div>
       )}
 
-      <ParticipationBanner />
+      <DonationAppealSection />
     </>
   );
 };
@@ -743,7 +743,7 @@ export const NewsEventsPage: React.FC = () => {
         </div>
       )}
 
-      <ParticipationBanner />
+      <DonationAppealSection />
     </>
   );
 };

@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { SeoHead, Breadcrumbs, SectionHeading } from '../components/common/UIElements';
-import { ParticipationBanner } from '../components/sections/SharedSections';
+import { DonationAppealSection } from '../components/sections/SharedSections';
 
 export const TransparencyPage: React.FC = () => {
   const { config, setIsCmsOpen } = useSite();
@@ -220,7 +220,7 @@ export const TransparencyPage: React.FC = () => {
         </div>
       </section>
 
-      <ParticipationBanner />
+      <DonationAppealSection />
     </>
   );
 };

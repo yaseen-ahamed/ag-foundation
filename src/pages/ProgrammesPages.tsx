@@ -17,7 +17,7 @@ import {
   FeaturedProjectStrokeForceCard,
   CharityCareImpactSection,
   AssociatedInstitutionsSection,
-  ParticipationBanner,
+  DonationAppealSection,
 } from '../components/sections/SharedSections';
 import {
   ReferencePhotoCrop,
@@ -113,7 +113,7 @@ export const ProgrammesOverviewPage: React.FC = () => {
       </section>
 
       <AssociatedInstitutionsSection />
-      <ParticipationBanner />
+      <DonationAppealSection />
     </>
   );
 };
@@ -829,7 +829,7 @@ export const ProgrammeDetailPage: React.FC = () => {
         </section>
       )}
 
-      <ParticipationBanner />
+      <DonationAppealSection />
     </>
   );
 };

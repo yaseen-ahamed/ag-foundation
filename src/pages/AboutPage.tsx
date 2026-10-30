@@ -13,7 +13,7 @@ import {
 import { useSite } from '../context/SiteContext';
 import { SeoHead, Breadcrumbs, SectionHeading } from '../components/common/UIElements';
 import { ReferencePhotoCrop } from '../components/visuals/FoundationVisual';
-import { ParticipationBanner } from '../components/sections/SharedSections';
+import { DonationAppealSection } from '../components/sections/SharedSections';
 
 export const AboutPage: React.FC = () => {
   const { config, setIsCmsOpen } = useSite();
@@ -376,7 +376,7 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      <ParticipationBanner />
+      <DonationAppealSection />
     </>
   );
 };
