@@ -14,6 +14,10 @@ import {
   Newspaper,
 } from 'lucide-react';
 import { useSite } from '../../context/SiteContext';
+import {
+  STROKE_FORCE_PHOTO,
+  VOLUNTEER_ACTIVITY_PHOTO,
+} from '../visuals/FoundationVisual';
 
 export const SiteHeader: React.FC = () => {
   const { config, setIsSearchOpen } = useSite();
@@ -139,48 +143,65 @@ export const SiteHeader: React.FC = () => {
               <div
                 role="menu"
                 aria-label="Our Programmes"
-                className="absolute left-0 top-full pt-2 w-[540px] z-50"
+                className="absolute -left-44 xl:-left-28 top-full pt-2 w-[820px] xl:w-[880px] z-50"
               >
-                <div className="bg-white rounded-xl border border-[#DFE6EB] shadow-lg p-5">
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#DFE6EB]">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[#536477]">
-                      Core Initiatives ({config.programmes.length})
-                    </span>
-                    <Link
-                      to="/programmes"
-                      className="text-xs font-semibold text-[#087F83] hover:underline inline-flex items-center gap-1"
-                    >
-                      View All Programmes
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    {config.programmes.map((prog) => (
+                <div className="bg-white rounded-2xl border border-[#DFE6EB] shadow-xl p-6 flex items-stretch gap-6 xl:gap-7">
+                  {/* Left Side: Dropdown Pages List */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#DFE6EB]">
+                      <span className="font-nav text-xs font-semibold uppercase tracking-[0.06em] text-[#536477]">
+                        Core Initiatives ({config.programmes.length})
+                      </span>
                       <Link
-                        key={prog.slug}
-                        to={`/programmes/${prog.slug}`}
-                        role="menuitem"
-                        className="group p-2.5 rounded-lg hover:bg-[#EFF7FA] transition-colors flex flex-col"
+                        to="/programmes"
+                        className="text-xs font-semibold text-[#087F83] hover:underline inline-flex items-center gap-1"
                       >
-                        <span className="text-sm font-semibold text-[#102C4B] group-hover:text-[#087F83] transition-colors">
-                          {prog.title}
-                        </span>
-                        <span className="text-xs text-[#536477] line-clamp-1 mt-0.5">
-                          {prog.category}
-                        </span>
+                        View All Programmes
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
-                    ))}
-                  </div>
-                  <div className="mt-3 pt-3 border-t border-[#DFE6EB] flex items-center justify-between bg-[#EFF7FA]/60 -mx-5 -mb-5 px-5 py-3 rounded-b-xl">
-                    <div className="text-xs text-[#102C4B]">
-                      <span className="font-semibold">Stroke Force:</span> Community Stroke Awareness Initiative
                     </div>
-                    <Link
-                      to="/stroke-force"
-                      className="text-xs font-semibold text-[#087F83] hover:underline whitespace-nowrap"
-                    >
-                      Explore Stroke Force →
-                    </Link>
+                    <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
+                      {config.programmes.map((prog) => (
+                        <Link
+                          key={prog.slug}
+                          to={`/programmes/${prog.slug}`}
+                          role="menuitem"
+                          className="group p-2 rounded-lg hover:bg-[#EFF7FA] transition-colors flex flex-col"
+                        >
+                          <span className="text-sm font-semibold text-[#102C4B] group-hover:text-[#087F83] transition-colors">
+                            {prog.title}
+                          </span>
+                          <span className="text-xs text-[#536477] line-clamp-1 mt-0.5">
+                            {prog.category}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Side: Personalis-Style Featured Image + Brief + Redirection Button */}
+                  <div className="w-[340px] xl:w-[360px] shrink-0 border-l border-[#DFE6EB] pl-6 xl:pl-7 flex items-center gap-5">
+                    <div className="w-36 xl:w-40 h-36 rounded-2xl overflow-hidden shrink-0 bg-[#EFF7FA] border border-[#DFE6EB]/60 shadow-2xs">
+                      <img
+                        src={STROKE_FORCE_PHOTO}
+                        alt="Stroke Force Community Initiative"
+                        className="w-full h-full object-cover object-[64%_center]"
+                      />
+                    </div>
+                    <div className="flex flex-col items-start">
+                      <span className="font-nav text-sm font-semibold uppercase tracking-[0.055em] text-[#102C4B] mb-2">
+                        Stroke Force
+                      </span>
+                      <p className="text-xs sm:text-[13px] text-[#536477] leading-relaxed mb-4">
+                        Together, we can equip communities to recognise stroke signs and save lives.
+                      </p>
+                      <Link
+                        to="/stroke-force"
+                        className="inline-flex items-center justify-center px-6 py-2 rounded-full border border-[#087F83] text-[#087F83] hover:bg-[#087F83] hover:text-white text-xs font-semibold transition-colors"
+                      >
+                        Stroke Force
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -234,67 +255,95 @@ export const SiteHeader: React.FC = () => {
               <div
                 role="menu"
                 aria-label="Get Involved & Resources"
-                className="absolute right-0 top-full pt-2 w-72 z-50"
+                className="absolute right-0 top-full pt-2 w-[640px] xl:w-[680px] z-50"
               >
-                <div className="bg-white rounded-xl border border-[#DFE6EB] shadow-lg p-3 space-y-1">
-                  <Link
-                    to="/donate"
-                    role="menuitem"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#EFF7FA] transition-colors"
-                  >
-                    <HeartHandshake className="w-4 h-4 text-[#087F83] mt-0.5 shrink-0" />
-                    <div>
-                      <div className="text-sm font-semibold text-[#102C4B]">Donate</div>
-                      <div className="text-xs text-[#536477]">Support healthcare & rehabilitation</div>
+                <div className="bg-white rounded-2xl border border-[#DFE6EB] shadow-xl p-6 flex items-stretch gap-6 xl:gap-7">
+                  {/* Left Side: Dropdown Pages List */}
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <Link
+                      to="/donate"
+                      role="menuitem"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#EFF7FA] transition-colors"
+                    >
+                      <HeartHandshake className="w-4 h-4 text-[#087F83] mt-0.5 shrink-0" />
+                      <div>
+                        <div className="text-sm font-semibold text-[#102C4B]">Donate</div>
+                        <div className="text-xs text-[#536477]">Support healthcare &amp; rehabilitation</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/volunteer"
+                      role="menuitem"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#EFF7FA] transition-colors"
+                    >
+                      <Users className="w-4 h-4 text-[#087F83] mt-0.5 shrink-0" />
+                      <div>
+                        <div className="text-sm font-semibold text-[#102C4B]">Volunteer With Us</div>
+                        <div className="text-xs text-[#536477]">Join medical camps &amp; Stroke Force</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/partner-with-us"
+                      role="menuitem"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#EFF7FA] transition-colors"
+                    >
+                      <Handshake className="w-4 h-4 text-[#087F83] mt-0.5 shrink-0" />
+                      <div>
+                        <div className="text-sm font-semibold text-[#102C4B]">Partner With Us</div>
+                        <div className="text-xs text-[#536477]">CSR &amp; institutional collaboration</div>
+                      </div>
+                    </Link>
+                    <div className="my-1.5 border-t border-[#DFE6EB]" />
+                    <Link
+                      to="/news-events"
+                      role="menuitem"
+                      className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-[#536477] hover:text-[#102C4B] hover:bg-[#F7F9FA]"
+                    >
+                      <Newspaper className="w-3.5 h-3.5 text-[#087F83]" />
+                      <span>News &amp; Events Archive</span>
+                    </Link>
+                    <Link
+                      to="/gallery"
+                      role="menuitem"
+                      className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-[#536477] hover:text-[#102C4B] hover:bg-[#F7F9FA]"
+                    >
+                      <ImageIcon className="w-3.5 h-3.5 text-[#087F83]" />
+                      <span>Media Gallery</span>
+                    </Link>
+                    <Link
+                      to="/transparency"
+                      role="menuitem"
+                      className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-[#536477] hover:text-[#102C4B] hover:bg-[#F7F9FA]"
+                    >
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#087F83]" />
+                      <span>Transparency &amp; Governance</span>
+                    </Link>
+                  </div>
+
+                  {/* Right Side: Personalis-Style Featured Image + Brief + Redirection Button */}
+                  <div className="w-[330px] xl:w-[350px] shrink-0 border-l border-[#DFE6EB] pl-6 xl:pl-7 flex items-center gap-5">
+                    <div className="w-36 xl:w-40 h-36 rounded-2xl overflow-hidden shrink-0 bg-[#EFF7FA] border border-[#DFE6EB]/60 shadow-2xs">
+                      <img
+                        src={VOLUNTEER_ACTIVITY_PHOTO}
+                        alt="Join Our Mission at Ayurgreen Foundation"
+                        className="w-full h-full object-cover object-center"
+                      />
                     </div>
-                  </Link>
-                  <Link
-                    to="/volunteer"
-                    role="menuitem"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#EFF7FA] transition-colors"
-                  >
-                    <Users className="w-4 h-4 text-[#087F83] mt-0.5 shrink-0" />
-                    <div>
-                      <div className="text-sm font-semibold text-[#102C4B]">Volunteer With Us</div>
-                      <div className="text-xs text-[#536477]">Join medical camps & Stroke Force</div>
+                    <div className="flex flex-col items-start">
+                      <span className="font-nav text-sm font-semibold uppercase tracking-[0.055em] text-[#102C4B] mb-2">
+                        Join Our Mission
+                      </span>
+                      <p className="text-xs sm:text-[13px] text-[#536477] leading-relaxed mb-4">
+                        Together, we can transform the future of community healthcare and rehabilitation.
+                      </p>
+                      <Link
+                        to="/volunteer"
+                        className="inline-flex items-center justify-center px-6 py-2 rounded-full border border-[#087F83] text-[#087F83] hover:bg-[#087F83] hover:text-white text-xs font-semibold transition-colors"
+                      >
+                        Volunteer
+                      </Link>
                     </div>
-                  </Link>
-                  <Link
-                    to="/partner-with-us"
-                    role="menuitem"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#EFF7FA] transition-colors"
-                  >
-                    <Handshake className="w-4 h-4 text-[#087F83] mt-0.5 shrink-0" />
-                    <div>
-                      <div className="text-sm font-semibold text-[#102C4B]">Partner With Us</div>
-                      <div className="text-xs text-[#536477]">CSR & institutional collaboration</div>
-                    </div>
-                  </Link>
-                  <div className="my-1.5 border-t border-[#DFE6EB]" />
-                  <Link
-                    to="/news-events"
-                    role="menuitem"
-                    className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-[#536477] hover:text-[#102C4B] hover:bg-[#F7F9FA]"
-                  >
-                    <Newspaper className="w-3.5 h-3.5 text-[#087F83]" />
-                    <span>News &amp; Events Archive</span>
-                  </Link>
-                  <Link
-                    to="/gallery"
-                    role="menuitem"
-                    className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-[#536477] hover:text-[#102C4B] hover:bg-[#F7F9FA]"
-                  >
-                    <ImageIcon className="w-3.5 h-3.5 text-[#087F83]" />
-                    <span>Media Gallery</span>
-                  </Link>
-                  <Link
-                    to="/transparency"
-                    role="menuitem"
-                    className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium text-[#536477] hover:text-[#102C4B] hover:bg-[#F7F9FA]"
-                  >
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#087F83]" />
-                    <span>Transparency &amp; Governance</span>
-                  </Link>
+                  </div>
                 </div>
               </div>
             )}
