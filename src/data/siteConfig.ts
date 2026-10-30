@@ -388,7 +388,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
     ],
     ourStory: [
       'Founded on 24 May 2022, Ayurgreen Foundation emerged from the clinical and community experience of Ayurgreen Group. Witnessing firsthand the financial, physical, and social barriers faced by patients recovering from neurological conditions, chronic illness, and acute health emergencies, the Foundation was constituted as a dedicated Section 8 non-profit company to institutionalise compassionate outreach.',
-      'Over time, our scope expanded across core programmes including the Charity Care Programme, Social Rehabilitation Programme, Rehab Village Project, Volunteer Internship Programme, Education With Purpose (EWP) Scholarship Programme, Ayurgreen Volunteers, Stroke Awareness Medical Camps, and our flagship community initiative Stroke Force.',
+      'Over time, our scope expanded across core programmes including the Charity Care Programme, Social Rehabilitation Programme, Rehab Village Project, Volunteer Internship Programme, Education With Purpose (EWP) Scholarship Programme, Stroke Awareness Medical Camps, and our flagship community initiative Stroke Force.',
     ],
     vision:
       'To promote equitable access to healthcare and social wellbeing through structured community initiatives and institutional partnerships.',
@@ -499,7 +499,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Healthcare Access',
       featuredOnHome: true,
       iconName: 'HeartHandshake',
-      accentColor: '#7C4DFF',
+      accentColor: '#7C3AED',
       cropRegion: { x: 76, y: 706, w: 96, h: 74 },
       illustrationType: 'charity',
       aboutHeading: 'About the Programme',
@@ -670,7 +670,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Rehabilitation',
       featuredOnHome: true,
       iconName: 'Accessibility',
-      accentColor: '#26A69A',
+      accentColor: '#0D9488',
       imageUrl: '/assets/aistudio/social_rehab_program_3edebc6f.png',
       cropRegion: { x: 395, y: 706, w: 112, h: 74 },
       illustrationType: 'social-rehab',
@@ -810,7 +810,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Rehabilitation',
       featuredOnHome: true,
       iconName: 'Home',
-      accentColor: '#087F83',
+      accentColor: '#D97706',
       cropRegion: { x: 185, y: 706, w: 150, h: 74 },
       illustrationType: 'rehab-village',
       logoUrl: '/assets/aistudio/rehab_village_logo.webp',
@@ -993,7 +993,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Civic Participation',
       featuredOnHome: true,
       iconName: 'HandHeart',
-      accentColor: '#00897B',
+      accentColor: '#059669',
       cropRegion: { x: 725, y: 706, w: 115, h: 74 },
       illustrationType: 'volunteer',
       aboutHeading: 'About the Programme',
@@ -1167,7 +1167,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
         verifiedMetricValue: '14 Students',
         isPlaceholder: false,
       },
-      relatedSlugs: ['ewp-scholarship', 'volunteer-activities', 'rehab-village'],
+      relatedSlugs: ['ewp-scholarship', 'rehab-village', 'social-rehabilitation'],
     },
 
     // 5. EWP SCHOLARSHIP PROGRAMME (EDUCATION WITH PURPOSE)
@@ -1179,7 +1179,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Education & Research',
       featuredOnHome: true,
       iconName: 'GraduationCap',
-      accentColor: '#102C4B',
+      accentColor: '#2563EB',
       imageUrl: '/assets/aistudio/ewp_program.JPG_dbea8171.jpeg',
       cropRegion: { x: 850, y: 706, w: 115, h: 74 },
       illustrationType: 'college',
@@ -1434,7 +1434,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Community Health',
       featuredOnHome: true,
       iconName: 'Stethoscope',
-      accentColor: '#087F83',
+      accentColor: '#DC2626',
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
       illustrationType: 'medical-camps',
       aboutHeading: 'About the Programme',
@@ -1551,68 +1551,10 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
         verifiedMetricValue: '124+',
         isPlaceholder: false,
       },
-      relatedSlugs: ['charity-care', 'rehab-village', 'volunteer-activities'],
+      relatedSlugs: ['charity-care', 'rehab-village', 'social-rehabilitation'],
     },
 
-    // 7. AYURGREEN VOLUNTEERS (VOLUNTEER ACTIVITIES)
-    {
-      slug: 'volunteer-activities',
-      title: 'Ayurgreen Volunteers',
-      detailTitle: 'Ayurgreen Volunteers — Community & Healthcare Volunteering',
-      shortTitle: 'Ayurgreen Volunteers',
-      category: 'Civic Participation',
-      featuredOnHome: false,
-      iconName: 'Users',
-      accentColor: '#00897B',
-      cropRegion: { x: 725, y: 706, w: 115, h: 74 },
-      illustrationType: 'volunteer',
-      summary:
-        'Creating meaningful opportunities for students, professionals, and citizens to contribute towards a healthier, more compassionate society.',
-      heroSubtitle:
-        'Empowering compassionate citizens, students, and healthcare professionals to drive grassroots social impact.',
-      introduction: [
-        'Volunteers are the heartbeat of Ayurgreen Foundation’s community presence. Ayurgreen Volunteers provides structured pathways for students, healthcare professionals, educators, and community members to contribute their time and skills meaningfully.',
-        'From supporting medical camps, RUN FAST Mini Marathon, National Reading Day, and World Environment Day to becoming certified community educators in the Stroke Force Training of Trainers (ToT) initiative, volunteers multiply the reach and warmth of every Foundation programme.',
-      ],
-      purpose:
-        'To cultivate civic responsibility and compassionate leadership by engaging volunteers in structured healthcare, educational, and social welfare initiatives.',
-      objectives: [
-        'Engage students and community members in organised outreach, medical camps, and awareness drives.',
-        'Provide structured orientation and Training of Trainers (ToT) opportunities for Stroke Force health educators.',
-        'Support patient companionship and inclusive community events under rehabilitation initiatives.',
-        'Build a sustainable network of socially conscious youth and professional volunteers.',
-      ],
-      activities: [
-        {
-          title: 'Outreach & Medical Camp Coordination',
-          description:
-            'Assisting with participant registration, logistics, and community navigation during local health camps.',
-        },
-        {
-          title: 'Stroke Force & Public Awareness',
-          description:
-            'Leading structured awareness sessions in colleges and community groups, including Stroke Force workshops and public campaigns.',
-        },
-        {
-          title: 'Rehabilitation & Social Support Engagement',
-          description:
-            'Contributing to inclusive community gatherings, skill workshops, and supportive companionship initiatives.',
-        },
-      ],
-      intendedAudience: [
-        'College and paramedical students seeking meaningful community service.',
-        'Healthcare professionals and educators willing to share expertise.',
-        'Community members passionate about social welfare and public health.',
-      ],
-      impactStatus: {
-        qualitativeSummary:
-          'Active network of student and community volunteers strengthening outreach, education, and patient support.',
-        isPlaceholder: false,
-      },
-      relatedSlugs: ['volunteer-internship', 'medical-camps', 'social-rehabilitation'],
-    },
-
-    // 8. AYURGREEN COLLEGE OF LIFE & SCIENCES (ACLAS)
+    // 7. AYURGREEN COLLEGE OF LIFE & SCIENCES (ACLAS)
     {
       slug: 'college-of-life-sciences',
       title: 'Ayurgreen College of Life & Sciences (ACLAS)',
@@ -1621,7 +1563,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Education & Research',
       featuredOnHome: false,
       iconName: 'GraduationCap',
-      accentColor: '#102C4B',
+      accentColor: '#4F46E5',
       illustrationType: 'college',
       logoUrl: '/assets/aistudio/ayurgreen_college_logo.webp',
       summary:
@@ -1670,7 +1612,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       relatedSlugs: ['ewp-scholarship', 'volunteer-internship', 'radiology'],
     },
 
-    // 9. RADIOLOGY DEPARTMENT – GETWELL HOSPITAL
+    // 8. RADIOLOGY DEPARTMENT – GETWELL HOSPITAL
     {
       slug: 'radiology',
       title: 'Radiology Department – Getwell Hospital',
@@ -1679,7 +1621,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Healthcare Access',
       featuredOnHome: false,
       iconName: 'ScanLine',
-      accentColor: '#07565B',
+      accentColor: '#0891B2',
       illustrationType: 'radiology',
       logoUrl: '/assets/aistudio/getwell_hospital_logo.webp',
       summary:

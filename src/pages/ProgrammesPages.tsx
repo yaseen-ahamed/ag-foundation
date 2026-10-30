@@ -126,7 +126,6 @@ export const ProgrammeDetailPage: React.FC = () => {
     'project-rehab-village': 'rehab-village',
     'community-outreach': 'medical-camps',
     'education-with-purpose': 'ewp-scholarship',
-    'ayurgreen-volunteers': 'volunteer-activities',
   };
 
   const normalizedSlug = slug ? slugAliases[slug] || slug : '';
