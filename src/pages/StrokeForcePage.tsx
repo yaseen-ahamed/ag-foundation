@@ -132,11 +132,11 @@ export const StrokeForcePage: React.FC = () => {
                   href="https://github.com/yaseen-ahamed/ag-foundation/releases/download/strokeforce/strokeforce.apk"
                   download="strokeforce.apk"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-[#102C4B] hover:bg-[#07565B] text-white text-sm font-semibold transition-colors shadow-2xs whitespace-nowrap"
-                  title="Download Stroke Force Android App (APK)"
-                  aria-label="Download Stroke Force APK for Android"
+                  title="Download Stroke 360 Android App (APK)"
+                  aria-label="Download Stroke 360 APK for Android"
                 >
                   <Download className="w-4 h-4 text-[#5EEAD4]" />
-                  <span>Download App (APK)</span>
+                  <span>Download Stroke 360</span>
                 </a>
                 <Link
                   to="/volunteer"
