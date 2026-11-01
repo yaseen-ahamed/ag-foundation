@@ -279,6 +279,43 @@ export const CharityCareImpactSection: React.FC<{ stats: CharityCareStats }> = (
   stats,
 }) => {
   const maxCases = Math.max(...stats.annualData.map((d) => d.totalCases), 40);
+  const graphContainerRef = React.useRef<HTMLDivElement | null>(null);
+  const [hasScrolledIn, setHasScrolledIn] = React.useState(false);
+
+  React.useEffect(() => {
+    const node = graphContainerRef.current;
+    if (!node) return;
+
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    ) {
+      setHasScrolledIn(true);
+      return;
+    }
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setHasScrolledIn(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry && entry.isIntersecting) {
+          setHasScrolledIn(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.18,
+        rootMargin: '0px 0px -32px 0px',
+      }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="space-y-8">
@@ -315,7 +352,14 @@ export const CharityCareImpactSection: React.FC<{ stats: CharityCareStats }> = (
       </div>
 
       {/* Annual Beneficiary Chart & Table (2023–2026) */}
-      <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE6EB] bg-white space-y-6 shadow-2xs">
+      <div
+        ref={graphContainerRef}
+        className={`p-6 sm:p-8 rounded-2xl border border-[#DFE6EB] bg-white space-y-6 shadow-2xs transition-all duration-700 ease-out ${
+          hasScrolledIn
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-4'
+        }`}
+      >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DFE6EB] pb-4">
           <div>
             <span className="text-xs font-semibold uppercase tracking-widest text-[#087F83]">
@@ -339,11 +383,21 @@ export const CharityCareImpactSection: React.FC<{ stats: CharityCareStats }> = (
 
         {/* Visual Horizontal Bar Comparison per Year */}
         <div className="space-y-4">
-          {stats.annualData.map((row) => {
+          {stats.annualData.map((row, idx) => {
             const totalPct = Math.round((row.totalCases / maxCases) * 100);
             const fullPct = Math.round((row.fullAssistance / maxCases) * 100);
             return (
-              <div key={row.year} className="space-y-1.5">
+              <div
+                key={row.year}
+                className={`space-y-1.5 transition-all duration-600 ease-out ${
+                  hasScrolledIn
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-2.5'
+                }`}
+                style={{
+                  transitionDelay: `${idx * 100}ms`,
+                }}
+              >
                 <div className="flex items-center justify-between text-xs sm:text-sm">
                   <span className="font-bold text-[#102C4B] tabular-nums w-14">
                     {row.year}
@@ -359,13 +413,25 @@ export const CharityCareImpactSection: React.FC<{ stats: CharityCareStats }> = (
                 </div>
                 <div className="w-full h-3.5 rounded-full bg-[#EFF7FA] overflow-hidden relative">
                   <div
-                    className="h-full bg-[#102C4B]/25 rounded-full transition-all duration-300"
-                    style={{ width: `${totalPct}%` }}
+                    className="h-full bg-[#102C4B]/25 rounded-full"
+                    style={{
+                      width: hasScrolledIn ? `${totalPct}%` : '0%',
+                      transitionProperty: 'width',
+                      transitionDuration: '950ms',
+                      transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                      transitionDelay: `${120 + idx * 120}ms`,
+                    }}
                     title={`${row.year}: ${row.totalCases} Total Patients/Cases`}
                   />
                   <div
-                    className="h-full bg-[#087F83] rounded-full absolute left-0 top-0 transition-all duration-300"
-                    style={{ width: `${fullPct}%` }}
+                    className="h-full bg-[#087F83] rounded-full absolute left-0 top-0"
+                    style={{
+                      width: hasScrolledIn ? `${fullPct}%` : '0%',
+                      transitionProperty: 'width',
+                      transitionDuration: '950ms',
+                      transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                      transitionDelay: `${180 + idx * 120}ms`,
+                    }}
                     title={`${row.year}: ${row.fullAssistance} Received 100% Assistance`}
                   />
                 </div>
