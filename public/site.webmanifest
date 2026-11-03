@@ -1,0 +1,38 @@
+{
+  "name": "Ayurgreen Foundation — Healthcare & Education for Social Impact",
+  "short_name": "Ayurgreen Foundation",
+  "description": "Ayurgreen Foundation is a Section 8 non-profit in Edappal, Malappuram, Kerala advancing Charity Care, Rehabilitation, Stroke Force awareness, and EWP scholarships.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#102C4B",
+  "icons": [
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

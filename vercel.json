@@ -24,9 +24,20 @@
       "permanent": true
     }
   ],
+  "headers": [
+    {
+      "source": "/(favicon\\.ico|favicon-.*\\.png|apple-touch-icon\\.png|site\\.webmanifest)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, must-revalidate"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!favicon\\.ico|favicon-.*\\.png|apple-touch-icon\\.png|site\\.webmanifest|robots\\.txt|sitemap\\.xml|assets/).*)",
       "destination": "/index.html"
     }
   ]
