@@ -25,8 +25,10 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       : `${title} | Ayurgreen Foundation`;
     document.title = fullTitle;
 
-    const path = canonicalPath ?? location.pathname;
-    const canonicalUrl = `https://www.ayurgreenfoundation.org${path === '/' ? '/' : path.replace(/\/+$/, '')}`;
+    const rawPath = canonicalPath ?? location.pathname;
+    const normalizedPath = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+    const cleanPath = normalizedPath === '/' ? '/' : normalizedPath.replace(/\/+$/, '');
+    const canonicalUrl = `https://ayurgreenfoundation.org${cleanPath}`;
 
     const setMeta = (selector: string, attr: string, content: string) => {
       let el = document.querySelector(selector);
@@ -52,19 +54,30 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
     setMeta('meta[name="twitter:title"]', 'content', fullTitle);
     setMeta('meta[name="twitter:description"]', 'content', description);
 
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', canonicalUrl);
+    // Strictly ensure exactly ONE canonical link tag exists and points to non-WWW canonical URL
+    const canonicalTags = Array.from(document.querySelectorAll('link[rel="canonical"]')) as HTMLLinkElement[];
+    let canonicalTag: HTMLLinkElement;
+    if (canonicalTags.length === 0) {
+      canonicalTag = document.createElement('link');
+      canonicalTag.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalTag);
+    } else {
+      canonicalTag = canonicalTags[0];
+      // Clean up any extraneous duplicate canonical tags
+      for (let i = 1; i < canonicalTags.length; i++) {
+        canonicalTags[i].remove();
+      }
     }
+    canonicalTag.setAttribute('href', canonicalUrl);
 
     // Dynamic Page Schema JSON-LD
     const resolvedSchemaType =
       schemaType ||
-      (path === '/about'
+      (cleanPath === '/about'
         ? 'AboutPage'
-        : path === '/contact'
+        : cleanPath === '/contact'
         ? 'ContactPage'
-        : path === '/programmes' || path === '/news-events' || path === '/gallery'
+        : cleanPath === '/programmes' || cleanPath === '/news-events' || cleanPath === '/gallery'
         ? 'CollectionPage'
         : 'WebPage');
 
@@ -86,10 +99,10 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
         name: fullTitle,
         description,
         isPartOf: {
-          '@id': 'https://www.ayurgreenfoundation.org/#website',
+          '@id': 'https://ayurgreenfoundation.org/#website',
         },
         about: {
-          '@id': 'https://www.ayurgreenfoundation.org/#organization',
+          '@id': 'https://ayurgreenfoundation.org/#organization',
         },
         inLanguage: 'en-IN',
       });
@@ -131,14 +144,19 @@ export const Breadcrumbs: React.FC<{ items: BreadcrumbItem[]; light?: boolean }>
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://www.ayurgreenfoundation.org/',
+        item: 'https://ayurgreenfoundation.org/',
       },
-      ...items.map((item, idx) => ({
-        '@type': 'ListItem',
-        position: idx + 2,
-        name: item.label,
-        item: `https://www.ayurgreenfoundation.org${item.to || location.pathname}`,
-      })),
+      ...items.map((item, idx) => {
+        const itemPath = item.to || location.pathname;
+        const normalizedItemPath = itemPath.startsWith('/') ? itemPath : `/${itemPath}`;
+        const cleanItemPath = normalizedItemPath === '/' ? '/' : normalizedItemPath.replace(/\/+$/, '');
+        return {
+          '@type': 'ListItem',
+          position: idx + 2,
+          name: item.label,
+          item: `https://ayurgreenfoundation.org${cleanItemPath}`,
+        };
+      }),
     ],
   };
 
