@@ -13,7 +13,7 @@ import { ReferencePhotoCrop } from '../components/visuals/FoundationVisual';
 import {
   FlagshipShowcaseSection,
   FeaturedProjectStrokeForceCard,
-  ProgrammeCard,
+  ProgrammesStackSection,
   AssociatedInstitutionsSection,
   ImpactMetricsStrip,
   DonationAppealSection,
@@ -208,12 +208,8 @@ export const HomePage: React.FC = () => {
             }
           />
 
-          {/* 6 Prominent Featured Programme Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProgrammes.map((prog) => (
-              <ProgrammeCard key={prog.slug} programme={prog} />
-            ))}
-          </div>
+          {/* Interactive Stacking Programme Cards (Desktop & Mobile Responsive) */}
+          <ProgrammesStackSection programmes={featuredProgrammes} />
         </div>
       </section>
 

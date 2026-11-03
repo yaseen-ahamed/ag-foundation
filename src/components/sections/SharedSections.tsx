@@ -20,6 +20,7 @@ import {
   BespokeInstitutionalArt,
 } from '../visuals/FoundationVisual';
 import { SectionHeading } from '../common/UIElements';
+import StackingCards, { StackingCardItem } from '../ui/stacking-cards';
 
 export const FlagshipShowcaseSection: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
@@ -643,6 +644,268 @@ export const ProgrammeCard: React.FC<{ programme: ProgrammeItem }> = ({ programm
         </div>
       </div>
     </article>
+  );
+};
+
+export const ProgrammesStackSection: React.FC<{
+  programmes: ProgrammeItem[];
+}> = ({ programmes }) => {
+  const total = programmes.length;
+
+  // Sovereign 60-30-10 clinical surface progression & top bar accents per card
+  const cardSurfaceStyles = [
+    {
+      cardBg: 'bg-white',
+      headerBg: 'bg-[#F7F9FA]',
+      topBar: 'bg-[#087F83]',
+      footerBg: 'bg-[#F7F9FA]/80',
+    },
+    {
+      cardBg: 'bg-[#F7F9FA]',
+      headerBg: 'bg-[#EFF7FA]',
+      topBar: 'bg-[#102C4B]',
+      footerBg: 'bg-white',
+    },
+    {
+      cardBg: 'bg-white',
+      headerBg: 'bg-[#EFF7FA]/75',
+      topBar: 'bg-[#07565B]',
+      footerBg: 'bg-[#F7F9FA]/80',
+    },
+    {
+      cardBg: 'bg-[#F7F9FA]',
+      headerBg: 'bg-white',
+      topBar: 'bg-[#087F83]',
+      footerBg: 'bg-white',
+    },
+    {
+      cardBg: 'bg-white',
+      headerBg: 'bg-[#F7F9FA]',
+      topBar: 'bg-[#102C4B]',
+      footerBg: 'bg-[#EFF7FA]/60',
+    },
+    {
+      cardBg: 'bg-[#F7F9FA]',
+      headerBg: 'bg-[#EFF7FA]',
+      topBar: 'bg-[#07565B]',
+      footerBg: 'bg-white',
+    },
+  ];
+
+  const scrollToCard = (idx: number) => {
+    const el = document.getElementById(`programme-stack-card-${idx}`);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="relative">
+      {/* Quick-Jump Programme Index Bar (Mobile horizontally scrollable, Desktop wrapped) */}
+      <div
+        aria-label="Quick jump to programme card"
+        className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-6 sm:mb-8 border-b border-[#DFE6EB]"
+      >
+        <span className="text-xs font-semibold uppercase tracking-[0.08em] text-[#536477] shrink-0 mr-1 hidden sm:inline">
+          Programme Index:
+        </span>
+        {programmes.map((prog, index) => {
+          const num = String(index + 1).padStart(2, '0');
+          return (
+            <button
+              key={prog.slug}
+              type="button"
+              onClick={() => scrollToCard(index)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#F7F9FA] hover:bg-[#EFF7FA] border border-[#DFE6EB] hover:border-[#087F83]/60 text-xs font-medium text-[#102C4B] transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83]"
+            >
+              <span className="font-bold text-[#087F83] tabular-nums">{num}.</span>
+              <span>{prog.shortTitle || prog.title}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Stacking Cards Deck */}
+      <StackingCards
+        totalCards={total}
+        scaleMultiplier={0.024}
+        className="relative pb-20 sm:pb-24"
+      >
+        {programmes.map((programme, index) => {
+          const num = String(index + 1).padStart(2, '0');
+          const totalNum = String(total).padStart(2, '0');
+          const styleTheme = cardSurfaceStyles[index % cardSurfaceStyles.length];
+          const stackTopOffset = `${index * 14}px`;
+
+          return (
+            <StackingCardItem
+              key={programme.slug}
+              id={`programme-stack-card-${index}`}
+              index={index}
+              topPosition={stackTopOffset}
+              className="top-[84px] sm:top-[92px] lg:top-[104px] mb-6 sm:mb-8 lg:mb-10 last:mb-0 h-auto"
+              style={{ zIndex: index + 10 }}
+            >
+              <article
+                aria-label={`${num}. ${programme.title}`}
+                className={`group ${styleTheme.cardBg} rounded-2xl sm:rounded-3xl border border-[#DFE6EB] hover:border-[#087F83]/70 overflow-hidden shadow-[0_-8px_28px_-12px_rgba(16,44,75,0.12),0_16px_36px_-12px_rgba(16,44,75,0.10)] transition-colors duration-200`}
+              >
+                {/* Top Signature Accent Bar */}
+                <div
+                  className={`h-1.5 w-full ${styleTheme.topBar}`}
+                  aria-hidden="true"
+                />
+
+                {/* Slim Top Index Header Strip (Visible when cards stack on top of each other) */}
+                <div
+                  className={`${styleTheme.headerBg} px-4 sm:px-7 lg:px-9 py-2.5 border-b border-[#DFE6EB] flex items-center justify-between gap-4 text-xs`}
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="font-bold text-[#087F83] tabular-nums shrink-0">
+                      {num} / {totalNum}
+                    </span>
+                    <span className="text-[#DFE6EB]" aria-hidden="true">
+                      |
+                    </span>
+                    <span className="font-semibold text-[#102C4B] truncate">
+                      {programme.title}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#536477] shrink-0">
+                    <span className="hidden sm:inline font-medium">
+                      {programme.category}
+                    </span>
+                    <span className="sm:hidden font-medium text-[11px]">
+                      {programme.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Main Split Card Body: Image + Content */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                  {/* Visual Column (Top on Mobile, Right 5 Columns on Desktop) */}
+                  <div className="lg:col-span-5 lg:order-2 relative h-40 sm:h-52 lg:h-auto lg:min-h-[340px] w-full bg-[#EFF7FA] overflow-hidden border-b lg:border-b-0 lg:border-l border-[#DFE6EB]">
+                    {programme.imageUrl || programme.cropRegion ? (
+                      <ReferencePhotoCrop
+                        crop={
+                          programme.cropRegion || { x: 0, y: 0, w: 100, h: 100 }
+                        }
+                        imageSrc={programme.imageUrl}
+                        alt={programme.title}
+                        className="w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-out"
+                      />
+                    ) : (
+                      <BespokeInstitutionalArt
+                        type={programme.illustrationType}
+                        alt={programme.title}
+                        className="w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-out"
+                      />
+                    )}
+                    {/* Subtle bottom gradient scrim on mobile for visual composure */}
+                    <div
+                      className="lg:hidden absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#102C4B]/35 to-transparent pointer-events-none"
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  {/* Narrative Content Column (Bottom on Mobile, Left 7 Columns on Desktop) */}
+                  <div className="lg:col-span-7 lg:order-1 p-5 sm:p-7 lg:p-9 flex flex-col justify-between">
+                    <div>
+                      {/* Icon Badge + Category & Subtitle Kicker */}
+                      <div className="flex items-center gap-3.5 mb-3.5 sm:mb-4">
+                        <div className="shrink-0">
+                          <ProgrammeIconBadge
+                            iconName={programme.iconName}
+                            accentColor={programme.accentColor}
+                            size="sm"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex flex-wrap items-center gap-1.5 text-xs text-[#536477]">
+                            <span className="font-semibold text-[#087F83]">
+                              {programme.category}
+                            </span>
+                            <span aria-hidden="true">·</span>
+                            <span className="truncate">
+                              Ayurgreen Foundation Initiative
+                            </span>
+                          </div>
+                          {programme.heroSubtitle && (
+                            <p className="text-xs sm:text-sm font-medium text-[#102C4B]/85 truncate mt-0.5">
+                              {programme.heroSubtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Programme Title */}
+                      <h3 className="text-xl sm:text-2xl lg:text-[1.85rem] font-editorial font-normal text-[#102C4B] group-hover:text-[#087F83] transition-colors leading-[1.15] tracking-[-0.015em] mb-2.5">
+                        <Link
+                          to={`/programmes/${programme.slug}`}
+                          className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83] rounded"
+                        >
+                          {programme.title}
+                        </Link>
+                      </h3>
+
+                      {/* Programme Summary */}
+                      <p className="text-xs sm:text-sm lg:text-[15.5px] text-[#536477] leading-relaxed line-clamp-3 sm:line-clamp-none mb-4 sm:mb-6">
+                        {programme.summary}
+                      </p>
+
+                      {/* Desktop/Tablet Qualitative Impact Highlight */}
+                      {programme.impactStatus?.qualitativeSummary && (
+                        <div className="hidden sm:block pt-3.5 mb-5 border-t border-[#DFE6EB]/80">
+                          <p className="text-xs text-[#536477] leading-relaxed">
+                            <span className="font-semibold text-[#102C4B]">
+                              Documented Focus:{' '}
+                            </span>
+                            {programme.impactStatus.qualitativeSummary}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Card Footer: Verified Metric / Pillar Info + Primary Action Link */}
+                    <div
+                      className={`pt-3.5 sm:pt-4 border-t border-[#DFE6EB] flex flex-wrap items-center justify-between gap-3`}
+                    >
+                      <div className="flex items-center gap-2 text-xs text-[#536477]">
+                        {programme.impactStatus?.verifiedMetricValue &&
+                        programme.impactStatus?.verifiedMetricLabel ? (
+                          <>
+                            <span className="font-bold text-sm text-[#102C4B] tabular-nums">
+                              {programme.impactStatus.verifiedMetricValue}
+                            </span>
+                            <span>·</span>
+                            <span className="font-medium text-[#536477]">
+                              {programme.impactStatus.verifiedMetricLabel}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="font-medium text-[#536477]">
+                            Programme {num} of {totalNum} · {programme.category}
+                          </span>
+                        )}
+                      </div>
+
+                      <Link
+                        to={`/programmes/${programme.slug}`}
+                        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#102C4B] hover:bg-[#087F83] text-white text-xs font-semibold transition-colors whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83]"
+                      >
+                        <span>Explore Programme</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </StackingCardItem>
+          );
+        })}
+      </StackingCards>
+    </div>
   );
 };
 
