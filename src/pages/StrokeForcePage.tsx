@@ -11,7 +11,6 @@ import {
   HeartPulse,
   Handshake,
   PhoneCall,
-  Download,
 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { SeoHead, Breadcrumbs, SectionHeading } from '../components/common/UIElements';
@@ -128,16 +127,6 @@ export const StrokeForcePage: React.FC = () => {
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
-                <a
-                  href="https://github.com/yaseen-ahamed/ag-foundation/releases/download/strokeforce/strokeforce.apk"
-                  download="strokeforce.apk"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-[#102C4B] hover:bg-[#07565B] text-white text-sm font-semibold transition-colors shadow-2xs whitespace-nowrap"
-                  title="Download Stroke 360 Android App (APK)"
-                  aria-label="Download Stroke 360 APK for Android"
-                >
-                  <Download className="w-4 h-4 text-[#5EEAD4]" />
-                  <span>Download Stroke 360</span>
-                </a>
                 <Link
                   to="/volunteer"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-[#087F83] hover:bg-[#07565B] text-white text-sm font-semibold transition-colors whitespace-nowrap"

@@ -28,7 +28,7 @@ interface SiteContextValue {
   importSiteJson: (rawJson: string) => { success: boolean; error?: string };
 }
 
-const CONFIG_STORAGE_KEY = 'ayurgreen_foundation_site_config_v12';
+const CONFIG_STORAGE_KEY = 'ayurgreen_foundation_site_config_v13';
 const INQUIRIES_STORAGE_KEY = 'ayurgreen_foundation_inquiries_v1';
 
 const SiteContext = createContext<SiteContextValue | undefined>(undefined);
@@ -37,7 +37,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [config, setConfig] = useState<SiteConfiguration>(() => {
     try {
       // Clear legacy caches so code updates reflect immediately
-      for (let i = 1; i <= 11; i++) {
+      for (let i = 1; i <= 12; i++) {
         localStorage.removeItem(`ayurgreen_foundation_site_config_v${i}`);
       }
       const saved = localStorage.getItem(CONFIG_STORAGE_KEY);

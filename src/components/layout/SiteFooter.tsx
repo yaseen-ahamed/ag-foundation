@@ -25,7 +25,7 @@ export const SiteFooter: React.FC = () => {
               <img
                 src={config.organization.logos.foundation}
                 alt="Ayurgreen Foundation"
-                className="h-14 sm:h-16 w-auto object-contain max-w-[240px] sm:max-w-[280px]"
+                className="h-16 sm:h-20 lg:h-[84px] w-auto object-contain max-w-[260px] sm:max-w-[310px] lg:max-w-[340px]"
               />
             </Link>
             <p className="text-sm font-semibold text-[#102C4B]">

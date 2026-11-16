@@ -44,9 +44,6 @@ export const HomePage: React.FC = () => {
             {/* Left Column: Top Hairline Rule, Oversized Light Display Headline, Supporting Copy & Two CTAs */}
             <div className="lg:col-span-6 pt-12 pb-6 sm:pt-16 sm:pb-8 lg:py-20 lg:pr-10">
               <div className="w-20 h-[2px] bg-[#2CE5C3] mb-5" aria-hidden="true" />
-              <p className="font-nav text-xs font-semibold uppercase tracking-[0.08em] text-[#7CE8D8] mb-3">
-                Established {config.organization.establishedDate} · {config.organization.legalStatus}
-              </p>
 
               <h1 className="text-[clamp(2.5rem,4.5vw,3.75rem)] font-editorial font-light leading-[1.08] tracking-[-0.025em] text-white mb-6">
                 Healthcare &amp;{' '}

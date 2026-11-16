@@ -81,7 +81,7 @@ export const SiteHeader: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#DFE6EB]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4 lg:gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-22 flex items-center justify-between gap-4 lg:gap-8">
         {/* Zone 1: Official Ayurgreen Foundation Logo */}
         <Link
           to="/"
@@ -91,7 +91,7 @@ export const SiteHeader: React.FC = () => {
           <img
             src={config.organization.logos.foundation}
             alt="Ayurgreen Foundation"
-            className="h-12 sm:h-14 lg:h-16 w-auto object-contain max-w-[200px] sm:max-w-[240px] lg:max-w-[280px]"
+            className="h-14 sm:h-16 lg:h-[74px] w-auto object-contain max-w-[230px] sm:max-w-[270px] lg:max-w-[320px]"
           />
         </Link>
 

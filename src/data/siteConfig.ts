@@ -350,7 +350,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
     addressLine1: 'Edappal, Kavilpadi',
     addressLine2: 'Malappuram District',
     stateCountry: 'Kerala, India',
-    email: 'foundationayurgreen@gmail.com',
+    email: 'info@ayurgreenfoundation.org',
     emailVerified: true,
     phone: '+91 89 430 555 18',
     phoneVerified: true,
@@ -966,7 +966,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
           'Are you interested in learning more about Rehab Village or joining our community as a partner, or volunteer? Get in touch with us today:',
         name: 'Ayurgreen Rehab Village',
         phone: '+91 89 430 555 18',
-        email: 'rehabvillage@ayurgreenhospitals.com',
+        email: 'info@ayurgreenfoundation.org',
       },
       intendedAudience: [
         'Patients: The primary beneficiaries who receive top-quality care and rehabilitation services.',
