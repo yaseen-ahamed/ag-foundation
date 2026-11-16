@@ -14,7 +14,7 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ProgrammesOverviewPage, ProgrammeDetailPage } from './pages/ProgrammesPages';
 import { StrokeForcePage } from './pages/StrokeForcePage';
-import { ImpactPage, GalleryPage, NewsEventsPage } from './pages/ArchivePages';
+import { ImpactPage, GalleryPage, NewsEventsPage, NewsEventDetailPage } from './pages/ArchivePages';
 import {
   GetInvolvedPage,
   DonatePage,
@@ -54,6 +54,7 @@ export default function App() {
               <Route path="/impact" element={<ImpactPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/news-events" element={<NewsEventsPage />} />
+              <Route path="/news-events/:slug" element={<NewsEventDetailPage />} />
               <Route path="/get-involved" element={<GetInvolvedPage />} />
               <Route path="/donate" element={<DonatePage />} />
               <Route path="/volunteer" element={<VolunteerPage />} />

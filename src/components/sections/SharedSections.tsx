@@ -839,7 +839,11 @@ export const ActivitiesStackSection: React.FC<{
                 {/* Main Split Card Body: Image + Content */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
                   {/* Visual Column (Top on Mobile, Right 5 Columns on Desktop) */}
-                  <div className="lg:col-span-5 lg:order-2 relative h-40 sm:h-52 lg:h-auto lg:min-h-[340px] w-full bg-[#EFF7FA] overflow-hidden border-b lg:border-b-0 lg:border-l border-[#DFE6EB]">
+                  <Link
+                    to={`/news-events/${item.slug || item.id}`}
+                    aria-label={`View ${item.title} report and photo gallery`}
+                    className="lg:col-span-5 lg:order-2 relative h-40 sm:h-52 lg:h-auto lg:min-h-[340px] w-full bg-[#EFF7FA] overflow-hidden border-b lg:border-b-0 lg:border-l border-[#DFE6EB] block"
+                  >
                     {item.imageUrl || item.cropRegion ? (
                       <ReferencePhotoCrop
                         crop={item.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
@@ -859,7 +863,7 @@ export const ActivitiesStackSection: React.FC<{
                       className="lg:hidden absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#102C4B]/35 to-transparent pointer-events-none"
                       aria-hidden="true"
                     />
-                  </div>
+                  </Link>
 
                   {/* Narrative Content Column (Bottom on Mobile, Left 7 Columns on Desktop) */}
                   <div className="lg:col-span-7 lg:order-1 p-5 sm:p-7 lg:p-9 flex flex-col justify-between">
@@ -896,7 +900,7 @@ export const ActivitiesStackSection: React.FC<{
                       {/* Activity Title */}
                       <h3 className="text-xl sm:text-2xl lg:text-[1.85rem] font-editorial font-normal text-[#102C4B] group-hover:text-[#087F83] transition-colors leading-[1.15] tracking-[-0.015em] mb-2.5">
                         <Link
-                          to="/news-events"
+                          to={`/news-events/${item.slug || item.id}`}
                           className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83] rounded"
                         >
                           {item.title}
@@ -936,10 +940,10 @@ export const ActivitiesStackSection: React.FC<{
                       </div>
 
                       <Link
-                        to="/news-events"
+                        to={`/news-events/${item.slug || item.id}`}
                         className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#102C4B] hover:bg-[#087F83] text-white text-xs font-semibold transition-colors whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83]"
                       >
-                        <span>Read Update</span>
+                        <span>Read Full Report</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>

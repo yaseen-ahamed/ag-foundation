@@ -120,7 +120,14 @@ export const SearchModal: React.FC = () => {
       route: inst.internalRoute || '/about#institutions',
     }));
 
-    return [...staticPages, ...progItems, ...instItems];
+    const activityItems: SearchResultItem[] = config.newsEvents.map((act) => ({
+      title: act.title,
+      category: `Activity · ${act.category}`,
+      description: act.summary,
+      route: `/news-events/${act.slug || act.id}`,
+    }));
+
+    return [...staticPages, ...progItems, ...activityItems, ...instItems];
   }, [config]);
 
   const filteredResults = useMemo(() => {

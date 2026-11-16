@@ -190,8 +190,16 @@ export interface ImpactStoryItem {
   cropRegion?: { x: number; y: number; w: number; h: number };
 }
 
+export interface EventGalleryImage {
+  url: string;
+  alt: string;
+  caption?: string;
+  objectPosition?: string;
+}
+
 export interface NewsEventItem {
   id: string;
+  slug?: string;
   title: string;
   category:
     | 'Programme Reports'
@@ -208,6 +216,17 @@ export interface NewsEventItem {
   isPlaceholder: boolean;
   cropRegion?: { x: number; y: number; w: number; h: number };
   imageUrl?: string;
+  heroSubtitle?: string;
+  partnerOrOrganiser?: string;
+  impactMetricValue?: string;
+  impactMetricLabel?: string;
+  highlights?: string[];
+  activities?: {
+    title: string;
+    description: string;
+  }[];
+  stakeholders?: string[];
+  galleryImages?: EventGalleryImage[];
 }
 
 export interface GalleryItem {
@@ -1807,121 +1826,677 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
   newsEvents: [
     {
       id: 'news-koode-medical-camp',
+      slug: 'koode-medical-camp',
       title: 'Koode Medical Camp in Collaboration with ILA Foundation',
       category: 'Medical Camps',
       dateLabel: '1 November 2025',
       locationLabel: 'Ayurgreen Hospital, Edappal',
+      heroSubtitle:
+        'Bridging Community Healthcare Access, Caregiver Guidance & Long-Term Charity Care Support',
+      partnerOrOrganiser: 'Ayurgreen Foundation in collaboration with ILA Foundation',
+      impactMetricValue: '54',
+      impactMetricLabel: 'Patients Consulted · 3 Enrolled in Charity Care',
       summary:
         '54 patients participated in medical consultations, caregiver guidance, and health education; 3 patients were subsequently enrolled in the Charity Care Programme following assessment.',
       content: [
         'The Koode Medical Camp was organised on 1 November 2025 at Ayurgreen Hospital, Edappal by Ayurgreen Foundation in collaboration with ILA Foundation to improve access to healthcare for beneficiaries associated with ILA Foundation.',
-        'The initiative combined medical consultations with caregiver guidance, health education, and supportive engagement activities. Participants received individual medical guidance and information about home-based care, government welfare schemes, and available support services.',
-        'Impact at a glance: 54 patients participated in the camp, and 3 patients were subsequently enrolled in Ayurgreen Foundation’s Charity Care Programme following socio-economic assessment.',
+        'The initiative combined specialist medical consultations with caregiver guidance, preventive health education, and supportive community engagement activities. Participants and their families received individual medical guidance alongside practical information about home-based care, government welfare schemes, and rehabilitation support services.',
+        'Impact at a glance: 54 patients participated in the camp, and 3 financially vulnerable patients were subsequently enrolled in Ayurgreen Foundation’s Charity Care Programme following structured socio-economic assessment.',
+      ],
+      highlights: [
+        '54 patients and family members received dedicated medical consultations and rehabilitation guidance.',
+        '3 deserving patients identified during the camp were enrolled directly into the Charity Care Programme.',
+        'Dedicated sessions on home-based caregiver management, assistive mobility, and social welfare schemes.',
+        'Joint community coordination between Ayurgreen Hospital clinical teams, student volunteers, and ILA Foundation.',
+      ],
+      activities: [
+        {
+          title: 'Specialist Medical & Rehabilitation Consultations',
+          description:
+            'Individual clinical evaluation for patients experiencing neurological, orthopaedic, and chronic health conditions.',
+        },
+        {
+          title: 'Caregiver Guidance & Home-Care Literacy',
+          description:
+            'Equipping family members with safe patient-handling techniques, daily therapy routines, and emotional support strategies.',
+        },
+        {
+          title: 'Welfare Scheme & Support Navigation',
+          description:
+            'Providing clear information on government health schemes, disability support pathways, and institutional rehabilitation options.',
+        },
+        {
+          title: 'Charity Care Socio-Economic Screening',
+          description:
+            'Identifying financially vulnerable patients requiring ongoing treatment and enrolling eligible cases into Charity Care.',
+        },
+      ],
+      stakeholders: [
+        'Beneficiaries and families associated with ILA Foundation',
+        'Patients requiring neurological and orthopaedic rehabilitation support',
+        'Family caregivers seeking home-based care guidance',
+        'Ayurgreen Hospital doctors, therapists, and Foundation volunteers',
       ],
       relatedRoute: '/programmes/medical-camps',
       isPlaceholder: false,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
       imageUrl: '/assets/aistudio/medical_camp_3776972f.webp',
+      galleryImages: [
+        {
+          url: '/assets/aistudio/medical_camp_3776972f.webp',
+          alt: 'Speaker addressing patients and families at the Koode Medical Camp at Ayurgreen Campus, Edappal',
+          caption: 'Interactive health education and caregiver address during the Koode Medical Camp at Ayurgreen Campus.',
+          objectPosition: 'left center',
+        },
+        {
+          url: '/assets/aistudio/charity_care_6e336a13.webp',
+          alt: 'Clinical care and diagnostic assistance supporting patients enrolled in the Charity Care Programme from the Koode Medical Camp',
+          caption: 'Clinical screening and treatment support linking camp beneficiaries to the Charity Care Programme.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/medical_camp_3776972f.webp',
+          alt: 'Wide view of 54 patients and caregivers gathered under the Koode Medical Camp pavilion at Ayurgreen Hospital, Edappal',
+          caption: '54 beneficiaries and caregivers participating in the Koode Medical Camp in collaboration with ILA Foundation.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/social_rehab_program_3edebc6f.png',
+          alt: 'Rehabilitation consultation and patient support guidance provided by Ayurgreen specialists',
+          caption: 'Individualised rehabilitation counselling and functional recovery guidance for patients and families.',
+          objectPosition: '82% center',
+        },
+        {
+          url: '/assets/aistudio/volunteer_activit_801ee57d.webp',
+          alt: 'Ayurgreen Foundation student volunteers assisting patients and coordinating registration at the medical camp',
+          caption: 'Student volunteers and coordinators facilitating patient assistance and camp registration.',
+          objectPosition: 'center 35%',
+        },
+        {
+          url: '/assets/aistudio/rehab_village_vehicle_4fb8d250.webp',
+          alt: 'Accessible patient transport vehicle supporting mobility-challenged participants at Ayurgreen Campus',
+          caption: 'Accessible campus transport supporting elderly and mobility-challenged camp participants.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/medical_camp_3776972f.webp',
+          alt: 'Community members and caregivers seated during the health awareness session at Koode Medical Camp, Edappal',
+          caption: 'Community members engaging in preventive healthcare and home-based care discussions.',
+          objectPosition: 'right center',
+        },
+      ],
     },
     {
       id: 'news-calicut-stroke-camp',
+      slug: 'calicut-stroke-camp',
       title: 'Calicut Stroke Awareness & Rehabilitation Camp (District-Level)',
       category: 'Medical Camps',
       dateLabel: 'Community Outreach Report',
       locationLabel: 'Thondayad, Kozhikode',
+      heroSubtitle:
+        'District-Level Stroke Awareness, Multidisciplinary Rehabilitation & Survivor Testimony',
+      partnerOrOrganiser: 'Ayurgreen Foundation in association with Rotary Club Calicut Cyber City',
+      impactMetricValue: '40+',
+      impactMetricLabel: 'Participants Benefited in Kozhikode',
       summary:
         'Organised in association with Rotary Club Calicut Cyber City, providing over 40 participants with guidance on stroke rehabilitation, physiotherapy, occupational therapy, and robotic rehabilitation.',
       content: [
-        'Ayurgreen Foundation, in association with Rotary Club Calicut Cyber City, organised a free district-level medical camp at Thondayad, Kozhikode focused on stroke awareness, rehabilitation, and recovery support.',
-        'The programme provided patients and caregivers with guidance on stroke rehabilitation, physiotherapy, occupational therapy, robotic rehabilitation, nutrition, and supportive care approaches. A stroke survivor also shared his recovery journey, highlighting the importance of continuous rehabilitation and support.',
-        'Impact: More than 40 participants benefited from the programme.',
+        'Ayurgreen Foundation, in association with Rotary Club Calicut Cyber City, organised a free district-level medical camp at Thondayad, Kozhikode focused on stroke awareness, multidisciplinary rehabilitation, and long-term recovery support.',
+        'The programme provided patients, stroke survivors, and caregivers with expert guidance on stroke rehabilitation, physiotherapy, occupational therapy, robotic rehabilitation, clinical nutrition, and supportive care approaches. A stroke survivor also shared his personal recovery journey, inspiring families and highlighting the transformative impact of continuous, structured rehabilitation.',
+        'Impact at a glance: More than 40 participants and families across Kozhikode benefited from the district-level programme.',
+      ],
+      highlights: [
+        'Over 40 participants, stroke survivors, and family caregivers reached across Kozhikode district.',
+        'Organised in collaboration with Rotary Club Calicut Cyber City at Thondayad, Kozhikode.',
+        'Expert sessions covering physiotherapy, occupational therapy, robotic rehabilitation, and nutrition.',
+        'Firsthand recovery testimony shared by a stroke survivor to motivate patients and families.',
+      ],
+      activities: [
+        {
+          title: 'Stroke Prevention & Early Recognition Session',
+          description:
+            'Educating participants and families on stroke risk factors, warning signs, and the importance of timely medical intervention.',
+        },
+        {
+          title: 'Physiotherapy, Occupational & Robotic Rehab Guidance',
+          description:
+            'Demonstrating modern neuro-rehabilitation pathways including robotic therapy and functional independence training.',
+        },
+        {
+          title: 'Clinical Nutrition & Supportive Care',
+          description:
+            'Dietary counselling and secondary stroke prevention strategies tailored for recovering patients.',
+        },
+        {
+          title: 'Stroke Survivor Experience Sharing',
+          description:
+            'An inspiring session where a stroke survivor shared practical insights on resilience, therapy adherence, and family support.',
+        },
+      ],
+      stakeholders: [
+        'Stroke survivors and neurological rehabilitation patients in Kozhikode',
+        'Family members and primary home caregivers',
+        'Members of Rotary Club Calicut Cyber City',
+        'Ayurgreen neuro-rehabilitation specialists, physiotherapists, and occupational therapists',
       ],
       relatedRoute: '/programmes/medical-camps',
       isPlaceholder: false,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
       imageUrl: '/assets/aistudio/stroke_camp_-_calicut_3972d47b.png',
+      galleryImages: [
+        // 1. Left Top (Portrait/Square)
+        {
+          url: '/assets/aistudio/Screenshot_2026-05-07_141015_be0a4072.png',
+          alt: 'Ayurgreen neuro-rehabilitation specialist conducting a one-on-one functional assessment with a stroke survivor at the Calicut medical camp',
+          caption: 'One-on-one physiotherapy and neuro-rehabilitation assessment for stroke survivors.',
+          objectPosition: 'center 25%',
+        },
+        // 2. Left Bottom (Portrait/Square)
+        {
+          url: '/assets/aistudio/Screenshot_2026-05-08_151131_5ff92d80.png',
+          alt: 'Ayurgreen Foundation student volunteers registering a participant at the Calicut Stroke Awareness and Rehabilitation Camp intake desk',
+          caption: 'Student volunteers welcoming and registering participants at the camp intake desk.',
+          objectPosition: 'center 25%',
+        },
+        // 3. Center Top (Wide Landscape)
+        {
+          url: '/assets/aistudio/Screenshot_2026-05-07_140630_5933b37e.png',
+          alt: 'Specialist medical consultation in front of the Together Against Stroke Free Stroke Medical Camp 2026 banner at Thondayad, Kozhikode with Rotary Calicut Cybercity',
+          caption: 'Medical consultation under the "Together Against Stroke — Free Stroke Medical Camp 2026" banner in Thondayad, Kozhikode.',
+          objectPosition: 'center 35%',
+        },
+        // 4. Center Middle (Wide Landscape)
+        {
+          url: '/assets/aistudio/Screenshot_2026-05-08_151305_4c1c5eb8.png',
+          alt: 'Ayurgreen nursing team at the Vitals Checking station measuring blood pressure for a wheelchair-assisted stroke survivor in Kozhikode',
+          caption: 'Nursing team checking blood pressure and clinical vitals for a stroke survivor at the Vitals Checking desk.',
+          objectPosition: 'center 28%',
+        },
+        // 5. Center Bottom (Wide Landscape)
+        {
+          url: '/assets/aistudio/Screenshot_2026-05-07_140707_5f7161ef.png',
+          alt: 'Occupational therapist guiding a patient through hand-grip dynamometer and fine-motor rehabilitation exercises at the Calicut Stroke Camp',
+          caption: 'Occupational therapy station (C2) evaluating hand-grip strength and upper-limb motor recovery.',
+          objectPosition: 'center 30%',
+        },
+        // 6. Right Top (Portrait/Square)
+        {
+          url: '/assets/aistudio/Screenshot_2026-05-07_141207_35c53cde.png',
+          alt: 'Clinical dietitian counselling a stroke patient and family caregiver on nutrition and secondary stroke prevention at the Calicut camp',
+          caption: 'Clinical nutrition and dietetics consultation (E1) for stroke recovery and secondary prevention.',
+          objectPosition: 'center 35%',
+        },
+        // 7. Right Bottom (Portrait/Square)
+        {
+          url: '/assets/aistudio/Screenshot_2026-05-08_151027_cfd7ab6d.png',
+          alt: 'Ayurgreen clinical coordinator briefing student volunteers beside the Ortho Neuro Rehabilitation standee at the Calicut Stroke Camp',
+          caption: 'Clinical team and student volunteers coordinating patient pathways beside the Ortho-Neuro Rehabilitation banner.',
+          objectPosition: 'center 25%',
+        },
+      ],
     },
     {
       id: 'news-nilambur-stroke-camp',
+      slug: 'nilambur-stroke-camp',
       title: 'Nilambur Stroke Awareness Medical Camp',
       category: 'Medical Camps',
       dateLabel: 'My City, Healthy City Initiative',
       locationLabel: 'Nilambur, Malappuram',
+      heroSubtitle:
+        'Promoting Early Stroke Recognition, Preventive Health Literacy & Timely Intervention',
+      partnerOrOrganiser: 'Ayurgreen Foundation in collaboration with Nilambur Rotary Club',
+      impactMetricValue: '30+',
+      impactMetricLabel: 'Participants Reached in Nilambur',
       summary:
         'Conducted in collaboration with Nilambur Rotary Club, reaching 30 participants with stroke prevention education, warning sign recognition, and rehabilitation guidance.',
       content: [
-        'Ayurgreen Foundation, in collaboration with Nilambur Rotary Club under the My City, Healthy City initiative, conducted a stroke awareness medical camp in Nilambur, Malappuram to promote awareness of stroke prevention, early recognition of warning signs, timely medical intervention, and rehabilitation.',
-        'The programme brought together medical and rehabilitation professionals to share essential health information and highlight the importance of recognising stroke symptoms and seeking immediate medical attention.',
-        'Impact at a glance: 30 participants reached through stroke awareness and health education.',
+        'Ayurgreen Foundation, in collaboration with Nilambur Rotary Club under the My City, Healthy City initiative, conducted a dedicated stroke awareness medical camp in Nilambur, Malappuram to promote community-wide awareness of stroke prevention, early recognition of warning signs, timely medical intervention, and structured rehabilitation.',
+        'The programme brought together medical doctors, physiotherapists, and rehabilitation professionals to share essential health information and highlight the life-saving importance of recognising stroke symptoms early using the BE FAST framework and seeking immediate hospital care.',
+        'Impact at a glance: 30 participants and families in Nilambur were reached directly through stroke awareness and preventive health education.',
+      ],
+      highlights: [
+        '30 community members reached through interactive stroke education and health consultations.',
+        'Conducted under the "My City, Healthy City" initiative in partnership with Nilambur Rotary Club.',
+        'Focused training on the BE FAST stroke warning sign recognition method for rapid emergency response.',
+        'Guidance on post-stroke neuro-rehabilitation and preventive lifestyle management.',
+      ],
+      activities: [
+        {
+          title: 'BE FAST Warning Sign Education',
+          description:
+            'Teaching community members to identify Balance loss, Eyesight changes, Facial drooping, Arm weakness, and Speech difficulty.',
+        },
+        {
+          title: 'Preventive Health & Risk Factor Screening',
+          description:
+            'Raising awareness on managing hypertension, diabetes, and lifestyle factors to prevent stroke occurrence.',
+        },
+        {
+          title: 'Post-Stroke Rehabilitation Pathways',
+          description:
+            'Informing families about multidisciplinary physiotherapy, occupational therapy, and social rehabilitation support.',
+        },
+        {
+          title: 'Rotary Community Collaboration',
+          description:
+            'Partnering with local civic leaders from Nilambur Rotary Club to extend health literacy into neighbourhood networks.',
+        },
+      ],
+      stakeholders: [
+        'Residents and families of Nilambur, Malappuram District',
+        'Nilambur Rotary Club members and civic volunteers',
+        'Individuals at risk of stroke and their family caregivers',
+        'Ayurgreen Foundation medical and rehabilitation outreach team',
       ],
       relatedRoute: '/programmes/medical-camps',
       isPlaceholder: false,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
+      imageUrl: '/assets/aistudio/stroke_force_fc11680c.webp',
+      galleryImages: [
+        {
+          url: '/assets/aistudio/stroke_force_fc11680c.webp',
+          alt: 'Stroke Force community awareness initiative promoting early stroke recognition and caregiver support in Nilambur',
+          caption: 'Empowering families in Nilambur with early stroke recognition and compassionate recovery support.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/social_rehab_program_3edebc6f.png',
+          alt: 'Rehabilitation specialist guiding a patient during community stroke recovery outreach',
+          caption: 'One-on-one rehabilitation guidance and functional recovery counselling.',
+          objectPosition: '82% center',
+        },
+        {
+          url: '/assets/aistudio/medical_camp_3776972f.webp',
+          alt: 'Community health session and medical consultation organized by Ayurgreen Foundation in Malappuram',
+          caption: 'Community members participating in stroke prevention and health education discussions.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/stroke_camp_-_calicut_3972d47b.png',
+          alt: 'Stroke awareness presentation highlighting the BE FAST warning signs in collaboration with Rotary partners',
+          caption: 'Clinical presentation on recognising stroke warning signs and acting fast during the golden hour.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/volunteer_activit_801ee57d.webp',
+          alt: 'Ayurgreen Foundation outreach volunteers coordinating participant registration and health education materials',
+          caption: 'Foundation volunteers assisting participants with health awareness resources.',
+          objectPosition: 'center 35%',
+        },
+        {
+          url: '/assets/aistudio/charity_care_6e336a13.webp',
+          alt: 'Clinical screening and blood pressure check during Ayurgreen Foundation outreach',
+          caption: 'Preventive clinical screening and patient support during community medical outreach.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/rehab_village_vehicle_4fb8d250.webp',
+          alt: 'Ayurgreen Rehab Village accessible transport supporting community rehabilitation outreach across Malappuram',
+          caption: 'Dedicated outreach logistics connecting Malappuram communities with Ayurgreen rehabilitation care.',
+          objectPosition: 'center center',
+        },
+      ],
     },
     {
       id: 'news-run-fast-marathon',
+      slug: 'run-fast-marathon',
       title: 'RUN FAST Mini Marathon — Stroke Force Public Awareness Initiative',
       category: 'Awareness Campaigns',
       dateLabel: '29 October 2025',
       locationLabel: 'Edappal, Malappuram',
+      heroSubtitle:
+        'Together Against Stroke: Recognising Stroke Signs, Acting Fast & Saving Lives Through Public Action',
+      partnerOrOrganiser:
+        'Ayurgreen Foundation · Stroke Force · Niramaya Rehab Speciality Hospital · Getwell Hospitals · ACLAS',
+      impactMetricValue: '250+',
+      impactMetricLabel: 'Runners, Volunteers & Healthcare Advocates United',
       summary:
-        'Public mini marathon organised to promote active living and spread the life-saving message of recognising stroke warning signs and acting fast.',
+        'Public mini marathon organised on World Stroke Day (29 October 2025) in Edappal, Malappuram to promote active living and spread the life-saving message of recognising stroke warning signs and acting fast.',
       content: [
-        'The RUN FAST Mini Marathon is a signature public engagement activity under Ayurgreen Foundation’s flagship Stroke Force initiative, uniting citizens, youth, and healthcare advocates to raise community-wide awareness of stroke prevention and rapid response.',
-        'Through public participation, the event reinforces the core Stroke Force message: Recognising Stroke Signs. Acting Fast. Saving Lives.',
+        'The RUN FAST Stroke Awareness Marathon 2025 was organised on 29 October 2025 in Edappal, Malappuram as a flagship public engagement event under Ayurgreen Foundation’s Stroke Force initiative. Held under the banner "Together Against Stroke", the marathon united citizens, senior runners, youth athletes, police officials, medical professionals, and student volunteers to champion stroke prevention and rapid emergency response.',
+        'Inaugurated at the Ayurgreen Campus in the presence of law enforcement officials and institutional leadership from Ayurgreen Hospitals, Niramaya Rehab Speciality Hospital, Getwell Hospitals, Green Health, and Ayurgreen College of Life & Sciences (ACLAS), the marathon transformed the streets of Edappal into a vibrant movement for community health literacy.',
+        'Along the route, dedicated medical support stations, doctors, and student volunteers ensured runner safety while engaging onlookers with the core Stroke Force message: Recognising Stroke Signs (BE FAST). Acting Fast. Saving Lives.',
+      ],
+      highlights: [
+        'Organised on 29 October 2025 in Edappal, Malappuram under the theme "Together Against Stroke".',
+        'Flagged off in the presence of Police Sub-Inspector and Ayurgreen Group leadership at Ayurgreen Campus.',
+        'Wide participation spanning youth athletes, senior citizens, healthcare professionals, and ACLAS student volunteers.',
+        'Full on-route medical support, hydration stations, bib registration desks, and post-marathon certificate distribution.',
+      ],
+      activities: [
+        {
+          title: 'Participant Registration & Bib Distribution',
+          description:
+            'Structured morning registration desks at Ayurgreen Campus equipping every runner with official RUN FAST marathon bibs and stroke awareness kits.',
+        },
+        {
+          title: 'Official Inauguration & Flag-Off Ceremony',
+          description:
+            'Dignitaries, police officials, and hospital leadership addressed the runners on stroke prevention before flagging off the marathon.',
+        },
+        {
+          title: 'Public Awareness Run Across Edappal',
+          description:
+            'Runners of all age groups carried the "Run FAST — Together Against Stroke" message across Edappal with medical and volunteer teams stationed along the route.',
+        },
+        {
+          title: 'Post-Marathon Recognition & Certificate Ceremony',
+          description:
+            'Celebrating participants, senior runners, and student volunteers with official RUN FAST certificates and community fellowship.',
+        },
+      ],
+      stakeholders: [
+        'Public marathon runners, youth athletes, and senior citizen participants across Malappuram',
+        'Local law enforcement officials and civic representatives in Edappal',
+        'Doctors, physiotherapists, and staff of Niramaya Rehab Speciality Hospital & Getwell Hospitals',
+        'Student volunteers and faculty of Ayurgreen College of Life & Sciences (ACLAS)',
       ],
       relatedRoute: '/stroke-force',
       isPlaceholder: false,
       cropRegion: { x: 0, y: 1280, w: 400, h: 145 },
-      imageUrl: '/assets/aistudio/runfast_-__minimarathon_9f7439db.png',
+      imageUrl: '/assets/aistudio/WhatsApp_Image_2026-05-31_at_8.02.03_PM_356e57f4.jpeg',
+      galleryImages: [
+        // 1. Left Top (Portrait/Square)
+        {
+          url: '/assets/aistudio/ChatGPT_Image_Jun_1__2026__11_05_29_AM_1dd09152.png',
+          alt: 'Four senior marathon runners proudly displaying RUN FAST bibs 141, 169, 135, and 168 at Ayurgreen Campus, Edappal',
+          caption: 'Senior marathon athletes wearing bibs 141, 169, 135, and 168 leading by example for active, stroke-free living.',
+          objectPosition: 'center 20%',
+        },
+        // 2. Left Bottom (Portrait/Square)
+        {
+          url: '/assets/aistudio/ChatGPT_Image_Jun_1__2026__11_11_00_AM_05c335b7.png',
+          alt: 'Two marathon runners wearing bibs 82 and 161 running side by side during the RUN FAST Stroke Awareness Marathon in Edappal',
+          caption: 'Runners #82 and #161 demonstrating endurance and community spirit along the Edappal route.',
+          objectPosition: 'center 15%',
+        },
+        // 3. Center Top (Wide Landscape)
+        {
+          url: '/assets/aistudio/WhatsApp_Image_2026-05-31_at_8.02.03_PM_356e57f4.jpeg',
+          alt: 'Dignitaries, police sub-inspector, healthcare leaders, and runners holding the RUN FAST Stroke Awareness Marathon 2025 banner on 29 October 2025 in Edappal',
+          caption: 'Official inauguration line-up with the "Run FAST — Stroke Awareness Marathon 2025 (29 October, Edappal, Malappuram)" banner.',
+          objectPosition: 'center 55%',
+        },
+        // 4. Center Middle (Wide Landscape)
+        {
+          url: '/assets/aistudio/WhatsApp_Image_2025-12-10_at_3.12.56_PM_facd180d.jpeg',
+          alt: 'Marathon runners with numbered bibs lined up at the starting line behind the Run FAST Together Against Stroke banner',
+          caption: 'Runners gathered at the starting line ready to champion the "Together Against Stroke" message.',
+          objectPosition: 'center 60%',
+        },
+        // 5. Center Bottom (Wide Landscape)
+        {
+          url: '/assets/aistudio/WhatsApp_Image_2025-12-10_at_3.15.38_PM_495d7371.jpeg',
+          alt: 'Large group photograph of student volunteers, certificate holders, and Ayurgreen staff celebrating after the RUN FAST Stroke Awareness Marathon',
+          caption: 'Student volunteers, runners with certificates, and hospital staff celebrating a successful marathon at Ayurgreen Campus.',
+          objectPosition: 'center 45%',
+        },
+        // 6. Right Top (Portrait/Square)
+        {
+          url: '/assets/aistudio/ChatGPT_Image_Jun_1__2026__11_04_27_AM_c8a34d12.png',
+          alt: 'Runner wearing bib 222 striding along the Edappal highway during the RUN FAST Stroke Awareness Marathon 2025',
+          caption: 'Participant #222 in action along the Edappal marathon route spreading public stroke awareness.',
+          objectPosition: 'center 20%',
+        },
+        // 7. Right Bottom (Portrait/Square)
+        {
+          url: '/assets/aistudio/ChatGPT_Image_Jun_1__2026__11_09_43_AM_e8fcf908.png',
+          alt: 'Smiling marathon participants and healthcare team members wearing RUN FAST bibs 190, 173, 136, and 126',
+          caption: 'Healthcare staff and community runners wearing bibs 190, 173, 136, and 126 at Ayurgreen Campus.',
+          objectPosition: 'center 20%',
+        },
+      ],
     },
     {
       id: 'news-national-reading-day',
+      slug: 'national-reading-day',
       title: 'National Reading Day — Educational & Community Engagement',
       category: 'Foundation Events',
       dateLabel: '19 June · Annual Observance',
       locationLabel: 'Ayurgreen Campus, Edappal',
+      heroSubtitle:
+        'Fostering Lifelong Learning, Health Literacy & Intellectual Curiosity Among Future Healthcare Leaders',
+      partnerOrOrganiser: 'Ayurgreen Foundation & Ayurgreen College of Life & Sciences (ACLAS)',
+      impactMetricValue: '19 June',
+      impactMetricLabel: 'Annual Campus & Student Literacy Observance',
       summary:
         'Promoting knowledge sharing, literacy, and reflective learning among students, volunteers, and the healthcare community.',
       content: [
-        'As part of its commitment to education and youth enrichment, Ayurgreen Foundation observes National Reading Day with students, faculty, and volunteers across the Ayurgreen ecosystem.',
-        'The observance encourages lifelong learning, health literacy, and intellectual curiosity alongside compassionate community service.',
+        'As part of its deep commitment to educational empowerment and youth enrichment, Ayurgreen Foundation observes National Reading Day on 19 June alongside students, faculty, and volunteers across Ayurgreen College of Life & Sciences (ACLAS) and the wider Ayurgreen ecosystem.',
+        'The observance features interactive faculty addresses, reflective reading sessions, and discussions on how continuous learning and health literacy strengthen compassionate clinical and community service.',
+        'By connecting academic curiosity with social responsibility, the initiative complements the Foundation’s Education With Purpose (EWP) Scholarship Programme and Volunteer Internship pathways.',
+      ],
+      highlights: [
+        'Observed annually on 19 June at Ayurgreen Campus, Edappal with students and healthcare faculty.',
+        'Interactive reading, note-taking, and knowledge-sharing sessions led by academic mentors.',
+        'Reinforces health literacy and empathetic communication skills among future allied health professionals.',
+        'Integrated with Ayurgreen Foundation’s youth development and educational scholarship initiatives.',
+      ],
+      activities: [
+        {
+          title: 'Faculty Address on Reading & Healthcare Empathy',
+          description:
+            'Educators guide students on how reading broadens clinical perspective, critical thinking, and patient empathy.',
+        },
+        {
+          title: 'Student Reflective Reading & Discussion Circle',
+          description:
+            'Students engage in structured reading exercises, reflective writing, and peer discussions on science and society.',
+        },
+        {
+          title: 'Health Literacy & Community Outreach Alignment',
+          description:
+            'Preparing students to translate medical knowledge into accessible plain-language health education for communities.',
+        },
+        {
+          title: 'Promotion of Academic Excellence (EWP)',
+          description:
+            'Highlighting educational opportunities and scholarship support available through Education With Purpose (EWP).',
+        },
+      ],
+      stakeholders: [
+        'Students of Ayurgreen College of Life & Sciences (ACLAS)',
+        'Academic faculty, mentors, and healthcare educators',
+        'Student interns of the Volunteer Internship Programme',
+        'Recipients and applicants of the EWP Scholarship Programme',
       ],
       relatedRoute: '/programmes/ewp-scholarship',
       isPlaceholder: false,
       cropRegion: { x: 725, y: 706, w: 115, h: 74 },
       imageUrl: '/assets/aistudio/national_reding_day_dc3855d2.png',
+      galleryImages: [
+        {
+          url: '/assets/aistudio/national_reding_day_dc3855d2.png',
+          alt: 'Faculty member addressing students during the National Reading Day June 19 session at Ayurgreen Campus',
+          caption: 'Faculty mentor addressing students during the National Reading Day (June 19) observance.',
+          objectPosition: 'left center',
+        },
+        {
+          url: '/assets/aistudio/ewp_program.JPG_dbea8171.jpeg',
+          alt: 'Students and faculty gathered for educational empowerment under Ayurgreen Foundation',
+          caption: 'Empowering deserving students through academic mentorship and the EWP Scholarship Programme.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/national_reding_day_dc3855d2.png',
+          alt: 'Wide view of Ayurgreen College of Life Sciences students taking notes during the National Reading Day observance',
+          caption: 'Students of Ayurgreen College of Life & Sciences participating in reflective reading and note-taking.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/volunteer_activit_801ee57d.webp',
+          alt: 'Student volunteers engaging in collaborative learning and community service preparation',
+          caption: 'Bridging classroom learning with compassionate hospital and community volunteering.',
+          objectPosition: 'center 35%',
+        },
+        {
+          url: '/assets/aistudio/WhatsApp_Image_2025-12-10_at_3.15.36_PM_1ccdaa8d.jpeg',
+          alt: 'Students and youth volunteers of Ayurgreen Foundation gathered on campus',
+          caption: 'Vibrant student community participating in Foundation educational and outreach programmes.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/national_reding_day_dc3855d2.png',
+          alt: 'Students seated in the campus hall engaging with reading materials on National Reading Day',
+          caption: 'Cultivating lifelong reading habits and intellectual curiosity among healthcare students.',
+          objectPosition: 'right center',
+        },
+        {
+          url: '/assets/aistudio/ewp_program.JPG_dbea8171.jpeg',
+          alt: 'Academic leadership and students at Ayurgreen College of Life Sciences, Edappal',
+          caption: 'Supporting the next generation of healthcare professionals through structured academic initiatives.',
+          objectPosition: 'right center',
+        },
+      ],
     },
     {
       id: 'news-world-environment-day',
+      slug: 'world-environment-day',
       title: 'World Environment Day — Green Campus & Community Wellbeing Drive',
       category: 'Foundation Events',
       dateLabel: '5 June · Annual Observance',
       locationLabel: 'Ayurgreen Campus & Rehab Village, Edappal',
+      heroSubtitle:
+        'Nurturing a Sustainable, Nature-Integrated Healing Environment for Patients & Communities',
+      partnerOrOrganiser: 'Ayurgreen Foundation · Ayurgreen Campus & Rehab Village Team',
+      impactMetricValue: '5 June',
+      impactMetricLabel: 'Annual Green Campus Pledge & Sustainability Drive',
       summary:
         'Celebrating environmental stewardship and sustainable community living in alignment with Ayurgreen’s healing village ethos.',
       content: [
-        'Recognising the deep connection between environmental health and human wellbeing, Ayurgreen Foundation and student volunteers observe World Environment Day through tree planting and campus sustainability initiatives.',
-        'These efforts support the serene, nature-integrated healing environment of Ayurgreen Campus and Rehab Village.',
+        'Recognising the profound connection between environmental health, serene surroundings, and human recovery, Ayurgreen Foundation, healthcare staff, and student volunteers observe World Environment Day every year on 5 June across Ayurgreen Campus and Rehab Village in Edappal.',
+        'During the observance, doctors, nurses, therapists, and students come together for the collective Green Handprint Pledge banner, tree-planting drives, and campus sustainability initiatives.',
+        'These efforts directly support the tranquil, nature-integrated healing atmosphere of Ayurgreen Campus and Rehab Village—where clean air, greenery, and eco-friendly practices foster physical and emotional wellbeing for recovering patients.',
+      ],
+      highlights: [
+        'Collective World Environment Day handprint pledge banner signed by students, clinicians, and staff.',
+        'Promotes environmental stewardship across Ayurgreen Campus and the surrounding Rehab Village community.',
+        'Highlights the link between a serene, green environment and holistic ortho-neuro patient rehabilitation.',
+        'Supported by eco-friendly patient transport and sustainable campus practices.',
+      ],
+      activities: [
+        {
+          title: 'Green Handprint Pledge Campaign',
+          description:
+            'Students, clinicians, and staff place painted handprints on the World Environment Day pledge banner to affirm their commitment to sustainability.',
+        },
+        {
+          title: 'Campus Tree Planting & Greening Drive',
+          description:
+            'Planting native saplings and maintaining shaded green corridors around the hospital and rehabilitation campus.',
+        },
+        {
+          title: 'Eco-Friendly Rehab Village Mobility',
+          description:
+            'Promoting zero-emission electric patient transport vehicles connecting homestays and Ayurgreen Hospitals.',
+        },
+        {
+          title: 'Environmental Health & Wellbeing Awareness',
+          description:
+            'Sensitising youth volunteers and community members on waste reduction, clean water, and healthy living environments.',
+        },
+      ],
+      stakeholders: [
+        'Healthcare professionals, nurses, and therapists at Ayurgreen Campus',
+        'Students and volunteers of Ayurgreen College of Life & Sciences',
+        'Patients and caregivers residing in Ayurgreen Rehab Village accommodations',
+        'Local community partners in Edappal, Malappuram',
       ],
       relatedRoute: '/programmes/rehab-village',
       isPlaceholder: false,
       cropRegion: { x: 185, y: 706, w: 150, h: 74 },
       imageUrl: '/assets/aistudio/world_environment_day_fa6ae0f5.png',
+      galleryImages: [
+        {
+          url: '/assets/aistudio/world_environment_day_fa6ae0f5.png',
+          alt: 'Healthcare staff and students gathered around the World Environment Day handprint pledge banner at Ayurgreen Campus',
+          caption: 'Students and clinical staff participating in the World Environment Day handprint pledge banner at Ayurgreen Campus.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/rehab_village_vehicle_4fb8d250.webp',
+          alt: 'Zero-emission electric vehicle of Ayurgreen Rehab Village promoting eco-friendly patient transport',
+          caption: 'Eco-friendly electric transport supporting sustainable patient mobility across Rehab Village.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/world_environment_day_fa6ae0f5.png',
+          alt: 'Close-up of the World Environment Day handprint pledge banner by Ayurgreen Foundation in Edappal',
+          caption: 'Collective green pledge affirming environmental stewardship across the Ayurgreen ecosystem.',
+          objectPosition: 'center 60%',
+        },
+        {
+          url: '/assets/aistudio/volunteer_activit_801ee57d.webp',
+          alt: 'Ayurgreen Foundation student volunteers participating in campus sustainability and community wellbeing activities',
+          caption: 'Student volunteers leading campus sustainability and community wellbeing initiatives.',
+          objectPosition: 'center 35%',
+        },
+        {
+          url: '/assets/aistudio/WhatsApp_Image_2025-12-10_at_3.13.16_PM__4__a2a96c97.jpeg',
+          alt: 'Shaded green banyan tree corridor in Edappal where Ayurgreen outreach teams engage with the community',
+          caption: 'Preserving green community spaces and natural shade corridors across Edappal.',
+          objectPosition: 'center center',
+        },
+        {
+          url: '/assets/aistudio/world_environment_day_fa6ae0f5.png',
+          alt: 'Architecture and green trees of Ayurgreen Campus during the World Environment Day observance',
+          caption: 'Nature-integrated campus architecture designed to foster a calm, healing environment.',
+          objectPosition: 'left top',
+        },
+        {
+          url: '/assets/aistudio/social_rehab_program_3edebc6f.png',
+          alt: 'Holistic patient wellbeing and rehabilitation in a supportive, nature-integrated campus setting',
+          caption: 'Connecting environmental serenity with dignified patient recovery and wellbeing.',
+          objectPosition: '82% center',
+        },
+      ],
     },
   ],
   galleryItems: [
     {
       id: 'gal-runfast-marathon',
-      title: 'RUN FAST Stroke Awareness Mini Marathon',
+      title: 'RUN FAST Stroke Awareness Mini Marathon — Inaugural Banner',
       category: 'Community Outreach Programmes',
       caption:
-        'Citizens, students, and officials uniting in Edappal, Malappuram for the RUN FAST Stroke Awareness Marathon.',
+        'Dignitaries, police sub-inspector, healthcare leaders, and marathon runners uniting in Edappal, Malappuram on 29 October 2025 for the RUN FAST Stroke Awareness Marathon.',
       altText:
         'Participants holding the Run FAST Stroke Awareness Marathon 2025 banner at Ayurgreen Campus, Edappal.',
       isVerifiedAsset: true,
       cropRegion: { x: 0, y: 1280, w: 400, h: 145 },
-      customImageUrl: '/assets/aistudio/runfast_-__minimarathon_9f7439db.png',
+      customImageUrl: '/assets/aistudio/WhatsApp_Image_2026-05-31_at_8.02.03_PM_356e57f4.jpeg',
+    },
+    {
+      id: 'gal-runfast-startline',
+      title: 'RUN FAST Marathon — Starting Line Assembly',
+      category: 'Community Outreach Programmes',
+      caption:
+        'Runners lined up behind the Together Against Stroke starting banner at Ayurgreen Campus, Edappal.',
+      altText:
+        'Marathon runners with bibs lined up behind the Run FAST Stroke Awareness Marathon 2025 banner.',
+      isVerifiedAsset: true,
+      customImageUrl: '/assets/aistudio/WhatsApp_Image_2025-12-10_at_3.12.56_PM_facd180d.jpeg',
+    },
+    {
+      id: 'gal-runfast-volunteers',
+      title: 'RUN FAST Marathon — Student Volunteers & Certificate Holders',
+      category: 'Volunteer Activities',
+      caption:
+        'Student volunteers, runners with participation certificates, and hospital staff celebrating after completing the RUN FAST Stroke Awareness Marathon.',
+      altText:
+        'Large group photograph of student volunteers and marathon participants at Ayurgreen Campus.',
+      isVerifiedAsset: true,
+      customImageUrl: '/assets/aistudio/WhatsApp_Image_2025-12-10_at_3.15.38_PM_495d7371.jpeg',
+    },
+    {
+      id: 'gal-runfast-seniors',
+      title: 'RUN FAST Marathon — Senior Citizen Athletes',
+      category: 'Community Outreach Programmes',
+      caption:
+        'Senior marathon runners proudly displaying bibs 141, 169, 135, and 168 during the RUN FAST Stroke Awareness Marathon.',
+      altText:
+        'Four senior marathon runners wearing Run FAST bibs 141, 169, 135, and 168.',
+      isVerifiedAsset: true,
+      customImageUrl: '/assets/aistudio/ChatGPT_Image_Jun_1__2026__11_05_29_AM_1dd09152.png',
     },
     {
       id: 'gal-calicut-camp',
@@ -1934,6 +2509,28 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       isVerifiedAsset: true,
       cropRegion: { x: 563, y: 706, w: 112, h: 74 },
       customImageUrl: '/assets/aistudio/stroke_camp_-_calicut_3972d47b.png',
+    },
+    {
+      id: 'gal-calicut-vitals',
+      title: 'Calicut Stroke Camp — Vitals & Nursing Assessment',
+      category: 'Medical Camps',
+      caption:
+        'Ayurgreen nursing team checking blood pressure and clinical vitals for a stroke survivor at the Kozhikode camp.',
+      altText:
+        'Nurses checking blood pressure for a wheelchair-assisted patient at the Calicut Stroke Medical Camp.',
+      isVerifiedAsset: true,
+      customImageUrl: '/assets/aistudio/Screenshot_2026-05-08_151305_4c1c5eb8.png',
+    },
+    {
+      id: 'gal-calicut-ot',
+      title: 'Calicut Stroke Camp — Occupational Therapy & Motor Assessment',
+      category: 'Rehabilitation Activities',
+      caption:
+        'Occupational therapist guiding a stroke survivor through hand-grip strength and fine-motor exercises in Kozhikode.',
+      altText:
+        'Occupational therapist conducting hand-grip rehabilitation assessment with a patient.',
+      isVerifiedAsset: true,
+      customImageUrl: '/assets/aistudio/Screenshot_2026-05-07_140707_5f7161ef.png',
     },
     {
       id: 'gal-reading-day',

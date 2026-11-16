@@ -28,7 +28,7 @@ interface SiteContextValue {
   importSiteJson: (rawJson: string) => { success: boolean; error?: string };
 }
 
-const CONFIG_STORAGE_KEY = 'ayurgreen_foundation_site_config_v18';
+const CONFIG_STORAGE_KEY = 'ayurgreen_foundation_site_config_v21';
 const INQUIRIES_STORAGE_KEY = 'ayurgreen_foundation_inquiries_v1';
 
 const SiteContext = createContext<SiteContextValue | undefined>(undefined);
@@ -37,7 +37,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [config, setConfig] = useState<SiteConfiguration>(() => {
     try {
       // Clear legacy caches so code updates reflect immediately
-      for (let i = 1; i <= 17; i++) {
+      for (let i = 1; i <= 20; i++) {
         localStorage.removeItem(`ayurgreen_foundation_site_config_v${i}`);
       }
       const saved = localStorage.getItem(CONFIG_STORAGE_KEY);
@@ -49,6 +49,8 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           contact: INITIAL_SITE_CONFIG.contact,
           programmes: INITIAL_SITE_CONFIG.programmes,
           impactPillars: INITIAL_SITE_CONFIG.impactPillars,
+          newsEvents: INITIAL_SITE_CONFIG.newsEvents,
+          galleryItems: INITIAL_SITE_CONFIG.galleryItems,
         };
       }
     } catch {
@@ -117,9 +119,18 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addNewsItem = (item: Omit<NewsEventItem, 'id'>) => {
+    const id = `news-${Date.now()}`;
+    const generatedSlug =
+      item.slug ||
+      item.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '') ||
+      id;
     const newItem: NewsEventItem = {
       ...item,
-      id: `news-${Date.now()}`,
+      id,
+      slug: generatedSlug,
     };
     setConfig((prev) => ({
       ...prev,
