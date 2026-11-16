@@ -5,6 +5,7 @@ import {
   Mail,
   Globe,
   Phone,
+  Instagram,
   Settings,
   ArrowUpRight,
 } from 'lucide-react';
@@ -38,11 +39,11 @@ export const SiteFooter: React.FC = () => {
             </p>
           </div>
 
-          {/* Column 2: Verified Location */}
-          <div className="lg:col-span-4 space-y-2.5">
+          {/* Column 2: Verified Location & Live Map Preview */}
+          <div className="lg:col-span-4 space-y-3">
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#087F83] shrink-0 mt-0.5" />
-              <div className="text-sm text-[#102C4B]">
+              <div className="text-sm text-[#102C4B] flex-1">
                 <p className="font-semibold">{config.contact.officeTitle}</p>
                 <p className="text-[#536477]">
                   {config.contact.addressLine1}, {config.contact.addressLine2},{' '}
@@ -58,6 +59,16 @@ export const SiteFooter: React.FC = () => {
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>
+            </div>
+
+            <div className="rounded-xl overflow-hidden border border-[#DFE6EB] bg-[#EFF7FA] h-32 sm:h-36 w-full shadow-2xs relative">
+              <iframe
+                title="Ayurgreen Campus — Edappal, Kavilpadi, Malappuram, Kerala"
+                src="https://maps.google.com/maps?q=Ayurgreen+Hospitals,+Kavilpadi,+Edappal,+Malappuram,+Kerala+679582&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
 
@@ -79,6 +90,21 @@ export const SiteFooter: React.FC = () => {
             <div className="flex items-center gap-3 text-sm">
               <Phone className="w-4 h-4 text-[#087F83] shrink-0" />
               <span className="text-xs text-[#536477]">{config.contact.phone}</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <Instagram className="w-4 h-4 text-[#087F83] shrink-0" />
+              <a
+                href={
+                  config.contact.socials?.instagram ||
+                  'https://www.instagram.com/ayurgreen__foundation/'
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[#102C4B] hover:text-[#087F83] transition-colors"
+              >
+                <span>@ayurgreen__foundation</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#087F83]" />
+              </a>
             </div>
           </div>
         </div>

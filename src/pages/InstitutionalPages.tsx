@@ -9,6 +9,7 @@ import {
   Mail,
   Phone,
   Globe,
+  Instagram,
   ArrowUpRight,
   ArrowRight,
   AlertCircle,
@@ -381,6 +382,29 @@ export const ContactPage: React.FC = () => {
                     <p className="text-sm font-semibold text-[#102C4B] mt-0.5">
                       {config.organization.domain}
                     </p>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-[#DFE6EB] flex items-start gap-3.5">
+                  <div className="p-2.5 rounded-xl bg-[#EFF7FA] text-[#087F83] shrink-0">
+                    <Instagram className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#087F83]">
+                      Official Instagram
+                    </div>
+                    <a
+                      href={
+                        config.contact.socials?.instagram ||
+                        'https://www.instagram.com/ayurgreen__foundation/'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#102C4B] hover:text-[#087F83] transition-colors mt-0.5"
+                    >
+                      <span>@ayurgreen__foundation</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#087F83]" />
+                    </a>
                   </div>
                 </div>
               </div>

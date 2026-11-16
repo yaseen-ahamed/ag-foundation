@@ -10,8 +10,15 @@ import {
   HandHeart,
   BarChart3,
   HeartPulse,
+  Calendar,
+  MapPin,
+  Home,
 } from 'lucide-react';
-import { ProgrammeItem, CharityCareStats } from '../../data/siteConfig';
+import {
+  ProgrammeItem,
+  CharityCareStats,
+  NewsEventItem,
+} from '../../data/siteConfig';
 import { useSite } from '../../context/SiteContext';
 import {
   ReferencePhotoCrop,
@@ -20,170 +27,6 @@ import {
 } from '../visuals/FoundationVisual';
 import { SectionHeading } from '../common/UIElements';
 import StackingCards, { StackingCardItem } from '../ui/stacking-cards';
-
-export const FlagshipShowcaseSection: React.FC = () => {
-  const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
-
-  const flagshipPillars = [
-    {
-      id: 'rehab-village',
-      category: 'Community-Based Rehabilitation',
-      title: 'Rehab Village Project',
-      description:
-        'A community-based rehabilitation initiative focused on recovery, functional independence, social participation and reintegration.',
-      to: '/programmes/rehab-village',
-      ctaLabel: 'Learn More',
-      crop: { x: 256, y: 690, w: 225, h: 112 },
-      overlayBg: 'bg-[#F39200]/92',
-      bottomBarColor: 'bg-[#F39200]',
-      restingPillClass: 'bg-[#F39200] text-white',
-    },
-    {
-      id: 'stroke-force',
-      category: 'Featured Project · Fast Action',
-      title: 'Stroke Force',
-      description:
-        'A flagship community awareness initiative that equips people with the knowledge to recognise stroke warning signs, understand the urgency of treatment and spread life-saving awareness within their communities.',
-      to: '/stroke-force',
-      ctaLabel: 'Learn More',
-      crop: { x: 0, y: 1280, w: 400, h: 145 },
-      overlayBg: 'bg-[#2B84EA]/92',
-      bottomBarColor: 'bg-[#2B84EA]',
-      restingPillClass: 'bg-[#2B84EA] text-white',
-    },
-    {
-      id: 'charity-care',
-      category: 'Healthcare Access',
-      title: 'Charity Care Programme',
-      description:
-        'Providing financial assistance to eligible patients facing economic difficulties, helping them access essential healthcare and treatment.',
-      to: '/programmes/charity-care',
-      ctaLabel: 'Learn More',
-      crop: { x: 32, y: 690, w: 220, h: 112 },
-      overlayBg: 'bg-[#58B947]/92',
-      bottomBarColor: 'bg-[#58B947]',
-      restingPillClass: 'bg-[#58B947] text-white',
-    },
-  ];
-
-  return (
-    <section
-      aria-labelledby="flagship-showcase-heading"
-      className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#DFE6EB]"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Personalis Reference Framing: Top 72px Accent Rule + Oversized Light Statement Headline */}
-        <div className="max-w-4xl mb-12 sm:mb-14">
-          <div className="w-20 h-[2px] bg-[#087F83] mb-5" aria-hidden="true" />
-          <h2
-            id="flagship-showcase-heading"
-            className="text-[clamp(2rem,3.6vw,3.2rem)] font-editorial font-light text-[#102C4B] leading-[1.08] tracking-[-0.025em]"
-          >
-            Inform the future of community healthcare &amp; rehabilitation.
-          </h2>
-        </div>
-
-        {/* 3-Column Tall Portrait Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {flagshipPillars.map((item, idx) => {
-            const isHovered = hoveredIndex === idx;
-            return (
-              <div
-                key={item.id}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onFocus={() => setHoveredIndex(idx)}
-                onBlur={(e) => {
-                  if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-                    setHoveredIndex(null);
-                  }
-                }}
-                onClick={() =>
-                  setHoveredIndex((prev) => (prev === idx ? null : idx))
-                }
-                tabIndex={0}
-                role="region"
-                aria-label={item.title}
-                className="group relative min-h-[470px] sm:min-h-[510px] rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087F83]"
-              >
-                {/* Full-Bleed Documentary Photography */}
-                <div className="absolute inset-0">
-                  <ReferencePhotoCrop
-                    crop={item.crop}
-                    alt={item.title}
-                    className="w-full h-full transition-transform duration-300 ease-out group-hover:scale-[1.03]"
-                  />
-                  {/* Default (Resting) State Scrim */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent transition-opacity duration-200 ${
-                      isHovered ? 'opacity-0' : 'opacity-100'
-                    }`}
-                    aria-hidden="true"
-                  />
-                  {/* Hover State Scrim */}
-                  <div
-                    className={`absolute inset-0 ${item.overlayBg} transition-opacity duration-200 ${
-                      isHovered ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    aria-hidden="true"
-                  />
-                </div>
-
-                {/* Top-Right Category Badge */}
-                <div className="relative z-10 p-6 sm:p-7 flex items-center justify-end">
-                  <span
-                    className={`px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-medium tracking-[-0.01em] transition-colors duration-200 shadow-2xs ${
-                      isHovered
-                        ? 'bg-white text-[#102C4B]'
-                        : item.restingPillClass
-                    }`}
-                  >
-                    {item.category}
-                  </span>
-                </div>
-
-                {/* Bottom / Mid Content Area */}
-                <div className="relative z-10 px-7 sm:px-8 pb-6 sm:pb-7 mt-auto flex flex-col justify-end">
-                  <h3 className="text-[1.75rem] sm:text-[2.1rem] font-editorial font-normal text-white leading-[1.12] tracking-[-0.02em] transition-transform duration-200">
-                    {item.title}
-                  </h3>
-
-                  <div
-                    className={`grid transition-all duration-200 ease-out ${
-                      isHovered
-                        ? 'grid-rows-[1fr] opacity-100 mt-4 pb-2'
-                        : 'grid-rows-[0fr] opacity-0 mt-0 pb-0'
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="text-sm sm:text-[15.5px] font-light text-white/95 leading-relaxed mb-6">
-                        {item.description}
-                      </p>
-                      <Link
-                        to={item.to}
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center justify-center px-7 py-2.5 rounded-md bg-white text-[#102C4B] hover:bg-[#EFF7FA] text-xs sm:text-sm font-medium transition-colors shadow-xs whitespace-nowrap"
-                      >
-                        <span>{item.ctaLabel}</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom Signature Solid Accent Bar */}
-                <div
-                  className={`relative z-20 h-3.5 w-full ${item.bottomBarColor} shrink-0 transition-opacity duration-200 ${
-                    isHovered ? 'opacity-0' : 'opacity-100'
-                  }`}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 export const FeaturedProjectStrokeForceCard: React.FC = () => {
   const { config } = useSite();
@@ -631,7 +474,200 @@ export const ProgrammeCard: React.FC<{ programme: ProgrammeItem }> = ({ programm
 export const ProgrammesStackSection: React.FC<{
   programmes: ProgrammeItem[];
 }> = ({ programmes }) => {
-  const total = programmes.length;
+  const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+
+  const getProgrammeShowcaseTheme = (slug: string, idx: number) => {
+    const bySlug: Record<
+      string,
+      { overlayBg: string; bottomBarColor: string; restingPillClass: string }
+    > = {
+      'charity-care': {
+        overlayBg: 'bg-[#58B947]/92',
+        bottomBarColor: 'bg-[#58B947]',
+        restingPillClass: 'bg-[#58B947] text-white',
+      },
+      'social-rehabilitation': {
+        overlayBg: 'bg-[#087F83]/92',
+        bottomBarColor: 'bg-[#087F83]',
+        restingPillClass: 'bg-[#087F83] text-white',
+      },
+      'rehab-village': {
+        overlayBg: 'bg-[#F39200]/92',
+        bottomBarColor: 'bg-[#F39200]',
+        restingPillClass: 'bg-[#F39200] text-white',
+      },
+      'volunteer-internship': {
+        overlayBg: 'bg-[#07565B]/92',
+        bottomBarColor: 'bg-[#07565B]',
+        restingPillClass: 'bg-[#07565B] text-white',
+      },
+      'ewp-scholarship': {
+        overlayBg: 'bg-[#2B84EA]/92',
+        bottomBarColor: 'bg-[#2B84EA]',
+        restingPillClass: 'bg-[#2B84EA] text-white',
+      },
+      'medical-camps': {
+        overlayBg: 'bg-[#102C4B]/92',
+        bottomBarColor: 'bg-[#102C4B]',
+        restingPillClass: 'bg-[#102C4B] text-white',
+      },
+    };
+
+    if (bySlug[slug]) return bySlug[slug];
+
+    const fallbackThemes = [
+      {
+        overlayBg: 'bg-[#F39200]/92',
+        bottomBarColor: 'bg-[#F39200]',
+        restingPillClass: 'bg-[#F39200] text-white',
+      },
+      {
+        overlayBg: 'bg-[#2B84EA]/92',
+        bottomBarColor: 'bg-[#2B84EA]',
+        restingPillClass: 'bg-[#2B84EA] text-white',
+      },
+      {
+        overlayBg: 'bg-[#58B947]/92',
+        bottomBarColor: 'bg-[#58B947]',
+        restingPillClass: 'bg-[#58B947] text-white',
+      },
+      {
+        overlayBg: 'bg-[#087F83]/92',
+        bottomBarColor: 'bg-[#087F83]',
+        restingPillClass: 'bg-[#087F83] text-white',
+      },
+      {
+        overlayBg: 'bg-[#07565B]/92',
+        bottomBarColor: 'bg-[#07565B]',
+        restingPillClass: 'bg-[#07565B] text-white',
+      },
+      {
+        overlayBg: 'bg-[#102C4B]/92',
+        bottomBarColor: 'bg-[#102C4B]',
+        restingPillClass: 'bg-[#102C4B] text-white',
+      },
+    ];
+
+    return fallbackThemes[idx % fallbackThemes.length];
+  };
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {programmes.map((programme, idx) => {
+        const isHovered = hoveredIndex === idx;
+        const theme = getProgrammeShowcaseTheme(programme.slug, idx);
+
+        return (
+          <div
+            key={programme.slug}
+            onMouseEnter={() => setHoveredIndex(idx)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            onFocus={() => setHoveredIndex(idx)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                setHoveredIndex(null);
+              }
+            }}
+            onClick={() =>
+              setHoveredIndex((prev) => (prev === idx ? null : idx))
+            }
+            tabIndex={0}
+            role="region"
+            aria-label={programme.title}
+            className="group relative min-h-[470px] sm:min-h-[510px] rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087F83]"
+          >
+            {/* Full-Bleed Documentary Photography */}
+            <div className="absolute inset-0">
+              {programme.imageUrl || programme.cropRegion ? (
+                <ReferencePhotoCrop
+                  crop={
+                    programme.cropRegion || { x: 0, y: 0, w: 100, h: 100 }
+                  }
+                  imageSrc={programme.imageUrl}
+                  alt={programme.title}
+                  className="w-full h-full transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                />
+              ) : (
+                <BespokeInstitutionalArt
+                  type={programme.illustrationType}
+                  alt={programme.title}
+                  className="w-full h-full transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                />
+              )}
+              {/* Default (Resting) State Scrim */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent transition-opacity duration-200 ${
+                  isHovered ? 'opacity-0' : 'opacity-100'
+                }`}
+                aria-hidden="true"
+              />
+              {/* Hover State Scrim */}
+              <div
+                className={`absolute inset-0 ${theme.overlayBg} transition-opacity duration-200 ${
+                  isHovered ? 'opacity-100' : 'opacity-0'
+                }`}
+                aria-hidden="true"
+              />
+            </div>
+
+            {/* Top-Right Category Badge */}
+            <div className="relative z-10 p-6 sm:p-7 flex items-center justify-end">
+              <span
+                className={`px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-medium tracking-[-0.01em] transition-colors duration-200 shadow-2xs ${
+                  isHovered
+                    ? 'bg-white text-[#102C4B]'
+                    : theme.restingPillClass
+                }`}
+              >
+                {programme.category}
+              </span>
+            </div>
+
+            {/* Bottom / Mid Content Area */}
+            <div className="relative z-10 px-7 sm:px-8 pb-6 sm:pb-7 mt-auto flex flex-col justify-end">
+              <h3 className="text-[1.75rem] sm:text-[2.1rem] font-editorial font-normal text-white leading-[1.12] tracking-[-0.02em] transition-transform duration-200">
+                {programme.title}
+              </h3>
+
+              <div
+                className={`grid transition-all duration-200 ease-out ${
+                  isHovered
+                    ? 'grid-rows-[1fr] opacity-100 mt-4 pb-2'
+                    : 'grid-rows-[0fr] opacity-0 mt-0 pb-0'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="text-sm sm:text-[15.5px] font-light text-white/95 leading-relaxed mb-6">
+                    {programme.summary}
+                  </p>
+                  <Link
+                    to={`/programmes/${programme.slug}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center justify-center px-7 py-2.5 rounded-md bg-white text-[#102C4B] hover:bg-[#EFF7FA] text-xs sm:text-sm font-medium transition-colors shadow-xs whitespace-nowrap"
+                  >
+                    <span>Learn More</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Signature Solid Accent Bar */}
+            <div
+              className={`relative z-20 h-3.5 w-full ${theme.bottomBarColor} shrink-0 transition-opacity duration-200 ${
+                isHovered ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export const ActivitiesStackSection: React.FC<{
+  activities: NewsEventItem[];
+}> = ({ activities }) => {
+  const total = activities.length;
 
   // Sovereign 60-30-10 clinical surface progression & top bar accents per card
   const cardSurfaceStyles = [
@@ -673,8 +709,40 @@ export const ProgrammesStackSection: React.FC<{
     },
   ];
 
+  const getShortActivityTitle = (item: NewsEventItem) => {
+    const shortMap: Record<string, string> = {
+      'news-koode-medical-camp': 'Koode Medical Camp',
+      'news-calicut-stroke-camp': 'Calicut Stroke Camp',
+      'news-nilambur-stroke-camp': 'Nilambur Stroke Camp',
+      'news-run-fast-marathon': 'RUN FAST Marathon',
+      'news-national-reading-day': 'National Reading Day',
+      'news-world-environment-day': 'World Environment Day',
+    };
+    if (shortMap[item.id]) return shortMap[item.id];
+    const parts = item.title.split('—')[0].trim();
+    return parts.length > 26 ? `${parts.slice(0, 24)}…` : parts;
+  };
+
+  const getActivityBadgeProps = (category: NewsEventItem['category'], index: number) => {
+    switch (category) {
+      case 'Medical Camps':
+        return { iconName: 'Stethoscope', accentColor: '#087F83' };
+      case 'Awareness Campaigns':
+        return { iconName: 'Users', accentColor: '#2563EB' };
+      case 'Foundation Events':
+        return {
+          iconName: index % 2 === 0 ? 'GraduationCap' : 'Home',
+          accentColor: index % 2 === 0 ? '#7C3AED' : '#059669',
+        };
+      case 'Volunteer Activities':
+        return { iconName: 'HandHeart', accentColor: '#0D9488' };
+      default:
+        return { iconName: 'HeartHandshake', accentColor: '#087F83' };
+    }
+  };
+
   const scrollToCard = (idx: number) => {
-    const el = document.getElementById(`programme-stack-card-${idx}`);
+    const el = document.getElementById(`activity-stack-card-${idx}`);
     if (el) {
       const y = el.getBoundingClientRect().top + window.scrollY - 96;
       window.scrollTo({ top: y, behavior: 'smooth' });
@@ -683,25 +751,25 @@ export const ProgrammesStackSection: React.FC<{
 
   return (
     <div className="relative">
-      {/* Quick-Jump Programme Index Bar (Mobile horizontally scrollable, Desktop wrapped) */}
+      {/* Quick-Jump Activity Index Bar (Mobile horizontally scrollable, Desktop wrapped) */}
       <div
-        aria-label="Quick jump to programme card"
+        aria-label="Quick jump to activity card"
         className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-6 sm:mb-8 border-b border-[#DFE6EB]"
       >
         <span className="text-xs font-semibold uppercase tracking-[0.08em] text-[#536477] shrink-0 mr-1 hidden sm:inline">
-          Programme Index:
+          Activity Index:
         </span>
-        {programmes.map((prog, index) => {
+        {activities.map((item, index) => {
           const num = String(index + 1).padStart(2, '0');
           return (
             <button
-              key={prog.slug}
+              key={item.id}
               type="button"
               onClick={() => scrollToCard(index)}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#F7F9FA] hover:bg-[#EFF7FA] border border-[#DFE6EB] hover:border-[#087F83]/60 text-xs font-medium text-[#102C4B] transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83]"
             >
               <span className="font-bold text-[#087F83] tabular-nums">{num}.</span>
-              <span>{prog.shortTitle || prog.title}</span>
+              <span>{getShortActivityTitle(item)}</span>
             </button>
           );
         })}
@@ -713,23 +781,28 @@ export const ProgrammesStackSection: React.FC<{
         scaleMultiplier={0.024}
         className="relative pb-20 sm:pb-24"
       >
-        {programmes.map((programme, index) => {
+        {activities.map((item, index) => {
           const num = String(index + 1).padStart(2, '0');
           const totalNum = String(total).padStart(2, '0');
           const styleTheme = cardSurfaceStyles[index % cardSurfaceStyles.length];
           const stackTopOffset = `${index * 14}px`;
+          const badgeProps = getActivityBadgeProps(item.category, index);
+          const highlightNote =
+            item.content && item.content.length > 0
+              ? item.content[item.content.length - 1]
+              : '';
 
           return (
             <StackingCardItem
-              key={programme.slug}
-              id={`programme-stack-card-${index}`}
+              key={item.id}
+              id={`activity-stack-card-${index}`}
               index={index}
               topPosition={stackTopOffset}
               className="top-[84px] sm:top-[92px] lg:top-[104px] mb-6 sm:mb-8 lg:mb-10 last:mb-0 h-auto"
               style={{ zIndex: index + 10 }}
             >
               <article
-                aria-label={`${num}. ${programme.title}`}
+                aria-label={`${num}. ${item.title}`}
                 className={`group ${styleTheme.cardBg} rounded-2xl sm:rounded-3xl border border-[#DFE6EB] hover:border-[#087F83]/70 overflow-hidden shadow-[0_-8px_28px_-12px_rgba(16,44,75,0.12),0_16px_36px_-12px_rgba(16,44,75,0.10)] transition-colors duration-200`}
               >
                 {/* Top Signature Accent Bar */}
@@ -750,15 +823,15 @@ export const ProgrammesStackSection: React.FC<{
                       |
                     </span>
                     <span className="font-semibold text-[#102C4B] truncate">
-                      {programme.title}
+                      {item.title}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-[#536477] shrink-0">
                     <span className="hidden sm:inline font-medium">
-                      {programme.category}
+                      {item.category}
                     </span>
                     <span className="sm:hidden font-medium text-[11px]">
-                      {programme.category}
+                      {item.category}
                     </span>
                   </div>
                 </div>
@@ -767,19 +840,17 @@ export const ProgrammesStackSection: React.FC<{
                 <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
                   {/* Visual Column (Top on Mobile, Right 5 Columns on Desktop) */}
                   <div className="lg:col-span-5 lg:order-2 relative h-40 sm:h-52 lg:h-auto lg:min-h-[340px] w-full bg-[#EFF7FA] overflow-hidden border-b lg:border-b-0 lg:border-l border-[#DFE6EB]">
-                    {programme.imageUrl || programme.cropRegion ? (
+                    {item.imageUrl || item.cropRegion ? (
                       <ReferencePhotoCrop
-                        crop={
-                          programme.cropRegion || { x: 0, y: 0, w: 100, h: 100 }
-                        }
-                        imageSrc={programme.imageUrl}
-                        alt={programme.title}
+                        crop={item.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                        imageSrc={item.imageUrl}
+                        alt={item.title}
                         className="w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-out"
                       />
                     ) : (
                       <BespokeInstitutionalArt
-                        type={programme.illustrationType}
-                        alt={programme.title}
+                        type="outreach"
+                        alt={item.title}
                         className="w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-out"
                       />
                     )}
@@ -793,89 +864,82 @@ export const ProgrammesStackSection: React.FC<{
                   {/* Narrative Content Column (Bottom on Mobile, Left 7 Columns on Desktop) */}
                   <div className="lg:col-span-7 lg:order-1 p-5 sm:p-7 lg:p-9 flex flex-col justify-between">
                     <div>
-                      {/* Icon Badge + Category & Subtitle Kicker */}
+                      {/* Icon Badge + Category & Date/Location Kicker */}
                       <div className="flex items-center gap-3.5 mb-3.5 sm:mb-4">
                         <div className="shrink-0">
                           <ProgrammeIconBadge
-                            iconName={programme.iconName}
-                            accentColor={programme.accentColor}
+                            iconName={badgeProps.iconName}
+                            accentColor={badgeProps.accentColor}
                             size="sm"
                           />
                         </div>
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-center gap-1.5 text-xs text-[#536477]">
                             <span className="font-semibold text-[#087F83]">
-                              {programme.category}
+                              {item.category}
                             </span>
                             <span aria-hidden="true">·</span>
-                            <span className="truncate">
-                              Ayurgreen Foundation Initiative
+                            <span className="inline-flex items-center gap-1 truncate">
+                              <Calendar className="w-3 h-3 text-[#087F83] shrink-0" />
+                              {item.dateLabel}
                             </span>
                           </div>
-                          {programme.heroSubtitle && (
-                            <p className="text-xs sm:text-sm font-medium text-[#102C4B]/85 truncate mt-0.5">
-                              {programme.heroSubtitle}
+                          {item.locationLabel && (
+                            <p className="text-xs sm:text-sm font-medium text-[#102C4B]/85 truncate mt-0.5 inline-flex items-center gap-1">
+                              <MapPin className="w-3.5 h-3.5 text-[#087F83] shrink-0" />
+                              <span>{item.locationLabel}</span>
                             </p>
                           )}
                         </div>
                       </div>
 
-                      {/* Programme Title */}
+                      {/* Activity Title */}
                       <h3 className="text-xl sm:text-2xl lg:text-[1.85rem] font-editorial font-normal text-[#102C4B] group-hover:text-[#087F83] transition-colors leading-[1.15] tracking-[-0.015em] mb-2.5">
                         <Link
-                          to={`/programmes/${programme.slug}`}
+                          to="/news-events"
                           className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83] rounded"
                         >
-                          {programme.title}
+                          {item.title}
                         </Link>
                       </h3>
 
-                      {/* Programme Summary */}
+                      {/* Activity Summary */}
                       <p className="text-xs sm:text-sm lg:text-[15.5px] text-[#536477] leading-relaxed line-clamp-3 sm:line-clamp-none mb-4 sm:mb-6">
-                        {programme.summary}
+                        {item.summary}
                       </p>
 
-                      {/* Desktop/Tablet Qualitative Impact Highlight */}
-                      {programme.impactStatus?.qualitativeSummary && (
+                      {/* Desktop/Tablet Qualitative Highlight */}
+                      {highlightNote && (
                         <div className="hidden sm:block pt-3.5 mb-5 border-t border-[#DFE6EB]/80">
                           <p className="text-xs text-[#536477] leading-relaxed">
                             <span className="font-semibold text-[#102C4B]">
                               Documented Focus:{' '}
                             </span>
-                            {programme.impactStatus.qualitativeSummary}
+                            {highlightNote}
                           </p>
                         </div>
                       )}
                     </div>
 
-                    {/* Card Footer: Verified Metric / Pillar Info + Primary Action Link */}
+                    {/* Card Footer: Location & Date Info + Primary Action Link */}
                     <div
                       className={`pt-3.5 sm:pt-4 border-t border-[#DFE6EB] flex flex-wrap items-center justify-between gap-3`}
                     >
                       <div className="flex items-center gap-2 text-xs text-[#536477]">
-                        {programme.impactStatus?.verifiedMetricValue &&
-                        programme.impactStatus?.verifiedMetricLabel ? (
-                          <>
-                            <span className="font-bold text-sm text-[#102C4B] tabular-nums">
-                              {programme.impactStatus.verifiedMetricValue}
-                            </span>
-                            <span>·</span>
-                            <span className="font-medium text-[#536477]">
-                              {programme.impactStatus.verifiedMetricLabel}
-                            </span>
-                          </>
-                        ) : (
-                          <span className="font-medium text-[#536477]">
-                            Programme {num} of {totalNum} · {programme.category}
-                          </span>
-                        )}
+                        <span className="font-bold text-sm text-[#102C4B]">
+                          {item.locationLabel}
+                        </span>
+                        <span aria-hidden="true">·</span>
+                        <span className="font-medium text-[#536477]">
+                          {item.dateLabel}
+                        </span>
                       </div>
 
                       <Link
-                        to={`/programmes/${programme.slug}`}
+                        to="/news-events"
                         className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#102C4B] hover:bg-[#087F83] text-white text-xs font-semibold transition-colors whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#087F83]"
                       >
-                        <span>Explore Programme</span>
+                        <span>Read Update</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>
@@ -1007,22 +1071,55 @@ export const ImpactMetricsStrip: React.FC<{ showHeader?: boolean }> = ({
 }) => {
   const { config } = useSite();
 
-  const renderPillarIcon = (iconName: string) => {
-    const cls = 'w-8 h-8 text-[#087F83] mb-3';
-    switch (iconName) {
-      case 'Accessibility':
-        return <Accessibility className={cls} />;
-      case 'HeartHandshake':
-        return <HeartHandshake className={cls} />;
-      case 'Users':
-        return <Users className={cls} />;
-      case 'GraduationCap':
-        return <GraduationCap className={cls} />;
-      case 'HandHeart':
-        return <HandHeart className={cls} />;
-      default:
-        return <Users className={cls} />;
-    }
+  const renderPlayfulPillarIcon = (id: string, iconName: string, idx: number) => {
+    const iconCls = 'w-7 h-7 transition-transform duration-300 ease-out group-hover:scale-110';
+
+    const getIconElement = () => {
+      switch (iconName) {
+        case 'Home':
+          return <Home className={iconCls} />;
+        case 'Accessibility':
+          return <Accessibility className={iconCls} />;
+        case 'HeartHandshake':
+          return <HeartHandshake className={iconCls} />;
+        case 'Users':
+          return <Users className={iconCls} />;
+        case 'GraduationCap':
+          return <GraduationCap className={iconCls} />;
+        case 'HandHeart':
+          return <HandHeart className={iconCls} />;
+        default:
+          return <HeartHandshake className={iconCls} />;
+      }
+    };
+
+    const colorThemes: Record<string, string> = {
+      'pillar-charity':
+        'bg-gradient-to-br from-[#FFECEF] to-[#FFD5DF] text-[#E11D48] ring-4 ring-[#FFF5F7] group-hover:from-[#F43F5E] group-hover:to-[#E11D48] group-hover:text-white group-hover:shadow-lg group-hover:shadow-[#F43F5E]/25',
+      'pillar-rehab':
+        'bg-gradient-to-br from-[#FFF3E0] to-[#FFE0B2] text-[#EA580C] ring-4 ring-[#FFF8ED] group-hover:from-[#FB923C] group-hover:to-[#EA580C] group-hover:text-white group-hover:shadow-lg group-hover:shadow-[#F97316]/25',
+      'pillar-outreach':
+        'bg-gradient-to-br from-[#E6F4FE] to-[#C7E6FD] text-[#0284C7] ring-4 ring-[#F2F9FE] group-hover:from-[#38BDF8] group-hover:to-[#0284C7] group-hover:text-white group-hover:shadow-lg group-hover:shadow-[#0EA5E9]/25',
+      'pillar-volunteers':
+        'bg-gradient-to-br from-[#E6F9F2] to-[#C2F0DF] text-[#059669] ring-4 ring-[#F2FCF8] group-hover:from-[#10B981] group-hover:to-[#059669] group-hover:text-white group-hover:shadow-lg group-hover:shadow-[#10B981]/25',
+    };
+
+    const fallbackList = [
+      colorThemes['pillar-charity'],
+      colorThemes['pillar-rehab'],
+      colorThemes['pillar-outreach'],
+      colorThemes['pillar-volunteers'],
+    ];
+
+    const badgeTheme = colorThemes[id] || fallbackList[idx % fallbackList.length];
+
+    return (
+      <div
+        className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300 ease-out group-hover:-translate-y-1.5 group-hover:rotate-6 ${badgeTheme}`}
+      >
+        {getIconElement()}
+      </div>
+    );
   };
 
   return (
@@ -1031,7 +1128,7 @@ export const ImpactMetricsStrip: React.FC<{ showHeader?: boolean }> = ({
         {showHeader && (
           <SectionHeading
             title="Our Impact"
-            subtitle="Structured across five core pillars of community wellbeing, documenting verified beneficiary assistance, medical camps, rehabilitation, and student volunteering."
+            subtitle="Creating meaningful change through accessible healthcare, rehabilitation, education and community engagement."
             align="split"
             action={
               <Link
@@ -1045,27 +1142,28 @@ export const ImpactMetricsStrip: React.FC<{ showHeader?: boolean }> = ({
           />
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#DFE6EB] border border-[#DFE6EB] rounded-2xl bg-white py-6">
-          {config.impactPillars.map((pillar) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#DFE6EB] border border-[#DFE6EB] rounded-3xl bg-white py-8 shadow-2xs">
+          {config.impactPillars.map((pillar, idx) => (
             <Link
               key={pillar.id}
               to={pillar.programmeLink}
-              className="group px-6 py-4 flex flex-col items-center text-center hover:bg-[#F7F9FA] transition-colors"
+              className="group px-6 sm:px-7 py-5 flex flex-col items-center text-center hover:bg-[#F7F9FA]/70 transition-colors"
             >
-              {renderPillarIcon(pillar.iconName)}
-              {pillar.verifiedNumber.trim() ? (
-                <div className="text-2xl font-bold text-[#102C4B] tabular-nums mb-0.5">
-                  {pillar.verifiedNumber}
-                </div>
-              ) : (
-                <div className="text-xs font-semibold uppercase tracking-wider text-[#087F83] mb-0.5">
-                  {pillar.category}
-                </div>
-              )}
-              <h3 className="text-base font-bold text-[#102C4B] group-hover:text-[#087F83] transition-colors mb-1.5">
+              {/* 1. Colourful Playful Icon on Top */}
+              {renderPlayfulPillarIcon(pillar.id, pillar.iconName, idx)}
+
+              {/* 2. Uniform Number */}
+              <div className="text-3xl sm:text-4xl font-bold text-[#102C4B] tabular-nums tracking-tight mb-1.5 transition-transform duration-300 group-hover:scale-105">
+                {pillar.verifiedNumber}
+              </div>
+
+              {/* 3. Uniform Title */}
+              <h3 className="text-base sm:text-lg font-bold text-[#102C4B] group-hover:text-[#087F83] transition-colors mb-2">
                 {pillar.themeTitle}
               </h3>
-              <p className="text-xs text-[#536477] leading-relaxed max-w-[210px]">
+
+              {/* 4. Uniform Description */}
+              <p className="text-xs sm:text-[13px] text-[#536477] leading-relaxed max-w-[240px]">
                 {pillar.description}
               </p>
             </Link>

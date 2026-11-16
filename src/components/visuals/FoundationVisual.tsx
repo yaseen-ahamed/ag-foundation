@@ -82,6 +82,8 @@ export const ReferencePhotoCrop: React.FC<ReferencePhotoCropProps> = ({
   if (resolvedDirectImage) {
     const objectPosClass = isStrokeForceCrop
       ? 'object-[64%_center]'
+      : isSocialRehabCrop || resolvedDirectImage === SOCIAL_REHAB_PHOTO
+      ? 'object-[82%_center]'
       : 'object-center';
     return (
       <div className={`relative overflow-hidden bg-[#EFF7FA] ${className}`}>

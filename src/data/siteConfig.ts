@@ -75,6 +75,7 @@ export interface ProgrammeItem {
     | 'HandHeart';
   accentColor: string;
   imageUrl?: string;
+  heroVideoEmbedUrl?: string;
   cropRegion?: { x: number; y: number; w: number; h: number };
   illustrationType:
     | 'charity'
@@ -162,7 +163,13 @@ export interface ImpactPillar {
   themeTitle: string;
   description: string;
   verifiedNumber: string;
-  iconName: 'Users' | 'Accessibility' | 'HeartHandshake' | 'GraduationCap' | 'HandHeart';
+  iconName:
+    | 'Users'
+    | 'Accessibility'
+    | 'HeartHandshake'
+    | 'GraduationCap'
+    | 'HandHeart'
+    | 'Home';
   programmeLink: string;
 }
 
@@ -354,9 +361,10 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
     emailVerified: true,
     phone: '+91 89 430 555 18',
     phoneVerified: true,
-    mapQueryUrl: 'https://share.google/TVSFkrnpwUfVc9iQN',
+    mapQueryUrl:
+      'https://www.google.com/maps?ll=10.803627,76.006511&z=15&t=m&hl=en-US&gl=US&mapclient=embed&cid=17502553929433422522',
     socials: {
-      instagram: '',
+      instagram: 'https://www.instagram.com/ayurgreen__foundation/',
       linkedin: '',
       facebook: '',
       youtube: '',
@@ -811,6 +819,7 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       featuredOnHome: true,
       iconName: 'Home',
       accentColor: '#D97706',
+      heroVideoEmbedUrl: 'https://www.youtube.com/embed/2olvFRcleew?rel=0&modestbranding=1',
       cropRegion: { x: 185, y: 706, w: 150, h: 74 },
       illustrationType: 'rehab-village',
       logoUrl: '/assets/aistudio/rehab_village_logo.webp',
@@ -1712,48 +1721,38 @@ export const INITIAL_SITE_CONFIG: SiteConfiguration = {
       category: 'Patients Supported',
       themeTitle: 'Charity Care Programme',
       description:
-        '90 patients supported (2023–2026), including 47 receiving 100% financial assistance and 43 receiving partial assistance.',
-      verifiedNumber: '90',
+        'Patients supported through full and partial financial assistance towards essential medical treatment, diagnostics, and care.',
+      verifiedNumber: '112+',
       iconName: 'HeartHandshake',
       programmeLink: '/programmes/charity-care',
     },
     {
       id: 'pillar-rehab',
       category: 'Rehabilitation Support',
-      themeTitle: 'Rehab Village & Social Rehab',
+      themeTitle: 'Rehab Village',
       description:
-        'Community-based ortho-neuro rehabilitation, extended village accommodation, vocational guidance, and family reintegration.',
-      verifiedNumber: '',
-      iconName: 'Accessibility',
+        'Community-based rehabilitation initiative providing affordable accommodation, patient support and livelihood opportunities for local community members.',
+      verifiedNumber: '230+',
+      iconName: 'Home',
       programmeLink: '/programmes/rehab-village',
     },
     {
       id: 'pillar-outreach',
       category: 'Medical Camps',
-      themeTitle: '124+ Camp Beneficiaries',
+      themeTitle: 'Community Health Outreach',
       description:
-        'Reached through District-Level Kozhikode Camp (40+), Koode Medical Camp (54), and Nilambur Stroke Camp (30).',
-      verifiedNumber: '124+',
+        'Through medical camps and community-based health initiatives.',
+      verifiedNumber: '200+',
       iconName: 'Users',
       programmeLink: '/programmes/medical-camps',
-    },
-    {
-      id: 'pillar-education',
-      category: 'Educational Support',
-      themeTitle: 'EWP & ACLAS Education',
-      description:
-        'Need-based EWP scholarships reducing financial barriers for deserving students at Ayurgreen College of Life & Sciences.',
-      verifiedNumber: '',
-      iconName: 'GraduationCap',
-      programmeLink: '/programmes/ewp-scholarship',
     },
     {
       id: 'pillar-volunteers',
       category: 'Student Internship',
       themeTitle: 'Volunteer Internship',
       description:
-        '14 students of Ayurgreen College of Life Sciences completed the inaugural structured hospital volunteering batch.',
-      verifiedNumber: '14',
+        'Students of Ayurgreen College of Life Sciences trained through structured hospital and rehabilitation volunteering batches.',
+      verifiedNumber: '47+',
       iconName: 'HandHeart',
       programmeLink: '/programmes/volunteer-internship',
     },

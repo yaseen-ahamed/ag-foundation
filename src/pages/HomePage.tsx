@@ -4,16 +4,15 @@ import {
   ArrowRight,
   ShieldCheck,
   HeartHandshake,
-  Calendar,
   BookOpen,
 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { SeoHead, SectionHeading } from '../components/common/UIElements';
 import { ReferencePhotoCrop } from '../components/visuals/FoundationVisual';
 import {
-  FlagshipShowcaseSection,
   FeaturedProjectStrokeForceCard,
   ProgrammesStackSection,
+  ActivitiesStackSection,
   AssociatedInstitutionsSection,
   ImpactMetricsStrip,
   DonationAppealSection,
@@ -235,53 +234,8 @@ export const HomePage: React.FC = () => {
             }
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {config.newsEvents.slice(0, 6).map((item) => (
-              <article
-                key={item.id}
-                className="bg-white rounded-2xl border border-[#DFE6EB] overflow-hidden flex flex-col shadow-2xs"
-              >
-                {(item.imageUrl || item.cropRegion) && (
-                  <div className="h-48 w-full bg-[#EFF7FA]">
-                    <ReferencePhotoCrop
-                      crop={item.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
-                      imageSrc={item.imageUrl}
-                      alt={item.title}
-                      className="w-full h-full"
-                    />
-                  </div>
-                )}
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 text-xs text-[#536477] mb-2">
-                    <span className="font-semibold text-[#087F83]">{item.category}</span>
-                    <span aria-hidden="true">·</span>
-                    <span className="inline-flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {item.dateLabel}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-bold text-[#102C4B] mb-2 leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#536477] leading-relaxed flex-1 mb-4">
-                    {item.summary}
-                  </p>
-                  <div className="pt-3 border-t border-[#DFE6EB]/70 flex items-center justify-between">
-                    <Link
-                      to="/news-events"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#087F83] hover:underline"
-                    >
-                      <span>Read Update</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                    {item.isPlaceholder && (
-                      <span className="text-[11px] text-[#536477]">Archive Template</span>
-                    )}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+          {/* Interactive Scroll-to-Stack Activity & Event Cards (Desktop & Mobile Responsive) */}
+          <ActivitiesStackSection activities={config.newsEvents.slice(0, 6)} />
         </div>
       </section>
 
@@ -401,10 +355,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 10: INFORM THE FUTURE OF COMMUNITY HEALTHCARE & REHABILITATION */}
-      <FlagshipShowcaseSection />
-
-      {/* SECTION 11: DONATION APPEAL */}
+      {/* SECTION 10: DONATION APPEAL */}
       <DonationAppealSection />
     </>
   );

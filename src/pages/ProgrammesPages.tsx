@@ -222,22 +222,35 @@ export const ProgrammeDetailPage: React.FC = () => {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="h-64 sm:h-80 rounded-2xl overflow-hidden border border-[#DFE6EB] shadow-sm bg-white">
-                {programme.imageUrl || programme.cropRegion ? (
-                  <ReferencePhotoCrop
-                    crop={programme.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
-                    imageSrc={programme.imageUrl}
-                    alt={displayTitle}
-                    className="w-full h-full"
+              {programme.heroVideoEmbedUrl ? (
+                <div className="aspect-video w-full rounded-2xl overflow-hidden border border-[#DFE6EB] shadow-sm bg-[#102C4B]">
+                  <iframe
+                    src={programme.heroVideoEmbedUrl}
+                    title={`${displayTitle} — Official Video`}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
                   />
-                ) : (
-                  <BespokeInstitutionalArt
-                    type={programme.illustrationType}
-                    alt={displayTitle}
-                    className="w-full h-full"
-                  />
-                )}
-              </div>
+                </div>
+              ) : (
+                <div className="h-64 sm:h-80 rounded-2xl overflow-hidden border border-[#DFE6EB] shadow-sm bg-white">
+                  {programme.imageUrl || programme.cropRegion ? (
+                    <ReferencePhotoCrop
+                      crop={programme.cropRegion || { x: 0, y: 0, w: 100, h: 100 }}
+                      imageSrc={programme.imageUrl}
+                      alt={displayTitle}
+                      className="w-full h-full"
+                    />
+                  ) : (
+                    <BespokeInstitutionalArt
+                      type={programme.illustrationType}
+                      alt={displayTitle}
+                      className="w-full h-full"
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
